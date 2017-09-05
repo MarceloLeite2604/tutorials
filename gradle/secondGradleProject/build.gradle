@@ -1,0 +1,15 @@
+repositories {
+    jcenter()
+}
+
+apply plugin: 'java'
+
+dependencies {
+    compile 'org.gradle:gradle-tooling-api:4.1'
+}
+
+jar {
+    manifest {
+        attributes 'Main-Class': 'org.marceloleite.Application'
+    }
+}

@@ -1,0 +1,135 @@
+/* The project descrption. */
+description ="""
+Example project for a Gradle build
+
+Project name: ${project.name}
+
+More detailed information here... """
+
+task onlySpecifiesCodeForConfigurationPhase {
+    group 'vogella'
+    description 'Configuration phase task example.'
+
+    println 'I always get printed even though, I am not invoked.'
+}
+
+task hello {
+    group 'vogella'
+    description 'The hello task greets Gradle by saying "Hello Gradle".'
+
+    doFirst {
+        println 'Hello, Gradle'
+    }
+    doLast {
+        println 'Bye bye, Gradle'
+    }
+}
+
+/* Define the repositories to search for dependencies. */
+repositories {
+    mavenCentral()
+}
+
+/* Adds the Java plugin on project. */
+apply plugin: 'java'
+
+/* Defines the default task. */
+defaultTasks 'myClean', 'myCompile'
+
+task myClean {
+    doLast {
+        println 'Executing the clean task.'
+    }
+}
+
+task myCompile {
+    doLast {
+        println 'Executing the compile task.'
+    }
+}
+
+task other(dependsOn: 'myCompile') {
+    doLast {
+        println "I'm not a default task."
+    }
+}
+
+task cleanOther {
+    doFirst {
+        println "The cleanOther task will be executed."
+    }
+    doLast {
+        println "I want to clean up before running."
+    }
+}
+
+cleanOther.dependsOn myClean, myCompile
+
+task secondTask {
+    doLast {
+        println "This is the second task."
+    }
+}
+
+secondTask.doLast {
+    println "This is the added section of the second task."
+}
+
+task thirdTask {
+    doLast {
+        println 'This is the third task.'
+    }
+}
+
+// Extra properties.
+ext {
+    // If the property below is defined, then the third and fourth tasks will be executed.
+    runThirdAndFourthTasks = false
+}
+
+// 1st approach - closure returning true, if the task should be executed, false if not.
+// Observation: This condition evaluates the property existance.
+thirdTask.onlyIf {
+    project.hasProperty('runThirdAndFourthTasks')
+}
+
+task fourthTask {
+    doLast {
+        println 'This is the fourth task.'
+    }
+}
+
+// 2nd approach - alternatively throw an StopExecutionException().
+// Observation: This condition evaluates the property value.
+fourthTask.doFirst {
+    if(!runThirdAndFourthTasks) {
+        throw new StopExecutionException()
+    }
+}
+
+// Retrieving system variables.
+def homePath= System.properties['user.home']
+println "Home path is: \"${homePath}\"."
+
+// Downloads gradle and uses it to run the build.
+/*
+Observation: 
+    To run it, use the command
+        gradle wrapper
+    The execute the "gradlew" bash file created. It will download Gradle and execute the "build.gradle" file.
+*/
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.11'
+}
+
+// Creates a copy task, which copies files.
+task copyFile(type: Copy) {
+    from 'source'
+    into 'destination'
+}
+
+task defaultWebsiteCheck(type: com.example.CheckWebsite)
+
+task checkGradleWebsite(type: com.example.CheckWebsite) {
+    url = 'https://docs.gradle.org/'
+}
