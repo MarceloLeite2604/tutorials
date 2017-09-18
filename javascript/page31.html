@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>Never Create Strings as objects.</h2>
+<p>Strings and objects cannot be safely compared.</p>
+
+<p id="demo"></p>
+
+<script>
+var x = "John";              // x is a string
+var y = new String("John");  // y is an object
+// The "===" operator matches when the operators are equal in both type and value. Although "x" and "y" are strings, the latter is declared as an object. Hence, they are different on its types.
+// Comparing two JavaScript objects will always return false.
+document.getElementById("demo").innerHTML = (x===y);
+</script>
+
+</body>
+</html>

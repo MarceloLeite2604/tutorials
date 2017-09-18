@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>JavaScript Math Functions</h2>
+
+<p>Math.PI returns the ratio of a circle's circumference to its diameter.</p>
+<p>iMath.round(x) returns the value of x rounded to its nearest integer.</p>
+<p>Math.pow(x, y) returns the value of x to the power of y.</p>
+<p>Math.min() and Math.max() can be used to find the lowest or highest value in a list of arguments.</p>
+<p>Math.random() returns a random number between 0 (inclusive),  and 1 (exclusive).</p>
+
+<p id="demo"></p>
+
+<script>
+var result = Math.PI + "<br>";
+result += Math.round(4.7) + "<br>";
+result += Math.round(4.4) + "<br>";
+result += Math.pow(8,2) + "<br>";
+result += Math.sqrt(64) + "<br>";
+result += Math.min(0, 150, 30, 20, -8, -200) + "<br>"; // Returns -200.
+result += Math.max(0, 150, 30, 20, -8, -200) + "<br>";  // Returns 150 
+result += Math.random();
+
+document.getElementById("demo").innerHTML = result;
+</script>
+
+</body>
+</html>
+

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>JavaScript Date Input Methods</h2>
+<p>Independent of input format, JavaScript will (by default) output dates in full text string format.</p>
+<p id="demo"></p>
+
+<script>
+var result;
+// ISO-8601 representation 
+// Date and time is separated with a capital T.
+// UTC time is defined with a capital letter Z.
+result = new Date("2015-03-25T12:00:00Z");
+// If you want to modify the time relative to UTC, remove the Z and add +HH:MM or -HH:MM instead.
+result += "<br>" + new Date("2015-03-25T12:00:00-03:00");
+// Short dates are written with an "MM/DD/YYYY" syntax.
+result += "<br>" + new Date("01/04/2017");
+document.getElementById("demo").innerHTML = result;
+</script>
+
+</body>
+</html>

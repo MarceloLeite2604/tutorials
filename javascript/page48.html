@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<p>The internal clock in JavaScript starts at midnight January 1, 1970.</p>
+<p>The getTime() function returns the number of milliseconds since then:</p>
+
+<p id="demo"></p>
+
+<script>
+var d = new Date();
+var result;
+result = d;
+result += "<br>";
+result += "<br>getDay:" + d.getDay(); // Weekday as number.
+result += "<br>getFullYear:" + d.getFullYear(); // Four digit year.
+result += "<br>getMonth:" + d.getMonth(); // Month
+result += "<br>getDate:" + d.getDate(); // Day as number.
+result += "<br>getHours:" + d.getHours(); // Hours
+result += "<br>getMinutes:" + d.getMinutes(); // Minutes
+result += "<br>getSeconds:" + d.getSeconds(); // Seconds
+result += "<br>getMilliseconds:" + d.getMilliseconds(); // Milliseconds.
+result += "<br>getTime:" + d.getTime(); // Milliseconds since January 1, 1970.
+result += "<br>";
+result += "<br>getUTCFullYear:" + d.getUTCFullYear();
+result += "<br>getUTCMonth:" + d.getUTCMonth();
+result += "<br>gateUTCDate:" + d.getUTCDate();
+result += "<br>getUTCHours:" + d.getUTCHours();
+result += "<br>getUTCMinutes:" + d.getUTCMinutes();
+result += "<br>getUTCSeconds:" + d.getUTCSeconds();
+result += "<br>getUTCMilliseconds:" + d.getUTCMilliseconds();
+result += "<br>";
+result += "<br>Date.parse:" + Date.parse(d);
+document.getElementById("demo").innerHTML = result;
+</script>
+
+</body>
+</html>
+

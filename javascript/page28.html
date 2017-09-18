@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<p>A GLOBAL variable can be accessed from any script or function.</p>
+
+<p id="demo"></p>
+
+<script>
+// This variable is global and can be accessed on any script location.
+// In Javascript, the global scope is the complete Javascript environment, however, in HTML, the global scope means the window object.
+var carName = "Volvo";
+myFunction();
+
+function myFunction() {
+    // This variable is local and can only be accessed on this function. When local variables has the same name as a local, it also has priority on global value (but it does not overwrite the global variable content).
+    var carName = "Volkswagen";
+
+    // When an undeclared variable has its value assigned, it automatically becomes global.
+    carType = "Golf";
+    document.getElementById("demo").innerHTML =
+        "I can display " + carName;
+}
+</script>
+
+</body>
+</html>

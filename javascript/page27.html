@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<!-- Observation: When using "new" to declare a variable, it automatically becomes an object. Avoid using it to declarate primitive types (string, booleans, numbers) since it complicates the code and slow down execution speed. -->
+<html>
+	<body>
+
+		<p>Creating a JavaScript Object.</p>
+
+		<p id="demo"></p>
+
+		<script>
+var car = {type:"Fiat", model:"500", color:"white"};
+document.getElementById("demo").innerHTML = car.type;
+// You can access a property in two ways: Using dot (.) or brackets ([]).
+document.getElementById("demo").innerHTML = car["type"];
+		</script>
+
+	</body>
+</html>
