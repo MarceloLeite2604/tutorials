@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>JavaScript Array Methods</h2> 
+
+<h2>toString()</h2>
+
+<p>The toString() method returns an array as a comma separated string:</p>
+
+<p id="demo"></p>
+<p id="demo2"></p>
+<p id="demo3"></p>
+<p id="demo4"></p>
+<p id="demo5"></p>
+<p id="demo6"></p>
+<p id="demo7"></p>
+<p id="demo8"></p>
+<p id="demo9"></p>
+<p id="demo10"></p>
+<p id="demo11"></p>
+
+<script>
+var fruits = ["Banana", "Orange", "Apple", "Mango"];
+
+// Convert the array elements on a string.
+document.getElementById("demo").innerHTML = fruits.toString();
+
+// Same as before, but informs the characters to write between the elements.
+document.getElementById("demo2").innerHTML = fruits.join(", then ");
+
+// Removes the element with the highest index. It also returns this element.
+fruit = fruits.pop();
+document.getElementById("demo3").innerHTML = "Element removed: " + fruit + ". New array size: " + fruits.length;
+
+// Adds a new element with the highest index plus one. It also returns the new array length.
+fruit = "Star fruit";
+newArraySize = fruits.push(fruit);
+document.getElementById("demo4").innerHTML = "New array size: " + newArraySize + ". Elements on array: " + fruits + ".";
+
+// "Shift" is similar to "pop", but it removes the element with the lowest
+// index and shifts all the remaining objects to a lower index. It also retuns
+// the removed element.
+fruit = fruits.shift();
+document.getElementById("demo5").innerHTML = "Element removed: " + fruit + ". Elements on array: " + fruits + ".";
+
+// Unshift is similar to "push", but it adds the element on the lowest index 
+// and shifts all the objects to a higher index. It also returns the new array
+// length.
+fruit = "Strawberry";
+newArraySize = fruits.unshift(fruit);
+document.getElementById("demo6").innerHTML = "New array size: " + newArraySize + ". Elements on array: " + fruits + ".";
+
+// Use "delete" to remove an inner element. But beware that is leaves an undefined hole on the array.
+delete fruits[2];
+fruitsArrayLength=fruits.length;
+var text = "<ul>";
+for (i=0; i < fruitsArrayLength; i++) {
+    text += "<li>"+ fruits[i] + "</li>";
+}
+text += "</ul>";
+document.getElementById("demo7").innerHTML = text;
+
+// Use splice to add multiple elements on any position of the array.
+// The example below will add the elements "Kiwi" and "Coconut" starting on 
+// position 2, and removing 1 element of the array.
+fruits.splice(2, 1, "Kiwi", "Coconut");
+document.getElementById("demo8").innerHTML = fruits;
+
+// "splice" can also be used to remove inner elements without leaving undefined objects.
+fruits.splice(2, 3);
+document.getElementById("demo9").innerHTML = fruits;
+
+// "concat" merge two or more arrays.
+var arr1 = ["Cecilie", "Lone"];
+var arr2 = ["Emil", "Tobias", "Linus"];
+var arr3 = ["Robin", "Morgan"];
+
+var myChildren = arr1.concat(arr2, arr3); 
+
+document.getElementById("demo10").innerHTML = myChildren;
+
+// The slice method creates a new array. It does not remove any element of the original array.
+var fruits = ["Banana", "Orange", "Lemon", "Apple", "Mango"];
+// The example below creates a new array starting on position "1" up until the 
+// previous position of "3" (i. e. the element on position "3" will not be 
+// included).
+// Observation: If the last argument is omitted, it will create a new array 
+// using all the remaining objects starting on position informed.
+var citrus = fruits.slice(1,3);
+document.getElementById("demo11").innerHTML = "The original array is: " + fruits + ".<br/> The new array is: " + citrus;
+
+</script>
+
+</body>
+</html>
