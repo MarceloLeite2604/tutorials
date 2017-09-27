@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>JavaScript Array Sort</h2>
+
+<p>The sort() method sorts an array alphabetically.</p>
+<p>The reverse() method reverts the elements.</p>
+
+<p id="demo1"></p>
+<p id="demo2"></p>
+<p id="demo3"></p>
+<p id="demo4"></p>
+<p id="demo5"></p>
+<p id="demo6"></p>
+<p id="demo7"></p>
+<p id="demo8"></p>
+<p id="demo9"></p>
+<p id="demo10"></p>
+
+
+<script>
+var fruits = ["Banana", "Orange", "Apple", "Mango"];
+document.getElementById("demo1").innerHTML = fruits;
+// Sorts the elements alfabetically (as a string).
+document.getElementById("demo2").innerHTML = fruits.sort();
+// Sorts the elements alfabetically reverse (as a string).
+document.getElementById("demo3").innerHTML = fruits.reverse();
+
+var points = [40, 100, 1, 5, 25, 10];
+// To sort numbers, it is necessary to inform a comparing function for the 
+// "sort" method. A comparing function returns "0" when both elements are 
+// equal, a negative value if the first element must be in a lower order of the
+// second, and a positive value if the first element must be in a higher order.
+function compareNumbers(firstElement, secondElement) {
+    return firstElement - secondElement;
+}
+points.sort(compareNumbers);
+document.getElementById("demo4").innerHTML = "Ascending sort: " + points;
+
+// Once the vector is sorted, it is easy to get the lowest and the highest 
+// number by retrieving the first and the last element, respectively.
+// Observation: To sort an array to retireve its highest and/or its lowest value is inefficient.
+document.getElementById("demo5").innerHTML = "Lowest value is " + points[0] + ". Highest value is " + points[points.length - 1] + ".";
+
+// To sort an array descending, the comparison function must return the 
+// opposite values.
+function compareNumbersDescending(firstElement, secondElement) {
+    return secondElement - firstElement;
+}
+points.sort(compareNumbersDescending);
+document.getElementById("demo6").innerHTML = "Descending sort: " + points;
+
+// The acquisition of the lowest and highest values are similar to the previous
+// example, but this time, the lowest value is on the lat position, and the 
+// highest is the first element.
+// Observation: To sort an array to retireve its highest and/or its lowest value is inefficient.
+document.getElementById("demo7").innerHTML = "Lowest value is " + points[points.length - 1] + ". Highest value is " + points[0] + ".";
+
+// To sort an array randomly,it is possible to use a comparison function which 
+// returns a random, positive or negative value.
+// Observation: Although never used on the comparison function, both elements
+// to compare are expected as parameters on the function.
+function randomComparison(firstElement, secondElement) {
+    return 0.5 - Math.random();
+}
+points.sort(randomComparison);
+document.getElementById("demo8").innerHTML = "Random sort: " + points;
+
+// It is possible to use the "apply" method to retrieve the maximum value of an
+//  unsorted array.
+// Observation: The "apply" method will be presented in the future but, in 
+// short, it replaces the execution context of a method (first argument) and 
+// defines the arguments which shall be passed to it (second argument, an array
+// for multiple arguments).
+document.getElementById("demo9").innerHTML = "Lowest value is: " + Math.min.apply(Math, points) + ". Highest value is " + Math.max.apply(Math, points) + ".";
+
+// The comparison method can also de used to sort objects.
+var cars = [
+{type:"Volvo", year:2016},
+{type:"Saab", year:2001},
+{type:"BMW", year:2010}]
+
+function carsComparisonMethod(firstObject, secondObject) {
+    return firstObject.year - secondObject.year;
+}
+
+cars.sort(carsComparisonMethod);
+var result = "<ul>";
+carsLength = cars.length;
+for (i=0; i<carsLength; i++) {
+    result += "<li> " + cars[i].year + " " + cars[i].type + "</li>";
+}
+result += "</ul>";
+document.getElementById("demo10").innerHTML = "Cars, sorted by year: <br/>" + result;
+
+
+
+</script>
+
+</body>
+</html>
