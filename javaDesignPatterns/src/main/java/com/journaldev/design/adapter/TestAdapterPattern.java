@@ -5,14 +5,12 @@ package com.journaldev.design.adapter;
  * originally incompatible objects. The adapter works as a "translator" between
  * them. In this example it is 
  * 
- * 
- * @author Marcelo Leite
  * @see <a href=
  *      "https://www.journaldev.com/1487/adapter-design-pattern-java">JournalDev
  *      Adapter Design Pattern</a>
  *
  */
-public class AdapterPatternTest {
+public class TestAdapterPattern {
 
 	public static void main(String[] args) {
 		testClassAdapter();
