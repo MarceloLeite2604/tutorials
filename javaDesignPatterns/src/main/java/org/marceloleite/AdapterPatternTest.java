@@ -1,7 +1,7 @@
 package org.marceloleite;
 
-import com.journaldev.design.adapter.Socket;
-import com.journaldev.design.adapter.SocketObjectAdapterImpl;
+import com.journaldev.design.structural.adapter.Socket;
+import com.journaldev.design.structural.adapter.SocketObjectAdapterImpl;
 
 /**
  * <p>
