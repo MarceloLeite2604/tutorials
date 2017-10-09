@@ -12,9 +12,16 @@ package com.journaldev.design.behavior.strategy;
  */
 public class CreditCardStrategy implements PaymentStrategy {
 
+	@SuppressWarnings("unused")
 	private String name;
+
+	@SuppressWarnings("unused")
 	private String cardNumber;
+
+	@SuppressWarnings("unused")
 	private String cvv;
+
+	@SuppressWarnings("unused")
 	private String dateOfExpiry;
 
 	public CreditCardStrategy(String name, String cardNumber, String cvv, String dateOfExpiry) {

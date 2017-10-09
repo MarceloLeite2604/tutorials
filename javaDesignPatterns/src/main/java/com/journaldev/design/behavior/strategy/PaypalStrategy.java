@@ -12,7 +12,10 @@ package com.journaldev.design.behavior.strategy;
  */
 public class PaypalStrategy implements PaymentStrategy {
 
+	@SuppressWarnings("unused")
 	private String emailId;
+	
+	@SuppressWarnings("unused")
 	private String password;
 
 	public PaypalStrategy(String emailId, String password) {
