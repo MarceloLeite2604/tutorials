@@ -1,0 +1,75 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>org.marceloleite</groupId>
+	<artifactId>firstcup</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>war</packaging>
+
+	<name>firstcup</name>
+	<url>http://maven.apache.org</url>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<maven.compiler.source>1.7</maven.compiler.source>
+		<maven.compiler.target>1.7</maven.compiler.target>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>3.8.1</version>
+			<scope>test</scope>
+		</dependency>
+		<!-- <dependency> <groupId>javax.persistence</groupId> <artifactId>persistence-api</artifactId> 
+			<version>1.0.2</version> </dependency> <dependency> <groupId>javax.ws.rs</groupId> 
+			<artifactId>javax.ws.rs-api</artifactId> <version>2.1</version> </dependency> 
+			<dependency> <groupId>javax.enterprise</groupId> <artifactId>cdi-api</artifactId> 
+			<version>2.0</version> <scope>provided</scope> </dependency> <dependency> 
+			<groupId>javax.ejb</groupId> <artifactId>ejb-api</artifactId> <version>3.0</version> 
+			<scope>provided</scope> </dependency> <dependency> <groupId>javax.validation</groupId> 
+			<artifactId>validation-api</artifactId> <version>2.0.0.Final</version> </dependency> -->
+
+		<!-- <dependency> <groupId>antlr</groupId> <artifactId>antlr</artifactId> 
+			<version>2.7.7</version> </dependency> <dependency> <groupId>dom4j</groupId> 
+			<artifactId>dom4j</artifactId> <version>1.6.1</version> </dependency> <dependency> 
+			<groupId>org.hibernate.common</groupId> <artifactId>hibernate-commons-annotations</artifactId> 
+			<version>4.0.5.Final</version> </dependency> <dependency> <groupId>org.hibernate</groupId> 
+			<artifactId>hibernate-core</artifactId> <version>4.2.16.Final</version> </dependency> 
+			<dependency> <groupId>org.hibernate</groupId> <artifactId>hibernate-ehcache</artifactId> 
+			<version>4.2.16.Final</version> </dependency> <dependency> <groupId>org.hibernate</groupId> 
+			<artifactId>hibernate-entitymanager</artifactId> <version>4.2.16.Final</version> 
+			</dependency> <dependency> <groupId>org.hibernate</groupId> <artifactId>hibernate-validator</artifactId> 
+			<version>4.3.2.Final</version> </dependency> <dependency> <groupId>org.jboss.logging</groupId> 
+			<artifactId>jboss-logging</artifactId> <version>3.1.0.GA</version> </dependency> 
+			<dependency> <groupId>org.javassist</groupId> <artifactId>javassist</artifactId> 
+			<version>3.15.0-GA</version> </dependency> -->
+
+		<!-- https://mvnrepository.com/artifact/org.apache.openejb/openejb-core -->
+		<dependency>
+			<groupId>org.apache.openjpa</groupId>
+			<artifactId>openjpa</artifactId>
+			<version>2.4.2</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.apache.tomee/openejb-core -->
+		<dependency>
+			<groupId>org.apache.tomee</groupId>
+			<artifactId>openejb-api</artifactId>
+			<version>7.0.3</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.apache.cxf/cxf-rt-rs-client -->
+		<dependency>
+			<groupId>org.apache.cxf</groupId>
+			<artifactId>cxf-rt-rs-client</artifactId>
+			<version>3.1.13</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.hibernate.common/hibernate-commons-annotations -->
+		<dependency>
+			<groupId>org.hibernate.common</groupId>
+			<artifactId>hibernate-commons-annotations</artifactId>
+			<version>5.0.1.Final</version>
+		</dependency>
+	</dependencies>
+</project>
