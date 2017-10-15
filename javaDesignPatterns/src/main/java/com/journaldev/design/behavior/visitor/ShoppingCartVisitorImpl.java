@@ -1,5 +1,13 @@
 package com.journaldev.design.behavior.visitor;
 
+/**
+ * This is the implementation of the visitor implementation
+ * ({@link ShoppingCartVisitor}).
+ * 
+ * @see <a href=
+ *      "https://www.journaldev.com/1769/visitor-design-pattern-java">JournalDev
+ *      Visitor Pattern Java Example.</a>
+ */
 public class ShoppingCartVisitorImpl implements ShoppingCartVisitor {
 
 	@Override
