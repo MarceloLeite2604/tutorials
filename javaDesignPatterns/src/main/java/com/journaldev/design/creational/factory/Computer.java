@@ -1,5 +1,14 @@
 package com.journaldev.design.creational.factory;
 
+/**
+ * This is the abstract super class of the design pattern. It can also be an
+ * interface or a normal class.
+ * 
+ * @see <a href=
+ *      "https://www.journaldev.com/1392/factory-design-pattern-in-java">JournalDev
+ *      Factory Design Pattern in Java.</a>
+ *
+ */
 public abstract class Computer {
 
 	public abstract String getRAM();

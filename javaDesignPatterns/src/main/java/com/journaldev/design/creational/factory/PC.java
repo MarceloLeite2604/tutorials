@@ -1,5 +1,14 @@
 package com.journaldev.design.creational.factory;
 
+/**
+ * This a is sub class of the factory design pattern. It extends the
+ * {@link Computer} class.
+ * 
+ * @see <a href=
+ *      "https://www.journaldev.com/1392/factory-design-pattern-in-java">JournalDev
+ *      Factory Design Pattern in Java.</a>
+ *
+ */
 public class PC extends Computer {
 
 	private String ram;

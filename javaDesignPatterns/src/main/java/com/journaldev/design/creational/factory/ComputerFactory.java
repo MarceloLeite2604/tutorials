@@ -2,15 +2,13 @@ package com.journaldev.design.creational.factory;
 
 /**
  * <p>
- * <ul>
- * <li>Provides approach to code for interface rather than implementation.</li>
- * <li>Removes the instantiation of actual implementation classes from client
- * code.</li>
- * <li>Makes our code more robust, less coupled and easy to extend. For example,
- * we can easily change {@link PC} implementation because client program is
- * unaware of this.</li>
- * <li>Provides abstraction between implementation and client classes through
- * inheritance.</li>
+ * This is the factory class. It is responsible to analyze the creation request,
+ * instantiate the correct object with the correct properties and return it to
+ * the client.
+ * </p>
+ * <p>
+ * It is possible to keep the factory class as a singleton or its
+ * instance-returner method as static.
  * </p>
  * 
  * @see <a href=
