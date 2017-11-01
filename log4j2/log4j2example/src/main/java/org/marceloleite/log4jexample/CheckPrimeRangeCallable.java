@@ -19,7 +19,7 @@ public class CheckPrimeRangeCallable implements Callable<Boolean> {
 
 	public CheckPrimeRangeCallable(int analizedValue, int startValue, int endvalue) {
 		super();
-		logger.traceEntry("Paramters: {}, {}, {}", analizedValue, startValue, endvalue);
+		logger.traceEntry("Parameters: {}, {}, {}", analizedValue, startValue, endvalue);
 		this.analizedNumber = analizedValue;
 		this.startValue = startValue;
 		this.endValue = endvalue;

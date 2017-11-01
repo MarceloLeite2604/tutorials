@@ -1,7 +1,5 @@
 package org.marceloleite.log4jexample;
 
-import java.util.Random;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
