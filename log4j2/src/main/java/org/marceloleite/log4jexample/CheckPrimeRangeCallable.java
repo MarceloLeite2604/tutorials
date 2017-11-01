@@ -11,13 +11,13 @@ public class CheckPrimeRangeCallable implements Callable<Boolean> {
 
 	private static final int INTERRUPTION_CHECK_STEP = 100000;
 
-	private int analizedNumber;
+	private long analizedNumber;
 
-	private int startValue;
+	private long startValue;
 
-	private int endValue;
+	private long endValue;
 
-	public CheckPrimeRangeCallable(int analizedValue, int startValue, int endvalue) {
+	public CheckPrimeRangeCallable(long analizedValue, long startValue, long endvalue) {
 		super();
 		logger.traceEntry("Parameters: {}, {}, {}", analizedValue, startValue, endvalue);
 		this.analizedNumber = analizedValue;
@@ -28,7 +28,7 @@ public class CheckPrimeRangeCallable implements Callable<Boolean> {
 	@Override
 	public Boolean call() throws Exception {
 		logger.traceEntry();
-		int counter = startValue;
+		long counter = startValue;
 		boolean isPrime = true;
 		boolean threadInterrupted = false;
 
@@ -37,7 +37,6 @@ public class CheckPrimeRangeCallable implements Callable<Boolean> {
 			counter++;
 
 			if ((counter - startValue) % INTERRUPTION_CHECK_STEP == 0) {
-				logger.trace("Checking interruption. Counter value: " + counter);
 				threadInterrupted = Thread.interrupted();
 			}
 		}
