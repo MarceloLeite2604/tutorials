@@ -5,8 +5,10 @@
 			<PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %l %-5level - %msg%n" />
 		</Console>
 	</Appenders>
+	
 	<Loggers>
-		<Root level="trace">
+		<Logger name="org.marceloleite.log4jexample.CheckPrimeRangeCallable" level="trace"/>
+		<Root level="info">
 			<AppenderRef ref="Console" />
 		</Root>
 	</Loggers>

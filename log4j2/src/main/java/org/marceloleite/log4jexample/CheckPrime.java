@@ -22,29 +22,30 @@ public class CheckPrime {
 		this.numberOfThreads = numberOfThreads;
 	}
 
-	public boolean isNumberPrime(int number) {
+	public boolean isNumberPrime(long number) {
 		logger.traceEntry("Number: {}", number);
 
 		boolean isPrime = false;
 		ExecutorService executorService = Executors.newFixedThreadPool(numberOfThreads);
 		Set<Future<Boolean>> futureSet = new HashSet<Future<Boolean>>();
 
-		int startValue = 3;
-		int stepDivision = (((number - 1) - startValue) / numberOfThreads);
-		int endValue = startValue + stepDivision;
+		long startValue = 3;
+		long stepDivision = ((number - startValue) / numberOfThreads);
+		long endValue = startValue + stepDivision;
+		logger.debug("Step division: {}", stepDivision);
 
 		for (int counter = 0; counter < numberOfThreads; counter++) {
 			CheckPrimeRangeCallable checkPrimeRangeCallable = new CheckPrimeRangeCallable(number, startValue, endValue);
 			futureSet.add(executorService.submit(checkPrimeRangeCallable));
-			startValue += stepDivision;
-			endValue += (endValue + stepDivision > number ? number - 1 : endValue + stepDivision);
+			startValue = endValue + 1;
+			endValue = ((startValue + stepDivision) >= number ? (number - 1) : startValue + stepDivision);
 		}
 
 		for (Future<Boolean> future : futureSet) {
 			try {
 				isPrime = future.get();
 				if (!isPrime) {
-					executorService.shutdownNow();
+					break;
 				}
 			} catch (InterruptedException | ExecutionException e) {
 				logger.info("Thread interrupted.");
@@ -52,6 +53,8 @@ public class CheckPrime {
 			}
 		}
 
-		return isPrime;
+		executorService.shutdownNow();
+
+		return logger.traceExit(isPrime);
 	}
 }
