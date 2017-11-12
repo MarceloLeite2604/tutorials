@@ -5,6 +5,7 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
@@ -57,6 +59,13 @@ public class ProdutosController {
 	 * validado deve vir o componente que apresenta o resultado da validação.
 	 */
 	@RequestMapping(method = RequestMethod.POST)
+	/*
+	 * Para que o sistema invalide da cache elaborada para a página home, é
+	 * utilizada a annotation "CacheEvict" toda vez que a função "gravar" for
+	 * executada. Ainda, a invalidação é para todos os registros da cache
+	 * (allEntries).
+	 */
+	@CacheEvict(value = "produtosHome", allEntries = true)
 	public ModelAndView gravar(MultipartFile sumario, @Valid Produto produto, BindingResult bindingResult,
 			RedirectAttributes redirectAttributes) {
 
@@ -92,11 +101,43 @@ public class ProdutosController {
 		return modelAndView;
 	}
 
+	/*
+	 * Existem duas formas de obter o Json do nosso produto. A primeira é
+	 * colocar no header da requisição HTML a propriedade "Accept" com o valor
+	 * "application/json". A segunda forma é colocar no final do endereço o
+	 * sufixo ".json".
+	 */
 	@RequestMapping("/detalhe/{id}")
 	public ModelAndView detalhe(@PathVariable("id") Integer id) {
 		ModelAndView modelAndView = new ModelAndView("produtos/detalhe");
 		Produto produto = produtoDAO.find(id);
 		modelAndView.addObject("produto", produto);
 		return modelAndView;
+	}
+
+	/*
+	 * Quando queremos que outros sistemas se integrem com os nossos dados, é
+	 * interessante elaborar um serviço que retorne os dados em um formato
+	 * conhecido como por exemplo XML ou Json. Para fazer isto, basta retornar o
+	 * próprio elemento que se deseja transmitir e colocar na função do
+	 * controller a annotation "ResponseBody". Esta annotation retornará no
+	 * corpo do HTML o que vier do objeto retornado pela função.
+	 */
+	/*
+	 * Observação: Para que o retorno no formato Json funcione, é necessário
+	 * incluir no projeto a biblioteca Jackson, que é responsável por realizar
+	 * esta transcrição de dados no formato Json.
+	 */
+	/*
+	 * Neste caso a função será comentada porque queremos que os dados em
+	 * formato Json do produto sejam distribuídos através da página
+	 * "/produtos/detalhe/{id}.json", que é o mesmo endereço da página HTML,
+	 * porém com o sufixo Json. Para isso será utilizado uma ViewResolver
+	 * configurada na classe AppWebConfiguration.
+	 */
+	@RequestMapping("/{id}")
+	@ResponseBody
+	public Produto detalheJson(@PathVariable("id") Integer id) {
+		return produtoDAO.find(id);
 	}
 }

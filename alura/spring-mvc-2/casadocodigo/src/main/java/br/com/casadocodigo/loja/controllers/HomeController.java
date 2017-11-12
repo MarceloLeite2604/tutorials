@@ -21,10 +21,15 @@ public class HomeController {
 	private ProdutoDAO produtoDAO;
 
 	@RequestMapping("/")
-	@Cacheable(value="produtoHome")
+	/*
+	 * Para evitar diversos acessos desnecessários no banco de dados, é possível
+	 * habilitar a cache para a página home. Para isto, basta utilizar a
+	 * annotation "Cache" e dar um nome para a cache elaborada. 
+	 */
+	@Cacheable(value = "produtosHome")
 	public ModelAndView index() {
 		System.out.println("Entrando na home da CDC.");
-		
+
 		List<Produto> produtos = produtoDAO.listar();
 		ModelAndView modelAndView = new ModelAndView("home");
 		modelAndView.addObject("produtos", produtos);
