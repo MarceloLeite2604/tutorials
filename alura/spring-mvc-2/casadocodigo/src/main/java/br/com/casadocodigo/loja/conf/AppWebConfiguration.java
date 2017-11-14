@@ -90,10 +90,10 @@ public class AppWebConfiguration extends WebMvcConfigurerAdapter {
 		return new StandardServletMultipartResolver();
 	}
 
-	@Override
+	/*@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
 		registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
-	}
+	}*/
 
 	@Bean
 	public RestTemplate restTemplate() {
