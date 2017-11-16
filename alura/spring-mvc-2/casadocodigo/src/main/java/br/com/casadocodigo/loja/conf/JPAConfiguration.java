@@ -3,8 +3,10 @@ package br.com.casadocodigo.loja.conf;
 import java.util.Properties;
 
 import javax.persistence.EntityManagerFactory;
+import javax.sql.DataSource;
 
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Profile;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.JpaVendorAdapter;
@@ -16,20 +18,27 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 public class JPAConfiguration {
 
 	@Bean
-	public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
+	public LocalContainerEntityManagerFactoryBean entityManagerFactory(DataSource dataSource) {
 		LocalContainerEntityManagerFactoryBean factoryBean = new LocalContainerEntityManagerFactoryBean();
+		
+		/*
+		 * Package a ser analisada para obter os classes que compõem nossas
+		 * entidades.
+		 */
+		factoryBean.setPackagesToScan("br.com.casadocodigo.loja.models");
+		
 		JpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
 		
 		factoryBean.setJpaVendorAdapter(vendorAdapter);
 
-		DriverManagerDataSource dataSource = new DriverManagerDataSource();
-		dataSource.setUsername("root");
-		dataSource.setPassword("u42krw");
-		dataSource.setUrl("jdbc:mysql://localhost:3306/casadocodigo");
-		dataSource.setDriverClassName("com.mysql.jdbc.Driver");
-
 		factoryBean.setDataSource(dataSource);
 
+		factoryBean.setJpaProperties(additionalProperties());		
+
+		return factoryBean;
+	}
+
+	private Properties additionalProperties() {
 		/* Conjunto de propriedades a ser definido no hibernate para o JPA. */
 		Properties jpaProperties = new Properties();
 
@@ -44,16 +53,18 @@ public class JPAConfiguration {
 		 * houver uma alteração na estrutura dos dados.
 		 */
 		jpaProperties.setProperty("hibernate.hbm2ddl.auto", "update");
+		return jpaProperties;
+	}
 
-		factoryBean.setJpaProperties(jpaProperties);
-
-		/*
-		 * Package a ser analisada para obter os classes que compõem nossas
-		 * entidades.
-		 */
-		factoryBean.setPackagesToScan("br.com.casadocodigo.loja.models");
-
-		return factoryBean;
+	@Bean
+	@Profile("dev")
+	public DataSource dataSource() {
+		DriverManagerDataSource dataSource = new DriverManagerDataSource();
+		dataSource.setUsername("root");
+		dataSource.setPassword("u42krw");
+		dataSource.setUrl("jdbc:mysql://localhost:3306/casadocodigo");
+		dataSource.setDriverClassName("com.mysql.jdbc.Driver");
+		return dataSource;
 	}
 
 	@Bean
