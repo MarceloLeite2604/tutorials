@@ -2,8 +2,11 @@ package br.com.casadocodigo.loja.conf;
 
 import javax.servlet.Filter;
 import javax.servlet.MultipartConfigElement;
+import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
 import javax.servlet.ServletRegistration.Dynamic;
 
+import org.springframework.web.context.request.RequestContextListener;
 import org.springframework.web.filter.CharacterEncodingFilter;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
@@ -40,6 +43,23 @@ public class ServletSpringMVC extends AbstractAnnotationConfigDispatcherServletI
 	protected void customizeRegistration(Dynamic registration) {
 		registration.setMultipartConfig(new MultipartConfigElement(""));
 		super.customizeRegistration(registration);
+	}
+
+	@Override
+	public void onStartup(ServletContext servletContext) throws ServletException {
+		super.onStartup(servletContext);
+		/*
+		 * Adicionamos um listener para escutar as requisições de contexto do
+		 * Spring e, em seguida, definimos um parâmetro que indica o profile que
+		 * estará ativo na sua execução (no caso "dev).
+		 */
+		/*
+		 * Atualmente temos dois profiles de execução na nossa aplicação:
+		 * "teste" para testes com a aplicação e "dev" para o ambiente de
+		 * desenvolvimento.
+		 */
+		servletContext.addListener(RequestContextListener.class);
+		servletContext.setInitParameter("spring.profiles.active", "dev");
 	}
 
 }

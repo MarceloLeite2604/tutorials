@@ -4,6 +4,9 @@ import java.util.concurrent.Callable;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
+import org.springframework.mail.MailSender;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -15,6 +18,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.com.casadocodigo.loja.models.CarrinhoCompras;
 import br.com.casadocodigo.loja.models.DadosPagamento;
+import br.com.casadocodigo.loja.models.Usuario;
 
 @RequestMapping("/pagamento")
 @Controller
@@ -26,6 +30,9 @@ public class PagamentoController {
 
 	@Autowired
 	private RestTemplate restTemplate;
+	
+	@Autowired
+	private MailSender sender;
 
 	/*
 	 * Esta é a implementação original do método "finalizar". Entretanto, da
@@ -64,7 +71,7 @@ public class PagamentoController {
 	 * escrito no método "finalizar original".
 	 */
 	@RequestMapping(value = "/finalizar", method = RequestMethod.POST)
-	public Callable<ModelAndView> finalizar(RedirectAttributes model) {
+	public Callable<ModelAndView> finalizar(@AuthenticationPrincipal Usuario usuario, RedirectAttributes model) {
 		return () -> {
 			System.out.println(carrinho.getTotal());
 
@@ -78,6 +85,9 @@ public class PagamentoController {
 				 * "Pagamento realizado com sucesso.");
 				 */
 				System.out.println(response);
+
+				enviaEmailDeCompraProduto(usuario);
+
 				model.addFlashAttribute("sucesso", response);
 				return new ModelAndView("redirect:/produtos");
 			} catch (HttpClientErrorException httpClientErrorException) {
@@ -86,5 +96,16 @@ public class PagamentoController {
 				return new ModelAndView("redirect:/produtos");
 			}
 		};
+	}
+
+	private void enviaEmailDeCompraProduto(Usuario usuario) {
+		SimpleMailMessage email = new SimpleMailMessage();
+		email.setSubject("Compra finalizada com sucesso.");
+		/*email.setTo(usuario.getEmail());*/
+		email.setTo("marceloleite2604@gmail.com");
+		email.setText("Compra aprovada com sucesso no valor de " + carrinho.getTotal());
+		email.setFrom("compras@casadocodigo.com.br");
+		
+		sender.send(email);
 	}
 }
