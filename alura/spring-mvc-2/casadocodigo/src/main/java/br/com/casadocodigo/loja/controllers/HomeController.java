@@ -25,6 +25,8 @@ public class HomeController {
 
 	@Autowired
 	private ProdutoDAO produtoDAO;
+	
+	@Autowired
 	private UsuarioDAO usuarioDao;
 
 	@RequestMapping("/")
