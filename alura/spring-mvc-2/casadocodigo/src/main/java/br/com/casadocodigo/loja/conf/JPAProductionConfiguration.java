@@ -60,7 +60,7 @@ public class JPAProductionConfiguration {
 
 		dataSource.setUrl("jdbc:postgresql://" + dbUrl.getHost() + ":" + dbUrl.getPort() + "/" + dbUrl.getPath());
 		dataSource.setUsername(dbUrl.getUserInfo().split(":")[0]);
-		dataSource.setUsername(dbUrl.getUserInfo().split(":")[1]);
+		dataSource.setPassword(dbUrl.getUserInfo().split(":")[1]);
 
 		return dataSource;
 	}
