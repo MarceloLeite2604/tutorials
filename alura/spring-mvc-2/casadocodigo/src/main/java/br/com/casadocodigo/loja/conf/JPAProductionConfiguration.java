@@ -58,7 +58,7 @@ public class JPAProductionConfiguration {
 
 		URI dbUrl = new URI(environment.getProperty("DATABASE_URL"));
 
-		dataSource.setUrl("jdbc:postgresql://" + dbUrl.getHost() + ":" + dbUrl.getPort() + "/" + dbUrl.getPath());
+		dataSource.setUrl("jdbc:postgresql://" + dbUrl.getHost() + ":" + dbUrl.getPort() + dbUrl.getPath());
 		dataSource.setUsername(dbUrl.getUserInfo().split(":")[0]);
 		dataSource.setPassword(dbUrl.getUserInfo().split(":")[1]);
 
