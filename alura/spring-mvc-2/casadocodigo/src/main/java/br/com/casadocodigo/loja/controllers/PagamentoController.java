@@ -76,7 +76,7 @@ public class PagamentoController {
 			System.out.println(carrinho.getTotal());
 
 			String uri = "http://book-payment.herokuapp.com/payment";
-
+			
 			try {
 				String response = restTemplate.postForObject(uri, new DadosPagamento(carrinho.getTotal()),
 						String.class);

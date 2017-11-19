@@ -47,6 +47,10 @@ public class CarrinhoComprasController {
 
 	@RequestMapping(method = RequestMethod.GET)
 	public ModelAndView itens() {
+		/*
+		 * if (true) { throw new
+		 * RuntimeException("Exceção genérica aconteçendo."); }
+		 */
 		return new ModelAndView("carrinho/itens");
 	}
 
@@ -55,11 +59,11 @@ public class CarrinhoComprasController {
 		CarrinhoItem carrinhoItem = new CarrinhoItem(produto, tipoPreco);
 		return carrinhoItem;
 	}
-	
+
 	@RequestMapping("/remover")
 	public ModelAndView remover(Integer produtoId, TipoPreco tipoPreco) {
 		carrinho.remover(produtoId, tipoPreco);
-		
+
 		return new ModelAndView("redirect:/carrinho");
 	}
 }

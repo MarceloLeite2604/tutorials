@@ -12,7 +12,7 @@ public class Preco implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
+
 	private BigDecimal valor;
 	private TipoPreco tipo;
 
@@ -30,5 +30,10 @@ public class Preco implements Serializable {
 
 	public void setTipo(TipoPreco tipo) {
 		this.tipo = tipo;
+	}
+
+	@Override
+	public String toString() {
+		return tipo.name() + " - " + this.valor;
 	}
 }

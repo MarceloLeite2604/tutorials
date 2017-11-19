@@ -18,26 +18,29 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 public class JPAConfiguration {
 
 	@Bean
-	public LocalContainerEntityManagerFactoryBean entityManagerFactory(DataSource dataSource) {
+	public LocalContainerEntityManagerFactoryBean entityManagerFactory(DataSource dataSource,
+			Properties additionalProperties) {
 		LocalContainerEntityManagerFactoryBean factoryBean = new LocalContainerEntityManagerFactoryBean();
-		
+
 		/*
 		 * Package a ser analisada para obter os classes que compõem nossas
 		 * entidades.
 		 */
 		factoryBean.setPackagesToScan("br.com.casadocodigo.loja.models");
-		
+
 		JpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
-		
+
 		factoryBean.setJpaVendorAdapter(vendorAdapter);
 
 		factoryBean.setDataSource(dataSource);
 
-		factoryBean.setJpaProperties(additionalProperties());		
+		factoryBean.setJpaProperties(additionalProperties);
 
 		return factoryBean;
 	}
 
+	@Bean
+	@Profile("dev")
 	private Properties additionalProperties() {
 		/* Conjunto de propriedades a ser definido no hibernate para o JPA. */
 		Properties jpaProperties = new Properties();

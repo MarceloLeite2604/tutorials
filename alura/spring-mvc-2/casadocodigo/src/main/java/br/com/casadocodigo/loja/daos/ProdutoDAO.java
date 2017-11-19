@@ -24,8 +24,47 @@ public class ProdutoDAO {
 		manager.persist(produto);
 	}
 
+	/*
+	 * Quando tentamos abrir uma página que contém uma entidade que possuir seus
+	 * detalhes em uma outra tabela, o hibernate acusa um erro dizendo que os
+	 * detalhes (preço) do item (produto) não puderam ser carregados. Isto
+	 * acontece porque a classe "ProdutoDAO" é transacional, ou seja, só haverá
+	 * uma sessão aberta enquanto o método desta classe estiver sendo executado
+	 * (o método "listar()", no nosso caso). Com isto, quando mais tarde
+	 * solicitamos o preço dos itens, o hibernate não tem mais uma sessão com o
+	 * banco de dados para obtê-los. Logo, não é possível obter os preços,
+	 * resultando em erro. Uma alternativa para isto é inserir na configuração
+	 * do Spring um filtro para indicar ao Spring que uma transação com o banco
+	 * deve permanecer aberta até que toda a requisição do usuário tenha sido
+	 * atendida.
+	 */
+	/*
+	 * A vantagem desta abordagem é que não é mais necessário cuidar a
+	 * inicialização dos detalhes de um item (preços dos produtos). A
+	 * desvantagem é que será realizado um número muito maior de queries no
+	 * banco de dados.
+	 */
+	/*public List<Produto> listar() {
+		return manager.createQuery("select distinct(p) from Produto p", Produto.class).getResultList();
+	}*/
+
+	/*
+	 * Por padrão, o hibernate utiliza o lazy fetch para carregar a lsita de
+	 * detalhes de um produto. Uma alternativa para evitar isto é utilizar
+	 * "join fetch". Ao fazer isto, forçamos o hibernate a carregar junto com os
+	 * produtos os seus preços.
+	 */
+	/*
+	 * A vantagem de utilizar o join fetch é que só será necessário uma query no
+	 * banco de dados para solucionar a inicialização de todos os itens. A
+	 * desvantagem é que será necessário cuidar na hora de escrever a query para
+	 * todos os itens que possuírem detalhes. Sempre que for necessário
+	 * apresentar os itens com os seus detalhes, a query de aquisição de dados
+	 * deverá utilizar o "join fetch".
+	 */
 	public List<Produto> listar() {
-		return manager.createQuery("select p from Produto p", Produto.class).getResultList();
+		return manager.createQuery("select distinct p from Produto p join fetch p.precos", Produto.class)
+				.getResultList();
 	}
 
 	public Produto find(Integer id) {

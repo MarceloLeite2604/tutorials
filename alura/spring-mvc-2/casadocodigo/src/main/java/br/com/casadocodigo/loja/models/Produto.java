@@ -35,6 +35,9 @@ public class Produto implements Serializable {
 	/* @DateTimeFormat(pattern = "dd/MM/yyyy") */
 	private Calendar dataLancamento;
 
+	/*
+	 * Por padrão, o hibernate só irá carregar esta lista quando precisar.
+	 */
 	@ElementCollection
 	private List<Preco> precos = new ArrayList<Preco>();
 

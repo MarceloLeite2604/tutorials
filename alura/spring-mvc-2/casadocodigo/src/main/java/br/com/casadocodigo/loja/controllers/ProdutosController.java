@@ -2,6 +2,7 @@ package br.com.casadocodigo.loja.controllers;
 
 import java.util.List;
 
+import javax.persistence.NoResultException;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -112,6 +114,10 @@ public class ProdutosController {
 		ModelAndView modelAndView = new ModelAndView("produtos/detalhe");
 		Produto produto = produtoDAO.find(id);
 		modelAndView.addObject("produto", produto);
+
+		/*if (true) {
+			throw new RuntimeException("Exceção genérica aconteçendo.");
+		}*/
 		return modelAndView;
 	}
 
@@ -140,4 +146,25 @@ public class ProdutosController {
 	public Produto detalheJson(@PathVariable("id") Integer id) {
 		return produtoDAO.find(id);
 	}
+
+	/*
+	 * Utilizando a annotation "ExceptionHandler", podemos informar para o
+	 * spring o que deve ser feito no momento que ocorrer uma determinada
+	 * exceção no nosso sistema. Neste caso, estamos redirecionando o usuário
+	 * para a página "error.jsp"
+	 */
+	/*
+	 * Observe que este tratamento só será realizando para o ProdutosController.
+	 * Se ocorrer um erro em outro controller (por exemplo,
+	 * PagamentoController), o Spring não irá utilizar este método.
+	 */
+	/* @ExceptionHandler(NoResultException.class) */
+	/*
+	 * Se quisermos que o método capture qualquer erro ocorrido, podemos colocar
+	 * a annotation "ExceptionHandler" informando a classe Exception.
+	 */
+	/*@ExceptionHandler(Exception.class)
+	public String trataDetalheNaoEncontrado() {
+		return "error";
+	}*/
 }
