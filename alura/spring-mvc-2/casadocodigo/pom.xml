@@ -6,10 +6,23 @@
 	<artifactId>casadocodigo</artifactId>
 	<version>1.0.0-SNAPSHOT</version>
 	<packaging>war</packaging>
-	
+
 	<build>
 		<finalName>casadocodigo</finalName>
 		<plugins>
+			<plugin>
+				<groupId>com.heroku.sdk</groupId>
+				<artifactId>heroku-maven-plugin</artifactId>
+				<version>2.0.0</version>
+				<configuration>
+					<!-- Este arquivo é obrigatório para realizar o deploy no Heroku. Ele 
+						explica como será executado o sistema dentro do servidor. Nele, também é 
+						possível adicionar parâmetros de execução do sistema, como por exemplo o 
+						profile de execução do Spring (parâmetro "spring.profiles.active"). -->
+					<web>java $JAVA_OPTS -jar -Dspring.profiles.active=prod
+						target/dependency/webapp-runner.jar --port $PORT target/*.war</web>
+				</configuration>
+			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-dependency-plugin</artifactId>
@@ -25,7 +38,7 @@
 								<artifactItem>
 									<groupId>com.github.jsimone</groupId>
 									<artifactId>webapp-runner</artifactId>
-									<version>7.0.57.2</version>
+									<version>8.0.24.0</version>
 									<destFileName>webapp-runner.jar</destFileName>
 								</artifactItem>
 							</artifactItems>
@@ -35,7 +48,7 @@
 			</plugin>
 		</plugins>
 	</build>
-	
+
 	<dependencies>
 		<dependency>
 			<groupId>org.apache.tomcat</groupId>

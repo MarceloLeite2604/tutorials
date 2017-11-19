@@ -1,5 +1,0 @@
-# Este arquivo é obrigatório para realizar o deploy no Heroku. Ele explica como
-# será executado o sistema dentro do servidor. Nele, também é possível 
-# adicionar parâmetros de execução do sistema, como por exemplo o profile de 
-# execução do Spring (parâmetro "spring.profiles.active").
-web: java $JAVA_OPTS -jar -Dspring.profiles.active=prod target/dependency/webapp-runner.jar --port $PORT target/*.war
