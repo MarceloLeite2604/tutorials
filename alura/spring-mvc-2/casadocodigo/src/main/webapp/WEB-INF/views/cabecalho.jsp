@@ -27,7 +27,7 @@
 </header>
 <nav class="categories-nav">
 	<ul class="container">
-		<li class="category"><a href="http://www.casadocodigo.com.br"><fmt:message
+		<li class="category"><a href="<c:url value="/"/>"><fmt:message
 					key="navegacao.categoria.home" /></a></li>
 		<li class="category"><a href="/collections/livros-de-agile">
 				<fmt:message key="navegacao.categoria.agile" />
