@@ -3,16 +3,16 @@
     <id>2451256</id>
     <dataCompra>2013-12-05T18:21:07.529-02:00</dataCompra>
     <itens>
-        <item>
+         <item>
             <formato>EBOOK</formato>
             <quantidade>1</quantidade>
             <livro>
-                <codigo>TDD</codigo>
-                <titulo>Test-Driven Development: Teste e Design no Mundo Real</titulo>
-                <tituloCurto>TDD</tituloCurto>
-                <nomeAutor>Mauricio Aniche</nomeAutor>
+                <codigo>ARQ</codigo>
+                <titulo>Introdução à Arquitetura e Design de Software</titulo>
+                <tituloCurto>Arquitetura Java</tituloCurto>
+                <nomeAutor>Sergio Lopes, Paulo Silveira, Guilherme Silveira, Nico Steppat, outros</nomeAutor>
                 <valorEbook>29.90</valorEbook>
-                <valorImpresso>59.90</valorImpresso>
+                <valorImpresso>79.90</valorImpresso>
             </livro>
         </item>
     </itens>
@@ -20,5 +20,6 @@
         <status>CONFIRMADO</status>
         <valor>29.90</valor>
         <titular>Edgar  Brião</titular>
+        <email-titular>edgar.b@abc.com</email-titular>
     </pagamento>
 </pedido>

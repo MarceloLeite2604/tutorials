@@ -1,0 +1,26 @@
+<movimentacoes>
+	<movimentacao>
+		<valor>2314.4</valor>
+		<data>11/12/2015</data>
+		<tipo>ENTRADA</tipo>
+	</movimentacao>
+
+	<movimentacao>
+		<valor>546.98</valor>
+		<data>11/12/2015</data>
+		<tipo>SAIDA</tipo>
+	</movimentacao>
+
+	<movimentacao>
+		<valor>314.1</valor>
+		<data>12/12/2015</data>
+		<tipo>SAIDA</tipo>
+	</movimentacao>
+
+	<movimentacao>
+		<valor>56.99</valor>
+		<data>13/12/2015</data>
+		<tipo>SAIDA</tipo>
+	</movimentacao>
+
+</movimentacoes>
