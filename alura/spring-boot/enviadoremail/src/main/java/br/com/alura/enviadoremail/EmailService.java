@@ -17,7 +17,7 @@ public class EmailService {
 			Email email = new SimpleEmail();
 			email.setHostName("smtp.googlemail.com");
 			email.setSmtpPort(465);
-			email.setAuthenticator(new DefaultAuthenticator("usuario", "senha"));
+		email.setAuthenticator(new DefaultAuthenticator("marcelo.leite.alura@gmail.com", "michael01jackson"));
 			email.setSSLOnConnect(true);
 			
 			email.setFrom("contato@alura.com.br");

@@ -7,8 +7,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import br.com.alura.enviadoremail.EmailService;
 import br.com.alura.listavip.model.Convidado;
-import br.com.alura.listavip.repository.ConvidadoRepository;
+import br.com.alura.listavip.service.ConvidadoService;
 
 /*
  * Ver o curso de spring MVC.
@@ -17,7 +18,7 @@ import br.com.alura.listavip.repository.ConvidadoRepository;
 public class ConvidadoController {
 
 	@Autowired
-	private ConvidadoRepository repository;
+	private ConvidadoService service = new ConvidadoService();
 
 	@RequestMapping("/")
 	public String index() {
@@ -29,18 +30,24 @@ public class ConvidadoController {
 	public String salvar(@RequestParam("nome") String nome, @RequestParam("email") String email,
 			@RequestParam("telefone") String telefone, Model model) {
 		Convidado convidado = new Convidado(nome, email, telefone);
-		repository.save(convidado);
-		
-		Iterable<Convidado> convidados = repository.findAll();
+		service.salvar(convidado);
+
+		new EmailService().enviar(nome, email);
+
+		/*
+		 * Não é uma boa prática colocar regras de negócio na camada de
+		 * controle. O correto é colocar na camada de serviço.
+		 */
+		Iterable<Convidado> convidados = service.obterTodos();
 		model.addAttribute("convidados", convidados);
 		return "listaconvidados";
 	}
 
 	@RequestMapping("listaconvidados")
 	public String listaConvidados(Model model) {
-		Iterable<Convidado> convidados = repository.findAll();
+		Iterable<Convidado> convidados = service.obterTodos();
 		/*
-		 * Encaminha o contéudo para a view.
+		 * Encaminha o conteúdo para a view.
 		 */
 		model.addAttribute("convidados", convidados);
 		return "listaconvidados";
