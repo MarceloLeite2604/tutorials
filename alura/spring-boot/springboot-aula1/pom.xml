@@ -47,10 +47,21 @@
 			<artifactId>mysql-connector-java</artifactId>
 			<version>5.1.39</version>
 		</dependency>
+		<!-- Importante: Para que o Eclipse Maven resolva a dependência dos projetos 
+			do mesmo workspace através dos seus Jars, clicar com o botão direito no projeto, 
+			menu "Maven", item "Disable workspace resolutions". -->
 		<dependency>
 			<groupId>br.com.alura.enviadoremail</groupId>
 			<artifactId>enviadoremail</artifactId>
 			<version>0.1</version>
+		</dependency>
+		<!-- Através do Spring Actuator, é possível obter uma série de informações 
+			a respeito da aplicação em execução através de links da aplicação. Os endereços 
+			podem ser conferidos no site: https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#production-ready-endpoints -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-actuator</artifactId>
+			<version>1.3.6.RELEASE</version>
 		</dependency>
 	</dependencies>
 
