@@ -1,0 +1,3 @@
+mvn -o test ->  Realiza os testes do projeto, porém no modo offline. Neste modo, o Maven não irá verificar dependências nem plugins. Isto agiliza a execução do comando porque o Maven não irá realizar as verificações mas, caso o Maven precise baixar algum plugin ou dependência, o comando irá apresentar erro.
+
+mvn -DskipTests=true package -> Realiza o empacotamento do projeto solicitando que as fases de teste sejam ignoradas.

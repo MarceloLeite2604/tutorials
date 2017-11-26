@@ -1,0 +1,58 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>br.com.alura.maven</groupId>
+	<artifactId>produtos</artifactId>
+	<packaging>jar</packaging>
+	<version>1.0-SNAPSHOT</version>
+	<name>produtos</name>
+	<url>http://www.alura.com.br</url>
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<maven.compiler.source>1.8</maven.compiler.source>
+		<maven.compiler.target>1.8</maven.compiler.target>
+	</properties>
+	<dependencies>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>3.8.1</version>
+			<scope>test</scope>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/com.thoughtworks.xstream/xstream -->
+		<dependency>
+			<groupId>com.thoughtworks.xstream</groupId>
+			<artifactId>xstream</artifactId>
+			<version>1.4.8</version>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+			<!-- Obtido na descrição de utilização (usage) da página do plugin: https://maven.apache.org/plugins/maven-pmd-plugin/usage.html -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-pmd-plugin</artifactId>
+				<version>3.8</version>
+				<executions>
+					<execution>
+						<!-- Por padrão, mesmo que o plugin esteja associado a um ciclo de 
+							vida do projeto (por exemplo, pmd:check associado ao ciclo "verify"), se 
+							executarmos o Maven informando o ciclo, o Maven não executará o goal deste 
+							plugin. Para que o o goal do plugin seja executado toda vez que o ciclo do 
+							Maven for executado, temos que informar isto no "pom.xml". -->
+						<!-- Na página dos plugins do Maven, no menu lateral esquerdo, existe 
+							um item "Goals" onde constam todos os seus goals. Na descrição de cada goal 
+							existe um item que informa em que fase do projeto o goal está associado (bind). 
+							Além disto, ele informa qual os outros goals do plugin que são executados 
+							(invoked) antes deste. -->
+						<phase>verify</phase>
+						<goals>
+							<goal>check</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+</project>
