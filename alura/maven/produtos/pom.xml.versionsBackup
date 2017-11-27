@@ -16,10 +16,6 @@
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
-			<!-- Para verificar a última versão das dependências de um projeto, é 
-				possível utilizar o comando "mvn versions:display-dependency-updates". -->
-			<!-- Para atualizar automaticamente as dependências de um projeto para 
-				sua última versão, é possível utilizar o comando "mvn versions:use-latest-versions". -->
 			<version>4.12</version>
 			<scope>test</scope>
 		</dependency>
@@ -27,7 +23,7 @@
 		<dependency>
 			<groupId>com.thoughtworks.xstream</groupId>
 			<artifactId>xstream</artifactId>
-			<version>1.4.10-java7</version>
+			<version>1.4.8</version>
 		</dependency>
 	</dependencies>
 
