@@ -17,6 +17,8 @@
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 			<version>3.8.1</version>
+			<!-- O escopo de teste indica que a package está disponível para testes 
+				da aplicação. Quando ela for empacotada, esta dependência não será colocada. -->
 			<scope>test</scope>
 		</dependency>
 		<!-- https://mvnrepository.com/artifact/javax.servlet/javax.servlet-api -->
@@ -24,7 +26,26 @@
 			<groupId>javax.servlet</groupId>
 			<artifactId>javax.servlet-api</artifactId>
 			<version>3.1.0</version>
+			<!-- Assim como o escopo "compile", o "provided" informa que esta dependência 
+				é necessária para compilar o projeto, entretanto o container onde a aplicação 
+				irá rodar já nos fornece (provide) a dependência. Logo, não é necessário 
+				incluí-la no pacote. -->
 			<scope>provided</scope>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/br.com.caelum.stella/caelum-stella-core -->
+		<dependency>
+			<groupId>br.com.caelum.stella</groupId>
+			<artifactId>caelum-stella-core</artifactId>
+			<version>2.1.2</version>
+			<!-- Este escopo é o padrão das dependências. Ela indica que, quando a 
+				aplicação for empacotada, esta dependência será incluída, pois é uma dependência 
+				de compilação. -->
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>br.com.alura.maven</groupId>
+			<artifactId>produtos</artifactId>
+			<version>1.0-SNAPSHOT</version>
 		</dependency>
 	</dependencies>
 	<build>
@@ -36,6 +57,9 @@
 				<version>9.3.7.v20160115</version>
 				<configuration>
 					<scanIntervalSeconds>10</scanIntervalSeconds>
+					<webApp>
+						<contextPath>/loja</contextPath>
+					</webApp>
 				</configuration>
 			</plugin>
 		</plugins>
