@@ -31,6 +31,13 @@
 				irá rodar já nos fornece (provide) a dependência. Logo, não é necessário 
 				incluí-la no pacote. -->
 			<scope>provided</scope>
+			<!-- Também há um escopo inverso do "provided", onde a biblioteca não 
+				será utilizada para compilar. Ela só será utilizada em tempo de execução. 
+				Este é o escopo "runtime". De qualquer forma, o Eclipse irá considerar dependências 
+				de "runtime" como de "compile" porque é possível executar os programas pelo 
+				Eclipse. Entretanto, se utilizarmos no nosso código uma classe de uma dependência 
+				com o escopo "runtime", ao tentar compilar o maven irá acusar que a classe 
+				solicitada não existe. -->
 		</dependency>
 		<!-- https://mvnrepository.com/artifact/br.com.caelum.stella/caelum-stella-core -->
 		<dependency>
