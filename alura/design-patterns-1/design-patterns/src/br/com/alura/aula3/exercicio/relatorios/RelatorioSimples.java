@@ -1,5 +1,8 @@
 package br.com.alura.aula3.exercicio.relatorios;
 
+import br.com.alura.geral.Banco;
+import br.com.alura.geral.Conta;
+
 public class RelatorioSimples extends TemplateDeRelatorio {
 
 	@Override

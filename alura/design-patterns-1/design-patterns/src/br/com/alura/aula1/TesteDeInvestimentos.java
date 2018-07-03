@@ -1,5 +1,8 @@
 package br.com.alura.aula1;
 
+import br.com.alura.geral.Conta;
+import br.com.alura.geral.ContaFixture;
+
 public class TesteDeInvestimentos {
 
 	public static void main(String[] args) {
@@ -8,12 +11,12 @@ public class TesteDeInvestimentos {
 		Investimento investimentoModerado = new InvestimentoModerado();
 		Investimento investimentoArrojado = new InvestimentoArrojado();
 
-		ContaBancaria contaBancaria = new ContaBancaria(100.0);
+		Conta conta = ContaFixture.criarConta100Reais();
 
 		RealizadorDeInvestimentos realizadorDeInvestimentos = new RealizadorDeInvestimentos();
-		
-		realizadorDeInvestimentos.calcular(contaBancaria, investimentoConservador);
-		realizadorDeInvestimentos.calcular(contaBancaria, investimentoModerado);
-		realizadorDeInvestimentos.calcular(contaBancaria, investimentoArrojado);
+
+		realizadorDeInvestimentos.calcular(conta, investimentoConservador);
+		realizadorDeInvestimentos.calcular(conta, investimentoModerado);
+		realizadorDeInvestimentos.calcular(conta, investimentoArrojado);
 	}
 }

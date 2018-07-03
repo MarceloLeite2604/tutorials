@@ -3,8 +3,11 @@ package br.com.alura.aula3.exercicio.relatorios;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-public class RelatorioComplexo extends TemplateDeRelatorio {
+import br.com.alura.geral.Banco;
+import br.com.alura.geral.Conta;
 
+public class RelatorioComplexo extends TemplateDeRelatorio {
+	
 	@Override
 	protected void cabecalho(Banco banco) {
 		System.out.println(banco.getNome() + " - " + banco.getEndereco() + ", telefone: " + banco.getTelefone());

@@ -1,5 +1,7 @@
 package br.com.alura.aula2.exercicio;
 
+import br.com.alura.geral.Conta;
+
 public class CadeiaDeRespostas {
 
 	public void responder(Requisicao requisicao, Conta conta) {

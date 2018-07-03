@@ -1,8 +1,10 @@
 package br.com.alura.aula3.exercicio.relatorios;
 
+import br.com.alura.geral.Banco;
+
 public abstract class TemplateDeRelatorio implements Relatorio {
 	
-	public void imprimir(Banco banco) {
+	public final void imprimir(Banco banco) {
 		cabecalho(banco);
 		corpo(banco);
 		rodape(banco);

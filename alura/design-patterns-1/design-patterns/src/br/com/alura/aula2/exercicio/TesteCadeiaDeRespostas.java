@@ -1,12 +1,17 @@
 package br.com.alura.aula2.exercicio;
 
+import br.com.alura.geral.Conta;
+
 public class TesteCadeiaDeRespostas {
 
 	public static void main(String[] args) {
-		Conta conta = new Conta("Jo„o", 100.0);
-		
+		Conta conta = Conta.builder()
+				.titular("Jo√£o")
+				.saldo(100.0)
+				.build();
+
 		Requisicao requisicao = new Requisicao(Formato.PORCENTO);
-		
+
 		new CadeiaDeRespostas().responder(requisicao, conta);
 	}
 }

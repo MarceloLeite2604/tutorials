@@ -3,11 +3,11 @@ package br.com.alura.aula1;
 public class TesteDeImpostos {
 
 	/*
-	 * Strategy pattern: Quando utilizamos uma interface que define um método
-	 * genérico. As classes que implementam esta interface define como deve ser
-	 * o método a ser executado. Já a classe que utiliza esta interface
-	 * necessita somente a execução de um método, independente da sua
-	 * implementação.
+	 * Strategy pattern: Quando utilizamos uma interface que define um mÃ©todo
+	 * genÃ©rico. As classes que implementam esta interface define como deve ser
+	 * o mÃ©todo a ser executado. JÃ¡ a classe que utiliza esta interface
+	 * necessita somente a execuÃ§Ã£o de um mÃ©todo, independente da sua
+	 * implementaÃ§Ã£o.
 	 */
 	public static void main(String[] args) {
 		Imposto iss = new ISS();
