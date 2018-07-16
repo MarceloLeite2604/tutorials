@@ -1,4 +1,4 @@
-package org.marceloleite.adjacencyMatrixGenerator;
+package org.marceloleite.graphs.util;
 
 import java.util.concurrent.ThreadLocalRandom;
 

@@ -3,7 +3,7 @@ package org.marceloleite.numberoftrees;
 public class Main {
 	
 	public static void main(String[] args) {
-		int[][] matrix = new InputReader().read("input15.txt");
+		int[][] matrix = new InputReader().read("input19.txt");
 		printMatrix(matrix);
 		System.out.println("Number of trees: " + new NumberOfTrees().calculate(matrix));
 	}

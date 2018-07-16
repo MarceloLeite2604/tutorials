@@ -1,22 +1,24 @@
-package org.marceloleite.adjacencyMatrixGenerator;
+package org.marceloleite.graphs.creator;
 
 import java.util.concurrent.ThreadLocalRandom;
 
-public class MatrixCreator {
+import org.marceloleite.graphs.model.AdjacencyMatrix;
+
+public class AdjacencyMatrixCreator {
 
 	private final ThreadLocalRandom random = ThreadLocalRandom.current();
 
 	private final int MAX_MATRIX_SIZE = 100;
 	private final int MIN_MATRIX_SIZE = 3;
 
-	public int[][] create() {
+	public AdjacencyMatrix create() {
 		int[][] matrix = createEmptyMatrix();
 		createConnections(matrix);
-		return matrix;
+		return new AdjacencyMatrix(matrix);
 	}
 
 	private void createConnections(int[][] matrix) {
-		int numberOfConnections = random.nextInt(0, (matrix.length*2) + 1);
+		int numberOfConnections = random.nextInt(0, (matrix.length * 2) + 1);
 		int firstNode;
 		int secondNode;
 		for (int counter = 0; counter < numberOfConnections; counter++) {
