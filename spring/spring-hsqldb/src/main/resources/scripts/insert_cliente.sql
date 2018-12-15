@@ -1,0 +1,1 @@
+INSERT INTO clientes (id, valor) values (:id, :valor)
