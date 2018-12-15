@@ -1,6 +1,12 @@
+# Arquivos de configuração dos projetos do Eclipse
 **/.settings
 **/.project
 **/target
 **/.classpath
 **/.metadata
+
+# Diretório de banco de dados do tutorial Spring HSQLDB
 spring/spring-hsqldb/hsqldb/*
+
+# Classes compiladas do Groovy
+**/*.class
