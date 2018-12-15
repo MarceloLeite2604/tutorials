@@ -5,6 +5,10 @@
 **/.classpath
 **/.metadata
 
+# Arquivos de configuração do IntelliJ
+**/.idea
+**/*.iml
+
 # Diretório de banco de dados do tutorial Spring HSQLDB
 spring/spring-hsqldb/hsqldb/*
 
