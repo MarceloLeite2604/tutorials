@@ -20,7 +20,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class BancoDadosUtil {
 
-	public static final int TOTAL_BANCO_DADOS = 20;
+	public static final int TOTAL_BANCO_DADOS = 1;
 
 	public static final int MAXIMO_BATCHES = 1000;
 

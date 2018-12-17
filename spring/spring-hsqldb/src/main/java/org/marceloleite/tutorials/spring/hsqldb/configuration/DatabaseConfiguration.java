@@ -25,7 +25,7 @@ public class DatabaseConfiguration {
 
 	private BasicDataSource criarDataSource(int instancia) {
 		BasicDataSource dataSource = new BasicDataSource();
-		dataSource.setUrl("jdbc:hsqldb:file:hsqldb/database" + instancia +";hsqldb.log_data=false;hsqldb.nio_max_size=2048");
+		dataSource.setUrl("jdbc:hsqldb:file:hsqldb/database" + instancia +";hsqldb.log_data=false;hsqldb.nio_max_size=4096");
 		dataSource.setUsername("sa");
 		dataSource.setPassword("");
 		dataSource.setDriverClassName("org.hsqldb.jdbc.JDBCDriver");

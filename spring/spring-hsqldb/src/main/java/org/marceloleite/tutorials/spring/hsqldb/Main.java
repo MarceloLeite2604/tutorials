@@ -10,7 +10,6 @@ import javax.inject.Inject;
 
 import org.marceloleite.tutorials.spring.hsqldb.dao.ClienteDAO;
 import org.marceloleite.tutorials.spring.hsqldb.model.Cliente;
-import org.marceloleite.tutorials.spring.hsqldb.util.BancoDadosUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
@@ -24,16 +23,13 @@ public class Main {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(Main.class);
 
-	private static final long TOTAL_REGISTROS_INSERIDOS = 500000;
+	private static final long TOTAL_REGISTROS_INSERIDOS = 48000000;
 	private static final long TOTAL_REGISTROS_SALVOS = 1000;
 
 	private static final double PROBABILIDADE = (double) TOTAL_REGISTROS_SALVOS / (double) TOTAL_REGISTROS_INSERIDOS;
 
 	@Inject
 	private ClienteDAO clienteDAO;
-
-	@Inject
-	private BancoDadosUtil bancoDadosUtil;
 
 	private Random random;
 
@@ -54,7 +50,7 @@ public class Main {
 
 			for (int contador = 1; contador <= TOTAL_REGISTROS_INSERIDOS; contador++) {
 				Cliente cliente = criarCliente();
-				
+
 				if (selecionarCliente()) {
 					clientesSelecionados.add(cliente);
 				}
