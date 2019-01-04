@@ -14,3 +14,9 @@ spring/spring-hsqldb/hsqldb/*
 
 # Classes compiladas do Groovy
 **/*.class
+
+# Arquivos "attach" do Spring.
+**/.attach*
+
+# Arquivos do banco HSQL
+**/hsqldb/*
