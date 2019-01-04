@@ -16,6 +16,7 @@ import org.springframework.batch.item.file.builder.FlatFileItemReaderBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.task.TaskExecutor;
 
 @Configuration
 public class StepConfiguration {
@@ -27,13 +28,14 @@ public class StepConfiguration {
 	private PersonItemProcessor personItemProcessor;
 
 	@Bean("stepOne")
-	public Step createStepOne(FlatFileItemReader<Person> reader,
+	public Step createStepOne(TaskExecutor taskExecutor, FlatFileItemReader<Person> reader,
 			JdbcBatchItemWriter<Person> writer) {
 		return stepBuilderFactory.get("stepOne")
 				.<Person, Person>chunk(10)
 				.reader(reader)
 				.processor(personItemProcessor)
 				.writer(writer)
+				.taskExecutor(taskExecutor)
 				.build();
 	}
 
