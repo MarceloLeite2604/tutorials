@@ -1,0 +1,26 @@
+# Configurações de criptografia.
+criptografia:
+  algoritmoCriptografia: DESede
+  modoFeedback: CBC
+  modoPreenchimento: PKCS5Padding
+  chave: Oypn30NJfByzStoCmFf+/XAa4KTq6q7+
+  
+# Configurações do banco de dados onde são armazenadas as informações de execução do batch.
+banco:
+  batch:
+    driverClassName: oracle.jdbc.driver.OracleDriver
+    url: jdbc:oracle:thin:@localhost:1521:XE
+    username: SPRING_BATCH
+    senha: 5lHe55R56OHHS+sdSvEbow==
+  programa:
+    driverClassName: oracle.jdbc.driver.OracleDriver
+    url: jdbc:oracle:thin:@localhost:1521:XE 
+    username: SPRING_JOB_CONFIGURATION
+    senha: Gs9H64msEr7GCyq6k0lYMwCLDGlAmhf/BoUXADK+evk=
+    
+# Configurações gerais do programa.
+programa:
+  totalDeRegistros: 1000
+  tamanhoDoChunk: 200
+  caminhoArquivoSaida: output/usuarios.csv
+  

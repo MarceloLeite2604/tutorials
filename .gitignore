@@ -20,3 +20,6 @@ spring/spring-hsqldb/hsqldb/*
 
 # Arquivos do banco HSQL
 **/hsqldb/*
+
+# Arquivos de saída do projeto "spring-job-configuration"
+**/spring-job-configuration/output/usuarios.csv
