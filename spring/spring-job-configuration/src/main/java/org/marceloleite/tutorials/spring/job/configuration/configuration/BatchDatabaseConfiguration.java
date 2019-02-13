@@ -13,17 +13,17 @@ import org.apache.commons.dbcp2.PoolingDataSource;
 import org.apache.commons.pool2.impl.GenericObjectPool;
 import org.marceloleite.tutorials.spring.job.configuration.util.Criptografia;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
-import org.springframework.stereotype.Component;
 
-@Component
-public class DatabaseConfiguration {
+@Configuration
+public class BatchDatabaseConfiguration {
 
 	private static final int MAXIMO_CONEXOES_EM_AGUARDO = 4;
 
 	private static final int TOTAL_CONEXOES = 6;
 	
-	@Bean
+	@Bean("batchDataSource")
 	@Primary
 	public DataSource criarBatchDataSource(
 			@Named("batchDataSourceProperties") Properties properties,

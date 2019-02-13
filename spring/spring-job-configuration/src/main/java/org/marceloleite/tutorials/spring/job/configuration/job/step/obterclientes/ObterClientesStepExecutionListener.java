@@ -4,36 +4,39 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
+import javax.inject.Inject;
+
+import org.marceloleite.tutorials.spring.job.configuration.job.MeuJobProperties;
 import org.springframework.batch.core.ExitStatus;
 import org.springframework.batch.core.StepExecution;
 import org.springframework.batch.core.StepExecutionListener;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 @Component
 public class ObterClientesStepExecutionListener implements StepExecutionListener {
 
-	@Value("${programa.caminhoArquivoSaida}")
-	private String caminhoDoArquivo;
+	@Inject
+	private MeuJobProperties meuJobProperties;
 
 	@Override
 	public void beforeStep(StepExecution stepExecution) {
-		excluirArquivoDeSaida();
+		excluirArquivoUsuarios();
+		System.out.println("Arquivo de usuários excluído.");
 	}
 
-	private void excluirArquivoDeSaida() {
+	private void excluirArquivoUsuarios() {
+		String caminhoArquivoUsuarios = meuJobProperties.getCaminhoArquivoDeUsuarios();
 		try {
-			Files.deleteIfExists(Paths.get(caminhoDoArquivo));
+			Files.deleteIfExists(Paths.get(caminhoArquivoUsuarios));
 		} catch (IOException excecao) {
-			throw new RuntimeException("Erro ao excluir o arquivo \"" + caminhoDoArquivo + "\".",
-					excecao);
+			throw new RuntimeException(
+					"Erro ao excluir o arquivo \"" + caminhoArquivoUsuarios + "\".", excecao);
 		}
 	}
 
 	@Override
 	public ExitStatus afterStep(StepExecution stepExecution) {
-		// TODO Auto-generated method stub
-		return null;
+		System.out.println("AfterStep");
+		return stepExecution.getExitStatus();
 	}
-
 }

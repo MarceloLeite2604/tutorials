@@ -18,9 +18,13 @@ banco:
     username: SPRING_JOB_CONFIGURATION
     senha: Gs9H64msEr7GCyq6k0lYMwCLDGlAmhf/BoUXADK+evk=
     
-# Configurações gerais do programa.
-programa:
-  totalDeRegistros: 1000
-  tamanhoDoChunk: 200
-  caminhoArquivoSaida: output/usuarios.csv
+# Configurações gerais do job.
+meu-job:
+  caminho-arquivo-de-usuarios: output/usuarios.csv
+  total-de-registros: 40
+  obter-clientes:
+    tamanho-do-chunk: 10
+  persistir-clientes:
+    quantidade-de-leitores: 1
+    tamanho-do-chunk: 10
   

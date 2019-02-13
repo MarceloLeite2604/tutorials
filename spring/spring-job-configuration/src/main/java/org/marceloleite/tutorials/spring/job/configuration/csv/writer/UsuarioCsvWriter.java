@@ -11,8 +11,6 @@ import java.util.List;
 import org.marceloleite.tutorials.spring.job.configuration.VerificadorLancamentoExcecaoSimulada;
 import org.marceloleite.tutorials.spring.job.configuration.comparator.OrdemColunasUsuarioCsvVoComparator;
 import org.marceloleite.tutorials.spring.job.configuration.model.csv.UsuarioCsvVO;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Component;
 
 import com.opencsv.CSVWriter;
 import com.opencsv.bean.HeaderColumnNameMappingStrategy;
@@ -22,25 +20,23 @@ import com.opencsv.bean.StatefulBeanToCsvBuilder;
 import com.opencsv.exceptions.CsvDataTypeMismatchException;
 import com.opencsv.exceptions.CsvRequiredFieldEmptyException;
 
-@Component
 public class UsuarioCsvWriter {
 
-	private static final char CARACTERE_SEPARADOR_DADOS = ';';
+	public static final char CARACTERE_SEPARADOR_DADOS = ';';
 
 	private static final OpenOption[] OPEN_OPTIONS_APPEND = { StandardOpenOption.APPEND };
 
-	@Value("${programa.caminhoArquivoSaida}")
 	private String caminhoArquivoSaida;
 
 	private VerificadorLancamentoExcecaoSimulada verificadorLancamentoExcecaoSimulada;
 
-	public UsuarioCsvWriter() {
-		verificadorLancamentoExcecaoSimulada = new VerificadorLancamentoExcecaoSimulada(0.2);
+	public UsuarioCsvWriter(String caminhoArquivoSaida) {
+		this.caminhoArquivoSaida = caminhoArquivoSaida;
+		verificadorLancamentoExcecaoSimulada = new VerificadorLancamentoExcecaoSimulada(0.25);
 	}
 
 	public void escrever(List<UsuarioCsvVO> usuarioCsvVOs) {
 
-		System.out.println("Registros: " + usuarioCsvVOs.size());
 		verificadorLancamentoExcecaoSimulada.verificar();
 
 		MappingStrategy<UsuarioCsvVO> mappingStrategy = elaborarMappingStrategy();

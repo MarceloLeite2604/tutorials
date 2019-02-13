@@ -12,7 +12,7 @@ import org.springframework.batch.item.ItemStreamWriter;
 import org.springframework.stereotype.Component;
 
 @Component
-public class ObterClientesItemWriter implements ItemStreamWriter<UsuarioCsvVO> {
+public class ObterClientesItemStreamWriter implements ItemStreamWriter<UsuarioCsvVO> {
 
 	@Inject
 	private UsuarioCsvWriter usuarioCsvWriter;

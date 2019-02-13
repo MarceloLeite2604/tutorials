@@ -3,19 +3,15 @@ package org.marceloleite.tutorials.spring.job.configuration.util;
 import java.util.Optional;
 import java.util.Properties;
 
-import org.marceloleite.tutorials.spring.job.configuration.mapper.ExecutionContextParaPropertiesMapper;
 import org.marceloleite.tutorials.spring.job.configuration.model.propriedades.Propriedade;
-import org.springframework.batch.item.ExecutionContext;
 
 public final class PropriedadeUtil {
-
-	private static final ExecutionContextParaPropertiesMapper EXECUTION_CONTEXT_PARA_PROPERTIES_MAPPER = new ExecutionContextParaPropertiesMapper();
 
 	private PropriedadeUtil() {
 		// Construtor privado para evitar a instanciação de objetos desta classe.
 	}
 
-	public static String obterPropriedade(Propriedade propriedade, Properties properties,
+	public static String obter(Propriedade propriedade, Properties properties,
 			String valorPadrao) {
 		Optional<String> optionalValorPropriedade = Optional
 				.ofNullable(properties.getProperty(propriedade.getNome()));
@@ -36,19 +32,13 @@ public final class PropriedadeUtil {
 		}
 	}
 
-	public static String obterPropriedade(Propriedade propriedade, Properties properties) {
-		return obterPropriedade(propriedade, properties, null);
+	public static String obter(Propriedade propriedade, Properties properties) {
+		return obter(propriedade, properties, null);
 	}
-
-	public static String obterPropriedade(Propriedade propriedade,
-			ExecutionContext executionContext, String valorPadrao) {
-		return obterPropriedade(propriedade,
-				EXECUTION_CONTEXT_PARA_PROPERTIES_MAPPER.map(executionContext), valorPadrao);
-	}
-
-	public static String obterPropriedade(Propriedade propriedade,
-			ExecutionContext executionContext) {
-		return obterPropriedade(propriedade,
-				EXECUTION_CONTEXT_PARA_PROPERTIES_MAPPER.map(executionContext), null);
+	
+	public static void copiar(Properties propertiesOrigem, Propriedade propriedadeOrigem,
+			Properties propertiesDestino, Propriedade propriedadeDestino) {
+		propertiesDestino.put(propriedadeDestino.getNome(),
+				propertiesOrigem.get(propriedadeOrigem.getNome()));
 	}
 }

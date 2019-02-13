@@ -22,4 +22,4 @@ spring/spring-hsqldb/hsqldb/*
 **/hsqldb/*
 
 # Arquivos de saída do projeto "spring-job-configuration"
-**/spring-job-configuration/output/usuarios.csv
+**/spring-job-configuration/output/*
