@@ -5,10 +5,10 @@ import java.util.Properties;
 
 import javax.inject.Inject;
 
-import org.marceloleite.tutorials.spring.job.configuration.model.propriedades.Propriedade;
-import org.marceloleite.tutorials.spring.job.configuration.propriedades.adquirente.AdquirentePropriedadeExecutionContextStrategy;
-import org.marceloleite.tutorials.spring.job.configuration.propriedades.adquirente.AdquirentePropriedadePropertyStrategy;
-import org.marceloleite.tutorials.spring.job.configuration.propriedades.adquirente.AdquirentePropriedadeValorPadraoStrategy;
+import org.marceloleite.tutorials.spring.job.configuration.model.Propriedade;
+import org.marceloleite.tutorials.spring.job.configuration.propriedade.adquirente.AdquirentePropriedadeExecutionContextStrategy;
+import org.marceloleite.tutorials.spring.job.configuration.propriedade.adquirente.AdquirentePropriedadePropertyStrategy;
+import org.marceloleite.tutorials.spring.job.configuration.propriedade.adquirente.AdquirentePropriedadeValorPadraoStrategy;
 import org.springframework.batch.item.ExecutionContext;
 import org.springframework.stereotype.Component;
 
@@ -25,7 +25,7 @@ public class AdquirentePropriedadeContexto {
 	private AdquirentePropriedadeValorPadraoStrategy valorPadraoStrategy;
 
 	public String adquirir(Propriedade propriedade, ExecutionContext executionContext,
-			Properties properties) {
+			Properties properties, String valorPadrao) {
 
 		Optional<String> optionalValor = executionContextStrategy.adquirir(propriedade,
 				executionContext);
@@ -46,7 +46,16 @@ public class AdquirentePropriedadeContexto {
 			return optionalValor.get();
 		}
 
+		if (valorPadrao != null) {
+			return valorPadrao;
+		}
+
 		throw new RuntimeException("Não foi possível localizar a propriedade \""
 				+ propriedade.getNomeCompleto() + "\".");
+	}
+
+	public String adquirir(Propriedade propriedade, ExecutionContext executionContext,
+			Properties properties) {
+		return adquirir(propriedade, executionContext, properties, null);
 	}
 }

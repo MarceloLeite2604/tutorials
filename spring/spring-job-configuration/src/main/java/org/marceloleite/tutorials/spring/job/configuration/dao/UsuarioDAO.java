@@ -15,4 +15,8 @@ public class UsuarioDAO {
 	public Iterable<UsuarioPO> salvarTodos(Iterable<UsuarioPO> usuarioPOs) {
 		return usuarioRepository.saveAll(usuarioPOs);
 	}
+
+	public void excluirTodos() {
+		usuarioRepository.deleteAll();
+	}
 }

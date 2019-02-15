@@ -2,7 +2,7 @@ package org.marceloleite.tutorials.spring.job.configuration.util;
 
 import java.util.Optional;
 
-import org.marceloleite.tutorials.spring.job.configuration.model.propriedades.Propriedade;
+import org.marceloleite.tutorials.spring.job.configuration.model.Propriedade;
 import org.springframework.batch.item.ExecutionContext;
 
 public final class ExecutionContextUtil {

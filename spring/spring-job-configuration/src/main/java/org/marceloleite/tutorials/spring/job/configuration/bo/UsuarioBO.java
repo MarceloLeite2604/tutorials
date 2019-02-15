@@ -16,4 +16,8 @@ public class UsuarioBO {
 		return usuarioDAO.salvarTodos(usuarioPOs);
 	}
 
+	public void excluirTodos() {
+		usuarioDAO.excluirTodos();
+	}
+
 }

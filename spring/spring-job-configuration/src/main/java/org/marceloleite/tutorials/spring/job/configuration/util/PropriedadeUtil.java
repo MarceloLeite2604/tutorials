@@ -3,7 +3,7 @@ package org.marceloleite.tutorials.spring.job.configuration.util;
 import java.util.Optional;
 import java.util.Properties;
 
-import org.marceloleite.tutorials.spring.job.configuration.model.propriedades.Propriedade;
+import org.marceloleite.tutorials.spring.job.configuration.model.Propriedade;
 
 public final class PropriedadeUtil {
 
@@ -11,8 +11,7 @@ public final class PropriedadeUtil {
 		// Construtor privado para evitar a instanciação de objetos desta classe.
 	}
 
-	public static String obter(Propriedade propriedade, Properties properties,
-			String valorPadrao) {
+	public static String obter(Propriedade propriedade, Properties properties, String valorPadrao) {
 		Optional<String> optionalValorPropriedade = Optional
 				.ofNullable(properties.getProperty(propriedade.getNome()));
 
@@ -35,10 +34,17 @@ public final class PropriedadeUtil {
 	public static String obter(Propriedade propriedade, Properties properties) {
 		return obter(propriedade, properties, null);
 	}
-	
+
 	public static void copiar(Properties propertiesOrigem, Propriedade propriedadeOrigem,
 			Properties propertiesDestino, Propriedade propriedadeDestino) {
 		propertiesDestino.put(propriedadeDestino.getNome(),
 				propertiesOrigem.get(propriedadeOrigem.getNome()));
+	}
+
+	public static Properties clonar(Properties fonteProperties) {
+
+		Properties properties = new Properties();
+		fonteProperties.forEach(properties::put);
+		return properties;
 	}
 }

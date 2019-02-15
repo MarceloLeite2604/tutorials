@@ -4,7 +4,7 @@ import java.util.Properties;
 
 import javax.inject.Inject;
 
-import org.marceloleite.tutorials.spring.job.configuration.model.propriedades.Propriedade;
+import org.marceloleite.tutorials.spring.job.configuration.model.Propriedade;
 import org.springframework.batch.item.ExecutionContext;
 
 public abstract class AbstractContexto {
@@ -15,6 +15,11 @@ public abstract class AbstractContexto {
 	protected String adquirir(Propriedade propriedade, ExecutionContext executionContext) {
 		return adquirentePropriedadeContexto.adquirir(propriedade, executionContext,
 				obterProperties());
+	}
+	
+	protected String adquirir(Propriedade propriedade, ExecutionContext executionContext, String valorPadrao) {
+		return adquirentePropriedadeContexto.adquirir(propriedade, executionContext,
+				obterProperties(), valorPadrao);
 	}
 	
 	protected void definir(Propriedade propriedade, String valor, ExecutionContext executionContext) {
