@@ -23,3 +23,6 @@ spring/spring-hsqldb/hsqldb/*
 
 # Arquivos de saída do projeto "spring-job-configuration"
 **/spring-job-configuration/output/*
+
+# Arquivos do ActiveMQ
+**/activemq-data/*
