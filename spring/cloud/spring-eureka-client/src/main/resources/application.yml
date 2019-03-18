@@ -1,0 +1,13 @@
+spring:
+  application:
+    name: spring-cloud-eureka-client
+server:
+  port: 0 # Porta aleatória para garantir que o feign client não irá se conectar diretamente nele. :)
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka
+  instance:
+    preferIpAddress: true
+    leaseRenewalIntervalInSeconds: 1
+    leaseExpirationDurationInSeconds: 2
