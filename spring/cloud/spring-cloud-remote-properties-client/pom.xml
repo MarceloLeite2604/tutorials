@@ -11,11 +11,11 @@
 	</parent>
 
 	<groupId>org.marceloleite.tutorials</groupId>
-	<artifactId>spring-git-information</artifactId>
+	<artifactId>spring-cloud-remote-properties-client</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
-	<name>spring-git-information</name>
+	<name>spring-cloud-remote-properties-client</name>
 	<url>http://maven.apache.org</url>
 
 	<properties>
@@ -39,12 +39,17 @@
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter</artifactId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-web</artifactId>
 		</dependency>
 
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-config-server</artifactId>
+			<artifactId>spring-cloud-config-client</artifactId>
 		</dependency>
 
 		<dependency>
@@ -59,38 +64,4 @@
 			<version>1</version>
 		</dependency>
 	</dependencies>
-
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-			</plugin>
-			<plugin>
-				<groupId>pl.project13.maven</groupId>
-				<artifactId>git-commit-id-plugin</artifactId>
-				<configuration>
-					<dotGitDirectory>${project.basedir}/../../../.git</dotGitDirectory>
-					<generateGitPropertiesFile>true</generateGitPropertiesFile>
-					<generateGitPropertiesFilename>src/main/resources/git.properties</generateGitPropertiesFilename>
-				</configuration>
-				<executions>
-					<execution>
-						<id>get-the-git-infos</id>
-						<goals>
-							<goal>revision</goal>
-						</goals>
-						<phase>initialize</phase>
-					</execution>
-					<execution>
-						<id>validate-the-git-infos</id>
-						<goals>
-							<goal>validateRevision</goal>
-						</goals>
-						<phase>package</phase>
-					</execution>
-				</executions>
-			</plugin>
-		</plugins>
-	</build>
 </project>

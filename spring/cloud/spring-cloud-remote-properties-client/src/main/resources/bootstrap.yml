@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: remote-properties-client
+  profiles:
+    active: default  
+  cloud:
+    config:
+      fail-fast: true
+      uri: http://localhost:8081
+      label: master

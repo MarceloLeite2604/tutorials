@@ -1,0 +1,14 @@
+server:
+  port: 8081
+
+spring:
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/MarceloLeite2604/spring-cloud-remote-properties
+          basedir: target/config
+          # Outros diretórios podem ser inseridos abaixo para buscar os arquivos de configuração em subpastas do repositório git.
+          search-paths:
+            - test
+            - remote-properties-client
