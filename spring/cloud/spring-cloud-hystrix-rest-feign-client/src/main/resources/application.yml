@@ -1,0 +1,8 @@
+server:
+  port: 8083
+spring:
+  application:
+    name: spring-cloud-hystrix-rest-feign-client
+feign:
+  hystrix:
+    enabled: true

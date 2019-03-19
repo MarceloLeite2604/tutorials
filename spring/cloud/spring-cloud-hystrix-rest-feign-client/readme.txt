@@ -1,0 +1,1 @@
+Para acessar o Hystrix dashboard, utilizar o endereço "http://localhost:8083/hystrix" e, no endereço do stream, utilizar "http://localhost:8083/actuator/hystrix.stream".
