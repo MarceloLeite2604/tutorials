@@ -1,0 +1,7 @@
+server:
+  port: 8082
+zuul:
+  routes:
+    foos:
+      path: /foos/**
+      url: http://localhost:8081/foos
