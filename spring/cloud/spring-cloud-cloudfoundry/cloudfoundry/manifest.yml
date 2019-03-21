@@ -1,0 +1,9 @@
+applications:
+- name: spring-cloud-cloudfoundry
+  memory: 768M
+  random-route: true
+  path: ../target/spring-cloud-cloudfoundry-cf.jar
+  env:
+    SPRING_PROFILES_ACTIVE: cloud,mysql
+  services:
+  - spring-bootstrap-db
