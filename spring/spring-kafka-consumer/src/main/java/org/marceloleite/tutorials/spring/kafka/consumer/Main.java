@@ -1,7 +1,5 @@
 package org.marceloleite.tutorials.spring.kafka.consumer;
 
-import java.util.concurrent.TimeUnit;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
@@ -20,13 +18,11 @@ public class Main {
 
 		MessageListener messageListener = context.getBean(MessageListener.class);
 
-		LOGGER.info("Aguardando mensagem.");
-		boolean mensagemRecebida = messageListener.getCountDownLatch()
-				.await(30, TimeUnit.SECONDS);
+		LOGGER.info("Aguardando mensagens por 30 segundos.");
+		Thread.sleep(30000);
 
-		if (!mensagemRecebida) {
-			LOGGER.info("Nenhuma menssagem recebida.");
-		}
+		LOGGER.info("{} mensagem(ns) recebidas.", messageListener.getTotalMensagens()
+				.get());
 
 		context.close();
 	}

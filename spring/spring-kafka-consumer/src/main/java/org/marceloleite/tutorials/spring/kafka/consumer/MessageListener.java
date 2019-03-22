@@ -1,29 +1,43 @@
 package org.marceloleite.tutorials.spring.kafka.consumer;
 
-import java.util.concurrent.CountDownLatch;
+import java.util.Properties;
+import java.util.concurrent.atomic.AtomicLong;
 
-import org.springframework.beans.factory.annotation.Value;
+import javax.inject.Inject;
+import javax.inject.Named;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.kafka.annotation.KafkaListener;
+import org.springframework.kafka.support.Acknowledgment;
+import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.stereotype.Component;
 
 @Component
 public class MessageListener {
 
-	private CountDownLatch countDownLatch = new CountDownLatch(3);
+	private static final Logger LOGGER = LoggerFactory.getLogger(MessageListener.class);
 
-	@Value("${kafka.groupId}")
-	private String groupId;
+	@Inject
+	@Named(NomesBeans.KAFKA_PROPERTIES)
+	private Properties kafkaProperties;
 
-	public CountDownLatch getCountDownLatch() {
-		return countDownLatch;
+	private AtomicLong totalMensagens = new AtomicLong(0L);
+
+	public AtomicLong getTotalMensagens() {
+		return totalMensagens;
 	}
 
 	@KafkaListener(
 			topics = "${kafka.topic}",
-			groupId = "${kafka.groupId}",
+			groupId = "${kafka.group.id}",
 			containerFactory = NomesBeans.CONCURRENT_KAFKA_LISTENER_CONTAINER_FACTORY)
-	public void receberMensagem(String message) {
-		System.out.println("Recebida a seguinte mensagem no grupo \"" + groupId + "\": " + message);
-		countDownLatch.countDown();
+	public void receberMensagem(@Payload String message, Acknowledgment acknowledgment) {
+
+		LOGGER.info("Recebida a seguinte mensagem no grupo \"{}\": {}",
+				kafkaProperties.getProperty("group.id"), message);
+
+		totalMensagens.incrementAndGet();
+		acknowledgment.acknowledge();
 	}
 }

@@ -1,4 +1,4 @@
 kafka:
-  bootstrapServers: localhost:32773,localhost:32774,localhost:32775
-  groupId: teste
+  bootstrap.servers: localhost:32768,localhost:32769,localhost:32770
+  group.id: teste
   topic: topic-teste
