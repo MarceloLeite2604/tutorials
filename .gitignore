@@ -26,3 +26,6 @@ spring/spring-hsqldb/hsqldb/*
 
 # Arquivos do ActiveMQ
 **/activemq-data/*
+
+# Arquivos de exemplo de uso do Spring Integration.
+**/spring/integration/spring-integration/arquivos/*

@@ -8,9 +8,9 @@ import org.marceloleite.webvalidations.bo.GreetingBO;
 import org.marceloleite.webvalidations.model.Greeting;
 import org.marceloleite.webvalidations.model.validation.rest.GreetingRestValidation;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -24,7 +24,7 @@ public class Controller {
 	@Inject
 	private GreetingBO greetingBO;
 
-	@RequestMapping(method = RequestMethod.GET, path = "/greeting")
+	@GetMapping("/greeting")
 	public Greeting get(@RequestParam(value = "name", defaultValue = "World") String name) {
 		return Greeting.builder()
 				.id(counter.incrementAndGet())
@@ -32,7 +32,7 @@ public class Controller {
 				.build();
 	}
 
-	@RequestMapping(method = RequestMethod.POST, path = "/greeting")
+	@PostMapping("/greeting")
 	public Greeting post(@Validated(GreetingRestValidation.class) @RequestBody Greeting greeting) {
 		return greetingBO.save(greeting);
 	}
