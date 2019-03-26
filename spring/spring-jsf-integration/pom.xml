@@ -3,13 +3,13 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>org.marceloleite.tutorials</groupId>
+	<groupId>com.github.marceloleite2604</groupId>
 	<artifactId>spring-jsf-integration</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1.0</version>
 	<packaging>war</packaging>
 
 	<name>spring-jsf-integration</name>
-	<url>http://maven.apache.org</url>
+	<url>https://github.com/MarceloLeite2604</url>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -24,19 +24,19 @@
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-core</artifactId>
-			<version>5.0.1.RELEASE</version>
+			<version>[5,)</version>
 		</dependency>
 
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-context</artifactId>
-			<version>5.0.1.RELEASE</version>
+			<version>[5,)</version>
 		</dependency>
 
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-web</artifactId>
-			<version>5.0.1.RELEASE</version>
+			<version>[5,)</version>
 		</dependency>
 
 		<!-- JSR-330 -->

@@ -1,10 +1,11 @@
-package org.marceloleite.tutorials.springjsfintegration;
+package com.github.marceloleite2604.spring.jsf.integration;
 
 import javax.inject.Inject;
 
-import org.marceloleite.tutorials.springjsfintegration.bo.UserBo;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
+
+import com.github.marceloleite2604.spring.jsf.integration.bo.UserBo;
 
 @Component
 @Scope("session")

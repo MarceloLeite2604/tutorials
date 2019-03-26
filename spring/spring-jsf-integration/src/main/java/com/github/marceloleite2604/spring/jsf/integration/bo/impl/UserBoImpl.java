@@ -1,8 +1,8 @@
-package org.marceloleite.tutorials.springjsfintegration.bo.impl;
+package com.github.marceloleite2604.spring.jsf.integration.bo.impl;
 
 import javax.inject.Named;
 
-import org.marceloleite.tutorials.springjsfintegration.bo.UserBo;
+import com.github.marceloleite2604.spring.jsf.integration.bo.UserBo;
 
 @Named
 public class UserBoImpl implements UserBo {
