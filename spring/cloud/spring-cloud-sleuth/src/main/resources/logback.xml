@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE xml>
+<configuration debug="false" scanPeriod="10 seconds">
+
+	<springProperty name="springApplicationName" source="spring.application.name"/>
+	<springProperty name="springProfilesActive" source="spring.profiles.active" defaultValue="default"/>
+
+	<include
+		resource="org/springframework/boot/logging/logback/base.xml" />
+		
+	<appender name="logstash"
+		class="net.logstash.logback.appender.LogstashTcpSocketAppender">
+		<waitStrategyType>blocking</waitStrategyType>
+		<destination>localhost:5000</destination>
+		<encoder
+			class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">
+			<providers>
+				<mdc />
+				<context />
+				<logLevel />
+				<loggerName />
+				<pattern>
+					<pattern>
+						{
+						"applicationName": "${springApplicationName}",
+						"springProfile": "${springProfilesActive}"
+						}
+					</pattern>
+				</pattern>
+				<threadName />
+				<message />
+				<logstashMarkers />
+				<stackTrace />
+			</providers>
+		</encoder>
+	</appender>
+
+	<root level="INFO">
+		<appender-ref ref="logstash" />
+	</root>
+</configuration>
