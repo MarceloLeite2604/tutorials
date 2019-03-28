@@ -1,0 +1,37 @@
+spring:
+  application:
+    name: spring-cloud-stream-server
+  cloud:
+    stream:
+      # Os bindinds montam a relação entre os canais descritos por objetos 
+      # Source e Sink e os tópicos de um serviço de mensagem externo (Kafka ou RabbitMQ).
+      bindings:
+        input:
+          destination: spring-cloud-stream-request
+          group: spring-cloud-stream-group
+          content-type: application/json
+        output:
+          destination: spring-cloud-stream-response
+          group: spring-cloud-stream-group
+          content-type: application/json
+
+---
+spring:
+  profiles: kafka
+  cloud:
+      stream:
+        default-binder: kafka
+  kafka:
+    bootstrap-servers:
+    - localhost:32769
+    consumer:
+      group-id: spring-cloud-stream-server-group
+
+---
+spring:
+  profiles: rabbitmq
+  cloud:
+      stream:
+        default-binder: rabbit
+  rabbitmq:
+    addresses: localhost:5672
