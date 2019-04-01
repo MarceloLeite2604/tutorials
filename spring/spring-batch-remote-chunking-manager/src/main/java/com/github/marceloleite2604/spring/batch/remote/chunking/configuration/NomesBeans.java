@@ -1,4 +1,4 @@
-package org.marceloleite.tutorials.spring.batch.remote.chunking.configuration;
+package com.github.marceloleite2604.spring.batch.remote.chunking.configuration;
 
 public final class NomesBeans {
 	

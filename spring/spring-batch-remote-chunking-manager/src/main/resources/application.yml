@@ -1,0 +1,17 @@
+spring:
+  application:
+    name: spring-batch-remote-chunking-manager
+  activemq:
+    broker-url: tcp://localhost:61616
+    packages:
+      trusted:
+      - "*"
+  jms:
+    cache:
+      enabled: false
+  batch:
+    job:
+      enabled: false
+logging:
+  level:
+   org: DEBUG

@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: spring-batch-remote-chunking-worker
+  activemq:
+    broker-url: tcp://localhost:61616
+  cloud:
+    stream:
+      bindings:
+        output:
+          destination: spring-batch-remote-chunking-response
+          group: spring-batch-remote-chunking-group
+          content-type: application/json
+        input:
+          destination: spring-batch-remote-chunking-request
+          group: spring-batch-remote-chunking-group
+          content-type: application/json
