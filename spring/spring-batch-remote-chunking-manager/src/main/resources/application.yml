@@ -5,7 +5,8 @@ spring:
     broker-url: tcp://localhost:61616
     packages:
       trusted:
-      - "*"
+      - "org.springframework.batch"
+      - "java.lang"
   jms:
     cache:
       enabled: false
@@ -14,4 +15,4 @@ spring:
       enabled: false
 logging:
   level:
-   org: DEBUG
+   org: INFO

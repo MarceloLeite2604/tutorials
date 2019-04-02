@@ -1,4 +1,4 @@
-package org.marceloleite.tutorials.spring.batch.remote.chunking.configuration;
+package com.github.marceloleite2604.spring.batch.remote.chunking.worker.configuration;
 
 import javax.inject.Named;
 
@@ -14,20 +14,16 @@ import org.springframework.messaging.MessageChannel;
 @Configuration
 public class IntegrationConfiguration {
 
-	@Bean
-	public ActiveMQConnectionFactory jmsConnectionFactory() {
-		ActiveMQConnectionFactory connectionFactory = new ActiveMQConnectionFactory();
-		connectionFactory.setBrokerURL("tcp://localhost:61616?daemon=true");
-		connectionFactory.setTrustAllPackages(true);
-		return connectionFactory;
-	}
+	private static final String NOME_CANAL_ACTIVEMQ_REQUESTS = "activemq-requests";
 
-	@Bean("requests")
+	private static final String NOME_CANAL_ACTIVEMQ_RESPONSES = "activemq-responses";
+
+	@Bean(NomesBeans.MESSAGE_CHANNEL_REQUESTS)
 	public MessageChannel criarMessageChannelRequests() {
 		return new DirectChannel();
 	}
 
-	@Bean("responses")
+	@Bean(NomesBeans.MESSAGE_CHANNEL_RESPONSES)
 	public MessageChannel criarMessageChannelResponses() {
 		return new DirectChannel();
 	}
@@ -35,19 +31,19 @@ public class IntegrationConfiguration {
 	@Bean
 	public IntegrationFlow criarIntegrationFlowResponses(
 			ActiveMQConnectionFactory jmsConnectionFactory,
-			@Named("responses") MessageChannel messageChannelResponses) {
+			@Named(NomesBeans.MESSAGE_CHANNEL_RESPONSES) MessageChannel messageChannelResponses) {
 		return IntegrationFlows.from(messageChannelResponses)
 				.handle(Jms.outboundAdapter(jmsConnectionFactory)
-						.destination("activemq-responses"))
+						.destination(NOME_CANAL_ACTIVEMQ_RESPONSES))
 				.get();
 	}
 
 	@Bean
 	public IntegrationFlow criarIntegrationFlowRequests(
 			ActiveMQConnectionFactory jmsConnectionFactory,
-			@Named("requests") MessageChannel messageChannelRequests) {
+			@Named(NomesBeans.MESSAGE_CHANNEL_REQUESTS) MessageChannel messageChannelRequests) {
 		return IntegrationFlows.from(Jms.messageDrivenChannelAdapter(jmsConnectionFactory)
-				.destination("activemq-requests"))
+				.destination(NOME_CANAL_ACTIVEMQ_REQUESTS))
 				.channel(messageChannelRequests)
 				.get();
 	}

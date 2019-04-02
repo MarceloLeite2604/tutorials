@@ -1,4 +1,4 @@
-package com.github.marceloleite2604.spring.batch.remote.chunking.job.step;
+package com.github.marceloleite2604.spring.batch.remote.chunking.manager.job.step;
 
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
@@ -10,15 +10,17 @@ import org.springframework.messaging.MessageChannel;
 import org.springframework.messaging.PollableChannel;
 import org.springframework.stereotype.Component;
 
+import com.github.marceloleite2604.spring.batch.remote.chunking.manager.configuration.NomesBeans;
+
 @Component
 public class EnvioDadosChunkMessageChannelItemWriter extends ChunkMessageChannelItemWriter<String> {
 
 	@Inject
-	@Named("requests")
+	@Named(NomesBeans.MESSAGE_CHANNEL_REQUESTS)
 	private MessageChannel messageChannelRequests;
 
 	@Inject
-	@Named("responses")
+	@Named(NomesBeans.POLLABLE_CHANNEL_RESPONSES)
 	PollableChannel pollableChannelResponses;
 
 	@PostConstruct

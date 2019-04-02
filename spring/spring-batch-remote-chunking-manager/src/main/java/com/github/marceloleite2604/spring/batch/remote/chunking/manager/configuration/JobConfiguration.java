@@ -1,4 +1,4 @@
-package com.github.marceloleite2604.spring.batch.remote.chunking.configuration;
+package com.github.marceloleite2604.spring.batch.remote.chunking.manager.configuration;
 
 import javax.inject.Named;
 import javax.sql.DataSource;
@@ -11,19 +11,15 @@ import org.springframework.batch.core.configuration.annotation.JobBuilderFactory
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import com.github.marceloleite2604.spring.batch.remote.chunking.job.step.EnvioDadosJobExecutionListener;
-
 @Configuration
 @EnableBatchProcessing
 public class JobConfiguration extends DefaultBatchConfigurer {
 
 	@Bean(NomesBeans.JOB_REMOTE_CHUNKING)
 	public Job criarJobRemoteChunking(JobBuilderFactory jobBuilderFactory,
-			@Named(NomesBeans.STEP_ENVIO_DADOS) Step stepEnvioDados,
-			EnvioDadosJobExecutionListener envioDadosJobExecutionListener) {
+			@Named(NomesBeans.STEP_ENVIO_DADOS) Step stepEnvioDados) {
 		return jobBuilderFactory.get("spring-batch-remote-chunking-manager")
 				.start(stepEnvioDados)
-				.listener(envioDadosJobExecutionListener)
 				.build();
 	}
 

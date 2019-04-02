@@ -1,4 +1,4 @@
-package org.marceloleite.tutorials.spring.batch.remote.chunking;
+package com.github.marceloleite2604.spring.batch.remote.chunking.worker;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;

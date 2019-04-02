@@ -1,4 +1,4 @@
-package com.github.marceloleite2604.spring.batch.remote.chunking;
+package com.github.marceloleite2604.spring.batch.remote.chunking.manager;
 
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.JobExecution;
@@ -19,32 +19,36 @@ import org.springframework.context.ConfigurableApplicationContext;
 @EnableAutoConfiguration(exclude = { DataSourceAutoConfiguration.class })
 public class Main {
 
-	public static void main(String[] args) throws JobExecutionAlreadyRunningException,
-			JobRestartException, JobInstanceAlreadyCompleteException, JobParametersInvalidException,
-			InterruptedException {
+	public static void main(String[] args) {
 		ConfigurableApplicationContext applicationContext = SpringApplication.run(Main.class, args);
 
 		JobExecution jobExecution = executarJob(applicationContext);
+
 		aguardarConclusaoJob(jobExecution);
 
 		applicationContext.stop();
 	}
 
-	private static JobExecution executarJob(ConfigurableApplicationContext context)
-			throws JobExecutionAlreadyRunningException, JobRestartException,
-			JobInstanceAlreadyCompleteException, JobParametersInvalidException {
+	private static JobExecution executarJob(ConfigurableApplicationContext context) {
 		JobLauncher jobLauncher = context.getBean(JobLauncher.class);
 		Job job = context.getBean(Job.class);
 		JobParameters jobParameters = new JobParametersBuilder().toJobParameters();
 
-		JobExecution jobExecution = jobLauncher.run(job, jobParameters);
-		return jobExecution;
+		try {
+			return jobLauncher.run(job, jobParameters);
+		} catch (JobExecutionAlreadyRunningException | JobRestartException
+				| JobInstanceAlreadyCompleteException | JobParametersInvalidException excecao) {
+			throw new RuntimeException("Erro ao solicitar a execução do job.", excecao);
+		}
 	}
 
-	private static void aguardarConclusaoJob(JobExecution jobExecution)
-			throws InterruptedException {
+	private static void aguardarConclusaoJob(JobExecution jobExecution) {
 		while (jobExecution.isRunning()) {
-			Thread.sleep(100);
+			try {
+				Thread.sleep(100);
+			} catch (InterruptedException excecao) {
+				throw new RuntimeException("Erro ao aguardar a execução do job.", excecao);
+			}
 		}
 	}
 }
