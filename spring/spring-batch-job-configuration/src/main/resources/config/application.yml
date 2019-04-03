@@ -1,0 +1,30 @@
+# Configurações de criptografia.
+criptografia:
+  algoritmo-riptografia: DESede
+  modo-feedback: CBC
+  modo-preenchimento: PKCS5Padding
+  chave: Oypn30NJfByzStoCmFf+/XAa4KTq6q7+
+  
+# Configurações do banco de dados onde são armazenadas as informações de execução do batch.
+banco:
+  spring-batch:
+    driver-class-name: oracle.jdbc.driver.OracleDriver
+    url: jdbc:oracle:thin:@localhost:1521:XE
+    username: SPRING_BATCH
+    senha: 5lHe55R56OHHS+sdSvEbow==
+  programa:
+    driver-class-name: oracle.jdbc.driver.OracleDriver
+    url: jdbc:oracle:thin:@localhost:1521:XE 
+    username: SPRING_JOB_CONFIGURATION
+    senha: Gs9H64msEr7GCyq6k0lYMwCLDGlAmhf/BoUXADK+evk=
+    
+# Configurações gerais do job criador de usuários.
+criador-usuarios:
+  diretorio-arquivo-de-usuarios: output/
+  total-de-registros: 10000
+  aquisicao-usuarios:
+    tamanho-do-chunk: 1000
+  persistencia-usuarios:
+    quantidade-de-leitores: 4
+    tamanho-do-chunk: 1000
+  fator-chance-lancamento-excecao: 0.0

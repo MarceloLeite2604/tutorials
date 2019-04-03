@@ -29,3 +29,7 @@ spring/spring-hsqldb/hsqldb/*
 
 # Arquivos de exemplo de uso do Spring Integration.
 **/spring/integration/spring-integration/arquivos/*
+
+# Arquivos de saída do projeto de exemplo do Spring Batch Job Configuration.
+**/spring-batch-job-configuration/output/*.csv
+**/spring-batch-job-configuration/output/*.tmp
