@@ -13,6 +13,7 @@ import org.springframework.batch.item.ExecutionContext;
 import org.springframework.batch.item.ItemStreamReader;
 import org.springframework.stereotype.Component;
 
+import com.github.marceloleite2604.tutorials.spring.job.configuration.exception.SpringBatchJobConfigurationRuntimeException;
 import com.github.marceloleite2604.tutorials.spring.job.configuration.job.step.persistenciausuarios.contexto.PersistenciaClientesContexto;
 import com.github.marceloleite2604.tutorials.spring.job.configuration.model.csv.UsuarioCsvVO;
 import com.github.marceloleite2604.tutorials.spring.job.configuration.util.CsvUtil;
@@ -58,7 +59,7 @@ public class PersistenciaUsuariosItemStreamReader implements ItemStreamReader<Us
 			bufferedReader = Files
 					.newBufferedReader(Paths.get(contextoExecucao.getCaminhoArquivoTemporario()));
 		} catch (IOException excecao) {
-			throw new RuntimeException("Erro ao abrir o arquivo temporário \""
+			throw new SpringBatchJobConfigurationRuntimeException("Erro ao abrir o arquivo temporário \""
 					+ contextoExecucao.getCaminhoArquivoTemporario() + "\".", excecao);
 		}
 		return bufferedReader;

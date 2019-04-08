@@ -9,7 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
-import com.github.marceloleite2604.tutorials.spring.job.configuration.exception.SpringJobConfigurationRuntimeException;
+import com.github.marceloleite2604.tutorials.spring.job.configuration.exception.SpringBatchJobConfigurationRuntimeException;
 
 @Component
 public class VerificadorLancamentoExcecaoSimulada {
@@ -31,7 +31,7 @@ public class VerificadorLancamentoExcecaoSimulada {
 
 	public void verificar() {
 		if (random.nextDouble() > (1.0 - fatorChanceLancamentoExcecao)) {
-			throw new SpringJobConfigurationRuntimeException("Exceção simulada.");
+			throw new SpringBatchJobConfigurationRuntimeException("Exceção simulada.");
 		}
 	}
 }

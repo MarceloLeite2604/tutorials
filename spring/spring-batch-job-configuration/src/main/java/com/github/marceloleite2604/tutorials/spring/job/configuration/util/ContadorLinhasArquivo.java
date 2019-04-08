@@ -9,6 +9,8 @@ import java.nio.charset.StandardCharsets;
 
 import org.springframework.stereotype.Component;
 
+import com.github.marceloleite2604.tutorials.spring.job.configuration.exception.SpringBatchJobConfigurationRuntimeException;
+
 @Component
 public class ContadorLinhasArquivo {
 
@@ -28,12 +30,12 @@ public class ContadorLinhasArquivo {
 				return contabilizarLinhasArquivo(lineNumberReader);
 
 			} catch (IOException excecao) {
-				throw new RuntimeException("Erro ao analisar o número de linhas do arquivo \""
+				throw new SpringBatchJobConfigurationRuntimeException("Erro ao analisar o número de linhas do arquivo \""
 						+ caminhoArquivo + "\".", excecao);
 			}
 
 		} else {
-			throw new RuntimeException("O arquivo \"" + caminhoArquivo + "\" não existe.");
+			throw new SpringBatchJobConfigurationRuntimeException("O arquivo \"" + caminhoArquivo + "\" não existe.");
 		}
 	}
 

@@ -12,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
+import com.github.marceloleite2604.tutorials.spring.job.configuration.exception.SpringBatchJobConfigurationRuntimeException;
 import com.github.marceloleite2604.tutorials.spring.job.configuration.model.json.ResponseJsonVO;
 import com.github.marceloleite2604.tutorials.spring.job.configuration.model.json.UserJsonVO;
 
@@ -41,7 +42,7 @@ public class UsuarioWebDAO {
 					.addParameter("results", Integer.toString(totalResultados))
 					.build();
 		} catch (URISyntaxException exception) {
-			throw new RuntimeException(
+			throw new SpringBatchJobConfigurationRuntimeException(
 					"Erro ao construir a URI do serviço de aquisição dos usuários.", exception);
 		}
 	}

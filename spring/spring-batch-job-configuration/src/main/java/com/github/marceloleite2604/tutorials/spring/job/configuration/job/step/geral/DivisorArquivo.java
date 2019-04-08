@@ -8,13 +8,16 @@ import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.AbstractMap;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Map.Entry;
 
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Component;
 
+import com.github.marceloleite2604.tutorials.spring.job.configuration.exception.SpringBatchJobConfigurationRuntimeException;
 import com.github.marceloleite2604.tutorials.spring.job.configuration.util.ArquivoUsuariosUtil;
 import com.github.marceloleite2604.tutorials.spring.job.configuration.util.ArquivoUtil;
 
@@ -29,21 +32,21 @@ public class DivisorArquivo {
 
 	private String cabecalhoCsv;
 
-	public List<String> dividirArquivo(String caminhoArquivo, int numeroDivisoes) {
+	public Map<String, Long> dividirArquivo(String caminhoArquivo, int numeroDivisoes) {
 
 		try (FileInputStream fileIputStream = new FileInputStream(caminhoArquivo);
 				InputStreamReader inputStreamReader = new InputStreamReader(fileIputStream,
-						"UTF-8");
+						StandardCharsets.UTF_8);
 				BufferedReader bufferedReader = new BufferedReader(inputStreamReader)) {
 			return criarArquivosTemporarios(caminhoArquivo, numeroDivisoes, bufferedReader);
 
 		} catch (IOException excecao) {
-			throw new RuntimeException(
+			throw new SpringBatchJobConfigurationRuntimeException(
 					"Erro ao realizar a divisão do arquivo \"" + caminhoArquivo + "\".", excecao);
 		}
 	}
 
-	private List<String> criarArquivosTemporarios(String caminhoArquivo, int numeroDivisoes,
+	private Map<String, Long> criarArquivosTemporarios(String caminhoArquivo, int numeroDivisoes,
 			BufferedReader bufferedReaderArquivo) throws IOException {
 		Long totalRegistrosArquivo = arquivoUtils.obterTotalLinhasArquivo(caminhoArquivo);
 
@@ -57,23 +60,24 @@ public class DivisorArquivo {
 			totalArquivosTemporarios = numeroDivisoes;
 		}
 
-		List<String> caminhosArquivos = new ArrayList<>(totalArquivosTemporarios);
+		Map<String, Long> registrosPorArquivoTemporario = new HashMap<>();
 
 		long linhasPorArquivo = totalRegistrosArquivo / totalArquivosTemporarios;
 		long linhasRestantes = totalRegistrosArquivo % totalArquivosTemporarios;
 
 		for (int contadorArquivos = 0; contadorArquivos < totalArquivosTemporarios; contadorArquivos++) {
-			String caminhoArquivoTemporario = criarArquivoTemporario(caminhoArquivo,
+			Entry<String, Long> entryArquivoTemporario = criarArquivoTemporario(caminhoArquivo,
 					bufferedReaderArquivo, contadorArquivos, totalArquivosTemporarios,
 					linhasPorArquivo, linhasRestantes);
 
-			caminhosArquivos.add(caminhoArquivoTemporario);
+			registrosPorArquivoTemporario.put(entryArquivoTemporario.getKey(),
+					entryArquivoTemporario.getValue());
 		}
 
-		return caminhosArquivos;
+		return registrosPorArquivoTemporario;
 	}
 
-	private String criarArquivoTemporario(String caminhoArquivoOriginal,
+	private Entry<String, Long> criarArquivoTemporario(String caminhoArquivoOriginal,
 			BufferedReader bufferedReaderArquivoOriginal, int indiceArquivo, int totalArquivos,
 			long linhasPorArquivo, long linhasRestantes) throws IOException {
 
@@ -88,21 +92,23 @@ public class DivisorArquivo {
 			escreverCabecalhoCsv(indiceArquivo, bufferedReaderArquivoOriginal,
 					bufferedWriterArquivoTemporario);
 
-			for (int contadorLinhas = 0; contadorLinhas < linhasPorArquivo; contadorLinhas++) {
+			long totalLinhasArquivoTemporario = 0;
+			while (totalLinhasArquivoTemporario < linhasPorArquivo) {
 				bufferedWriterArquivoTemporario
 						.write(bufferedReaderArquivoOriginal.readLine() + "\n");
+				totalLinhasArquivoTemporario++;
 			}
 
 			if (indiceArquivo + 1 == totalArquivos) {
-				for (int contadorLinhas = 0; contadorLinhas < linhasRestantes; contadorLinhas++) {
+				for (int contadorLinhasRestantes = 0; contadorLinhasRestantes < linhasRestantes; contadorLinhasRestantes++) {
 					bufferedWriterArquivoTemporario
 							.write(bufferedReaderArquivoOriginal.readLine() + "\n");
+					totalLinhasArquivoTemporario++;
 				}
 			}
+			return new AbstractMap.SimpleEntry<>(caminhoArquivoTemporario,
+					totalLinhasArquivoTemporario);
 		}
-
-		return caminhoArquivoTemporario;
-
 	}
 
 	private void escreverCabecalhoCsv(int indiceArquivo,

@@ -34,13 +34,13 @@ public class AquisicaoUsuariosItemStreamReader implements ItemStreamReader<UserJ
 		
 		if (!totalDeRegistrosAtingido()) {
 			userJsonVO = usuarioWebBuffer.read();
-			contexto.setRegistrosEscritos(contexto.getRegistrosEscritos() + 1);
+			contexto.setRegistrosLidos(contexto.getRegistrosLidos() + 1);
 		}
 		return userJsonVO;
 	}
 
 	private boolean totalDeRegistrosAtingido() {
-		return (contexto.getRegistrosEscritos() >= contexto.getTotalDeRegistros());
+		return (contexto.getRegistrosLidos() >= contexto.getTotalDeRegistros());
 	}
 
 	@Override
@@ -52,7 +52,6 @@ public class AquisicaoUsuariosItemStreamReader implements ItemStreamReader<UserJ
 	@Override
 	public void update(ExecutionContext executionContext) {
 		contexto.salvarContexto(executionContext);
-
 	}
 
 	@Override

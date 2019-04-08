@@ -2,8 +2,8 @@ package com.github.marceloleite2604.tutorials.spring.job.configuration.job.step.
 
 import java.time.LocalDateTime;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import javax.inject.Inject;
 
@@ -35,27 +35,32 @@ public class PersistenciaUsuariosStepPartitioner implements Partitioner {
 	@Override
 	public Map<String, ExecutionContext> partition(int numeroDivisoes) {
 
-		String instante = (String)jobParameters.get(CriadorUsuariosContextoPropriedade.INSTANTE.getNome());
+		String instante = (String) jobParameters
+				.get(CriadorUsuariosContextoPropriedade.INSTANTE.getNome());
 
 		LocalDateTime localDateTime = LocalDateTimeUtil.parseDataParaNomeArquivo(instante);
 
 		String caminhoArquivoSaida = arquivoUsuariosUtil.elaborarCaminhoArquivo(localDateTime);
 
-		List<String> caminhoArquivosTemporarios = divisorArquivo.dividirArquivo(caminhoArquivoSaida,
-				numeroDivisoes);
+		Map<String, Long> totalRegistrosPorArquivosTemporarios = divisorArquivo
+				.dividirArquivo(caminhoArquivoSaida, numeroDivisoes);
 
-		return montarMapaContextosExecucao(numeroDivisoes, caminhoArquivosTemporarios);
+		return montarMapaContextosExecucao(totalRegistrosPorArquivosTemporarios);
 	}
 
-	private Map<String, ExecutionContext> montarMapaContextosExecucao(int numeroDivisoes,
-			List<String> caminhoArquivosTemporarios) {
+	private Map<String, ExecutionContext> montarMapaContextosExecucao(
+			Map<String, Long> totalRegistrosPorArquivosTemporarios) {
+		int divisao = 0;
 		Map<String, ExecutionContext> resultado = new HashMap<>();
-		for (int divisao = 0; divisao < numeroDivisoes; divisao++) {
+		for (Entry<String, Long> entry : totalRegistrosPorArquivosTemporarios.entrySet()) {
 			ExecutionContext executionContext = new ExecutionContext();
 			executionContext.put(
 					PersistenciaClientesContextoPropriedade.CAMINHO_ARQUIVO_DE_USUARIOS.getNome(),
-					caminhoArquivosTemporarios.get(divisao));
-			resultado.put(Integer.toString(divisao), executionContext);
+					entry.getKey());
+			executionContext.put(
+					PersistenciaClientesContextoPropriedade.TOTAL_DE_REGISTROS.getNome(),
+					Long.toString(entry.getValue()));
+			resultado.put(Integer.toString(divisao++), executionContext);
 		}
 		return resultado;
 	}

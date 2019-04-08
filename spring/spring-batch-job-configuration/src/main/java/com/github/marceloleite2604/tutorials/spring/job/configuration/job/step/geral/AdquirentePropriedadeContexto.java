@@ -8,6 +8,7 @@ import javax.inject.Inject;
 import org.springframework.batch.item.ExecutionContext;
 import org.springframework.stereotype.Component;
 
+import com.github.marceloleite2604.tutorials.spring.job.configuration.exception.SpringBatchJobConfigurationRuntimeException;
 import com.github.marceloleite2604.tutorials.spring.job.configuration.model.Propriedade;
 import com.github.marceloleite2604.tutorials.spring.job.configuration.propriedade.adquirente.AdquirentePropriedadeExecutionContextStrategy;
 import com.github.marceloleite2604.tutorials.spring.job.configuration.propriedade.adquirente.AdquirentePropriedadePropertyStrategy;
@@ -51,7 +52,7 @@ public class AdquirentePropriedadeContexto {
 			return valorPadrao;
 		}
 
-		throw new RuntimeException("Não foi possível localizar a propriedade \""
+		throw new SpringBatchJobConfigurationRuntimeException("Não foi possível localizar a propriedade \""
 				+ propriedade.getNomeCompleto() + "\".");
 	}
 

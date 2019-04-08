@@ -3,6 +3,7 @@ package com.github.marceloleite2604.tutorials.spring.job.configuration.util;
 import java.util.Optional;
 import java.util.Properties;
 
+import com.github.marceloleite2604.tutorials.spring.job.configuration.exception.SpringBatchJobConfigurationRuntimeException;
 import com.github.marceloleite2604.tutorials.spring.job.configuration.model.Propriedade;
 
 public final class PropriedadeUtil {
@@ -24,7 +25,7 @@ public final class PropriedadeUtil {
 				if (valorPadrao != null) {
 					return valorPadrao;
 				} else {
-					throw new RuntimeException("Não foi possível localizar a propriedade \""
+					throw new SpringBatchJobConfigurationRuntimeException("Não foi possível localizar a propriedade \""
 							+ propriedade.getNome() + "\".");
 				}
 			}

@@ -4,6 +4,7 @@ import java.util.Optional;
 
 import org.springframework.batch.item.ExecutionContext;
 
+import com.github.marceloleite2604.tutorials.spring.job.configuration.exception.SpringBatchJobConfigurationRuntimeException;
 import com.github.marceloleite2604.tutorials.spring.job.configuration.model.Propriedade;
 
 public final class ExecutionContextUtil {
@@ -26,7 +27,7 @@ public final class ExecutionContextUtil {
 				if (valorPadrao != null) {
 					return valorPadrao;
 				} else {
-					throw new RuntimeException("Não foi possível localizar a propriedade \""
+					throw new SpringBatchJobConfigurationRuntimeException("Não foi possível localizar a propriedade \""
 							+ propriedade.getNome() + "\".");
 				}
 			}

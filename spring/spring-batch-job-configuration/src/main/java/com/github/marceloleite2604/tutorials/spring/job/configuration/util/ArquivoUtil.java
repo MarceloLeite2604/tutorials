@@ -11,6 +11,8 @@ import javax.inject.Inject;
 import org.apache.commons.io.FileUtils;
 import org.springframework.stereotype.Component;
 
+import com.github.marceloleite2604.tutorials.spring.job.configuration.exception.SpringBatchJobConfigurationRuntimeException;
+
 @Component
 public class ArquivoUtil {
 
@@ -23,7 +25,7 @@ public class ArquivoUtil {
 			try {
 				FileUtils.forceDelete(arquivo);
 			} catch (IOException excecao) {
-				throw new RuntimeException("Erro ao tentar excluir o arquivo \"" + caminho + "\".",
+				throw new SpringBatchJobConfigurationRuntimeException("Erro ao tentar excluir o arquivo \"" + caminho + "\".",
 						excecao);
 			}
 		}

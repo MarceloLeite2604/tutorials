@@ -5,6 +5,7 @@ import com.github.marceloleite2604.tutorials.spring.job.configuration.model.Prop
 
 public enum AquisicaoUsuariosContextoPropriedade implements Propriedade {
 
+	REGISTROS_LIDOS("registros-lidos", "0"),
 	REGISTROS_ESCRITOS("registros-escritos", "0"),
 	CAMINHO_ARQUIVO_DE_USUARIOS("caminho-arquivo-de-usuarios"),
 	TOTAL_DE_REGISTROS("total-de-registros");

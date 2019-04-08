@@ -24,6 +24,8 @@ public class AquisicaoUsuariosContexto extends AbstractContexto {
 
 	private long totalDeRegistros;
 
+	private long registrosLidos;
+
 	private long registrosEscritos;
 
 	private String caminhoArquivoDeUsuarios;
@@ -48,6 +50,14 @@ public class AquisicaoUsuariosContexto extends AbstractContexto {
 		this.totalDeRegistros = totalDeRegistros;
 	}
 
+	public long getRegistrosLidos() {
+		return registrosLidos;
+	}
+
+	public void setRegistrosLidos(long registrosLidos) {
+		this.registrosLidos = registrosLidos;
+	}
+
 	public long getRegistrosEscritos() {
 		return registrosEscritos;
 	}
@@ -58,6 +68,7 @@ public class AquisicaoUsuariosContexto extends AbstractContexto {
 
 	public void restaurarContexto(ExecutionContext executionContext) {
 		registrosEscritos = obterRegistrosEscritos(executionContext);
+		registrosLidos = obterRegistrosLidos(executionContext);
 		totalDeRegistros = obterTotalRegistros(executionContext);
 		caminhoArquivoDeUsuarios = obterCaminhoArquivoDeUsuarios(executionContext);
 	}
@@ -73,6 +84,12 @@ public class AquisicaoUsuariosContexto extends AbstractContexto {
 		return Long.parseLong(valor);
 	}
 
+	private Long obterRegistrosLidos(ExecutionContext executionContext) {
+		String valor = adquirir(AquisicaoUsuariosContextoPropriedade.REGISTROS_LIDOS,
+				executionContext, obterRegistrosEscritos(executionContext).toString());
+		return Long.parseLong(valor);
+	}
+
 	private Long obterTotalRegistros(ExecutionContext executionContext) {
 		String valor = adquirir(AquisicaoUsuariosContextoPropriedade.TOTAL_DE_REGISTROS,
 				executionContext);
@@ -80,9 +97,15 @@ public class AquisicaoUsuariosContexto extends AbstractContexto {
 	}
 
 	public void salvarContexto(ExecutionContext executionContext) {
+		definirRegistrosLidos(executionContext);
 		definirRegistrosEscritos(executionContext);
 		definirTotalRegistros(executionContext);
 		definirCaminhoArquivoDeUsuarios(executionContext);
+	}
+
+	private void definirRegistrosLidos(ExecutionContext executionContext) {
+		definir(AquisicaoUsuariosContextoPropriedade.REGISTROS_LIDOS, Long.toString(registrosLidos),
+				executionContext);
 	}
 
 	private void definirRegistrosEscritos(ExecutionContext executionContext) {

@@ -9,6 +9,7 @@ import java.nio.file.StandardOpenOption;
 import java.util.List;
 
 import com.github.marceloleite2604.tutorials.spring.job.configuration.comparator.OrdemColunasUsuarioCsvVoComparator;
+import com.github.marceloleite2604.tutorials.spring.job.configuration.exception.SpringBatchJobConfigurationRuntimeException;
 import com.github.marceloleite2604.tutorials.spring.job.configuration.model.csv.UsuarioCsvVO;
 import com.github.marceloleite2604.tutorials.spring.job.configuration.util.CsvUtil;
 import com.opencsv.CSVWriter;
@@ -43,10 +44,10 @@ public class ArquivoUsuariosWriter {
 
 			statefulBeanToCsv.write(usuarioCsvVOs);
 		} catch (IOException excecao) {
-			throw new RuntimeException("Erro ao abrir o arquivo \"" + caminhoArquivoSaida
+			throw new SpringBatchJobConfigurationRuntimeException("Erro ao abrir o arquivo \"" + caminhoArquivoSaida
 					+ "\" para escrita dos usuarios.", excecao);
 		} catch (CsvDataTypeMismatchException | CsvRequiredFieldEmptyException excecao) {
-			throw new RuntimeException("Erro ao escrever os dados do usuário "
+			throw new SpringBatchJobConfigurationRuntimeException("Erro ao escrever os dados do usuário "
 					+ excecao.getLineNumber() + " no arquivo \"" + caminhoArquivoSaida + "\".",
 					excecao);
 		}
