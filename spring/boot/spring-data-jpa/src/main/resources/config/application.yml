@@ -7,17 +7,6 @@ spring:
   data:
     rest:
       base-path: /api
-security:
-  oauth2:
-    client:
-      clientId: 6f08f6428bae35486370
-      clientSecret: 3eee8bf7ad6ec804f7efe41b41cdc3f9305e1a9d
-      accessTokenUri: https://github.com/login/oauth/access_token
-      userAuthorizationUri: https://github.com/login/oauth/authorize
-      clientAuthenticationScheme: header
-    resource:
-      userInfoUri: https://api.github.com/user
-      preferTokenInfo: false
       
 server:
   port: 8083
@@ -25,12 +14,12 @@ server:
 okta:
   oauth2:
     issuer: https://dev-489812.okta.com/oauth2/default
-    client-id: 0oafmbtqpBAyHkCfM356
+    client-id: 0oafvsz7a1vSZ196O356
     
 logging:
   level:
-    com: DEBUG
-    org: DEBUG
+    com: INFO
+    org: INFO
   
 programa:
   # Configurações de criptografia.

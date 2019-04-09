@@ -1,10 +1,12 @@
 package com.github.marceloleite2604.tutorials.spring.data.jpa.configuration;
 
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 
 @Configuration
+@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class OktaOAuth2WebSecurityConfigurerAdapter extends WebSecurityConfigurerAdapter {
 
 	@Override
@@ -13,8 +15,6 @@ public class OktaOAuth2WebSecurityConfigurerAdapter extends WebSecurityConfigure
 				.regexMatchers("/api/.+")
 				.authenticated()
 				.and()
-				.oauth2ResourceServer()
-				.jwt();
+				.oauth2ResourceServer();
 	}
-
 }

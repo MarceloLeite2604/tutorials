@@ -33,9 +33,4 @@ public class ProgramaConfiguration {
 				.paddingScheme(modoPreenchimento)
 				.build();
 	}
-
-//	@Bean
-//	public RestTemplate criarRestTemplate() {
-//		return new RestTemplate();
-//	}
 }
