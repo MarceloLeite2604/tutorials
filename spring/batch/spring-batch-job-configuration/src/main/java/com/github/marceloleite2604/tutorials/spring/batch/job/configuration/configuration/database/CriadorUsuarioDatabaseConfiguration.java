@@ -23,7 +23,7 @@ import com.github.marceloleite2604.tutorials.spring.batch.job.configuration.dive
 		transactionManagerRef = NomesBeans.PROGRAMA_TRANSACTION_MANAGER)
 public class CriadorUsuarioDatabaseConfiguration {
 
-	public static final String BASE_PACKAGES = "com.github.marceloleite2604.tutorials.spring.job.configuration";
+	public static final String BASE_PACKAGES = "com.github.marceloleite2604.tutorials.spring.batch.job.configuration";
 
 	@Bean(NomesBeans.PROGRAMA_ENTITY_MANAGER_FACTORY_BEAN)
 	public LocalContainerEntityManagerFactoryBean criarProgramaEntityManagerFactoryBean(

@@ -7,7 +7,7 @@ criador-usuarios:
   persistencia-usuarios:
     quantidade-de-leitores: 4
     tamanho-do-chunk: 100
-  fator-chance-lancamento-excecao: 0.1
+  fator-chance-lancamento-excecao: 0.05
 
 # Configurações de criptografia.
 criptografia:
@@ -31,4 +31,4 @@ banco:
 
 logging:
   level:
-    com.github.marceloleite2604.tutorials.spring.job.configuration: DEBUG
+    com.github.marceloleite2604.tutorials.spring.batch.job.configuration: DEBUG
