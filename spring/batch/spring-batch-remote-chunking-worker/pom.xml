@@ -76,7 +76,7 @@
 						</goals>
 						<configuration>
 							<classifier>spring-boot</classifier>
-							<mainClass>org.marceloleite.tutorials.spring.batch.remote.chunking.Main
+							<mainClass>com.github.marceloleite2604.tutorials.spring.batch.remote.chunking.Main
 							</mainClass>
 						</configuration>
 					</execution>

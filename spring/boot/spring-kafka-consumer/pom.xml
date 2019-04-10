@@ -10,7 +10,7 @@
 		<relativePath />
 	</parent>
 
-	<groupId>org.marceloleite.tutorials</groupId>
+	<groupId>com.github.marceloleite2604.tutorials</groupId>
 	<artifactId>spring-kafka-consumer</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>

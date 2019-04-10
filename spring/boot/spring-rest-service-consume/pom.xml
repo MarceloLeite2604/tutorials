@@ -8,13 +8,13 @@
 		<version>2.0.0.RELEASE</version>
 	</parent>
 
-	<groupId>org.marceloleite</groupId>
+	<groupId>com.github.marceloleite2604</groupId>
 	<artifactId>spring-rest-service-consume</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
 	<name>spring-rest-service-consume</name>
-	<url>http://maven.apache.org</url>
+	<url>https://github.com/MarceloLeite2604</url>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

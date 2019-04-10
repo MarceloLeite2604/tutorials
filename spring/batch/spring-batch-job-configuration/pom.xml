@@ -73,9 +73,9 @@
 		</dependency>
 
 		<dependency>
-			<groupId>org.marceloleite</groupId>
+			<groupId>com.github.marceloleite2604</groupId>
 			<artifactId>encryptor-decryptor</artifactId>
-			<version>[1,2)</version>
+			<version>[2,3)</version>
 		</dependency>
 
 		<dependency>
@@ -109,7 +109,7 @@
 						</goals>
 						<configuration>
 							<classifier>executable</classifier>
-							<mainClass>com.github.marceloleite2604.tutorials.spring.job.configuration.Main</mainClass>
+							<mainClass>com.github.marceloleite2604.tutorials.spring.batch.job.configuration.Main</mainClass>
 						</configuration>
 					</execution>
 				</executions>

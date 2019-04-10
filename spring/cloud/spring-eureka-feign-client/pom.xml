@@ -10,13 +10,13 @@
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 
-	<groupId>org.marceloleite.tutorials</groupId>
+	<groupId>com.github.marceloleite2604.tutorials</groupId>
 	<artifactId>spring-eureka-feign-client</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
 	<name>spring-eureka-feign-client</name>
-	<url>http://maven.apache.org</url>
+	<url>https://github.com/MarceloLeite2604</url>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

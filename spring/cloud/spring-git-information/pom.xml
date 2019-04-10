@@ -10,13 +10,13 @@
 		<relativePath />
 	</parent>
 
-	<groupId>org.marceloleite.tutorials</groupId>
+	<groupId>com.github.marceloleite2604.tutorials</groupId>
 	<artifactId>spring-git-information</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
 	<name>spring-git-information</name>
-	<url>http://maven.apache.org</url>
+	<url>https://github.com/MarceloLeite2604</url>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
