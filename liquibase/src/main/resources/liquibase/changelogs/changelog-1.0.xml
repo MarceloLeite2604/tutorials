@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+	xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+	<changeSet author="Marcelo Leite" id="1">
+		<createTable tableName="usuarios" schemaName="programa_db">
+			<column name="id" type="INT">
+				<constraints nullable="false" primaryKey="true"
+					unique="false" />
+			</column>
+			<column name="usuario" type="VARCHAR2(64)" />
+			<column name="senha" type="VARCHAR2(128)" />
+			<column name="habilitado" type="TINYINT" defaultValue="1" />
+		</createTable>
+
+		<createTable tableName="papeis" schemaName="programa_db">
+			<column name="id" type="INT">
+				<constraints nullable="false" primaryKey="true"
+					primaryKeyName="usuarios_pk" unique="false" />
+			</column>
+			<column name="papel" type="VARCHAR2(64)">
+				<constraints nullable="false" primaryKey="true"
+					primaryKeyName="papeis_pk"
+					unique="false" />
+			</column>
+			<column name="descricao" type="VARCHAR2(256)" />
+		</createTable>
+
+		<createTable tableName="usuarios_papeis" schemaName="programa_db">
+			<column name="id_usuario" type="INT">
+				<constraints nullable="false" primaryKey="true"
+					primaryKeyName="usuarios_papeis_pk"
+					unique="false"
+					foreignKeyName="usuarios_papeis_usuarios_fk"
+					references="usuarios(id)" />
+			</column>
+			<column name="id_papel" type="INT">
+				<constraints nullable="false" primaryKey="true"
+					primaryKeyName="usuarios_papeis_pk"
+					foreignKeyName="usuarios_papeis_papeis_fk"
+					references="papeis(id)"
+					unique="false" />
+			</column>
+
+		</createTable>
+	</changeSet>
+</databaseChangeLog>

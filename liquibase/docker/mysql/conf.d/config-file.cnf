@@ -1,0 +1,4 @@
+[mysqld]
+# Faz com que todas as tabelas sejam criadas com o nome em letras minúsculas. 
+# Isto é necessário para evitar um bug que ocorre com o Liquibase ao verificar a existência da tabela "databasechangelog".  
+lower_case_table_names = 1
