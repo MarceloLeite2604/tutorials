@@ -1,0 +1,2 @@
+CREATE DATABASE IF NOT EXISTS spring_batch_db;
+CREATE DATABASE IF NOT EXISTS programa_db;

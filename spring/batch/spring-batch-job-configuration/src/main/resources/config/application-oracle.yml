@@ -15,13 +15,20 @@ criptografia:
   modo-feedback: CBC
   modo-preenchimento: PKCS5Padding
   chave: Oypn30NJfByzStoCmFf+/XAa4KTq6q7+
-    
-spring:
-  profiles:
-    active:
-    - "@profileAtivo@"
-    
+  
 logging:
   level:
     com.github.marceloleite2604.tutorials.spring.batch.job.configuration: DEBUG
-    
+  
+# Configurações do banco de dados Oracle.
+banco:
+  spring-batch:
+    driver-class-name: oracle.jdbc.driver.OracleDriver
+    url: jdbc:oracle:thin:@localhost:1521:XE
+    username: SPRING_BATCH
+    senha: 5lHe55R56OHHS+sdSvEbow==
+  programa:
+    driver-class-name: oracle.jdbc.driver.OracleDriver
+    url: jdbc:oracle:thin:@localhost:1521:XE 
+    username: SPRING_JOB_CONFIGURATION
+    senha: Gs9H64msEr7GCyq6k0lYMwCLDGlAmhf/BoUXADK+evk=

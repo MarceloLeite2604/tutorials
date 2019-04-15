@@ -15,6 +15,8 @@ import com.github.marceloleite2604.tutorials.spring.batch.job.configuration.util
 @Component
 public class CriadorUsuariosParametersConverter implements JobParametersConverter {
 
+	private static final int PERIODO_MINUTOS = 20;
+
 	@Override
 	public JobParameters getJobParameters(Properties properties) {
 		JobParametersBuilder jobParametersBuilder = new JobParametersBuilder();
@@ -34,7 +36,7 @@ public class CriadorUsuariosParametersConverter implements JobParametersConverte
 		LocalDateTime localDateTime = LocalDateTime.now();
 
 		int minute = localDateTime.getMinute();
-		minute -= minute % 10;
+		minute -= minute % PERIODO_MINUTOS;
 
 		return LocalDateTimeUtil.formatarParaNomeDeArquivo(localDateTime.withMinute(minute)
 				.withSecond(0)
