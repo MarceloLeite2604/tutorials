@@ -9,7 +9,7 @@
 	<name>projeto-camel-alura</name>
 
 	<properties>
-		<camel-version>2.16.0</camel-version>
+		<camel-version>[2.24.0,3)</camel-version>
 	</properties>
 
 	<dependencies>

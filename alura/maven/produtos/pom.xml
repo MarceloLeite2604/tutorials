@@ -28,7 +28,7 @@
 		<dependency>
 			<groupId>com.thoughtworks.xstream</groupId>
 			<artifactId>xstream</artifactId>
-			<version>1.4.1</version>
+			<version>[1.4.6,2)</version>
 			<!-- Quando adicionamos uma dependência no Maven, é possível removermos 
 				as suas dependências que não iremos utilizar. No caso abaixo estamos inserindo 
 				a biblioteca XStream, mas removendo a biblioteca XMLPull. Muito provavelmente 
