@@ -1,0 +1,45 @@
+spring:
+  profiles:
+    active:
+    - "@activeProfile@"
+  application:
+    name: "@project.name@"
+  thymeleaf:
+    prefix: classpath:/thymeleaf/templates/
+    suffix: .html
+    mode: HTML
+    encoding: UTF-8
+    template-resolver-order: 0
+    cache: false
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
+  jpa:
+    show-sql: true
+      
+server:
+  port: 8080
+  error:
+    include-stacktrace: always
+  servlet:
+    contextPath: /model-mapper
+    
+model-mapper:
+  database:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/modelmapper_db
+    username: modelmapper
+    password: tluG69M0GgrLhANTg5OYNg==
+    connections: 4
+    other-connection-properties:
+      useSSL: false
+      allowPublicKeyRetrieval: true
+      useTimezone: true
+      serverTimezone: UTC
+  encryption:
+    cryptographic-algorythm: DESede
+    feedback-mode: CBC
+    padding-scheme: PKCS5Padding
+    key: HOx/E0OiLLw3PVFwc84lyInc1oNJ5u8I
+  version: "@project.version@"

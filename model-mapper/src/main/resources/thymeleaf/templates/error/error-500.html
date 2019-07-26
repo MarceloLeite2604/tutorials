@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html 
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<style>
+			table td {
+				vertical-align: top;
+				border: solid 1px #888;
+				padding: 10px;
+			}
+		</style>
+	</head>
+	<body>
+		<h1 th:text="#{error-500.title}">Error 500</h1>
+		<table>
+			<tr>
+				<td th:text="#{error-500.instant}">Instant</td>
+				<td th:text="${error.instant}" />
+			</tr>
+			<tr>
+				<td th:text="#{error-500.path}">Server path</td>
+				<td th:text="${error.path}" />
+			</tr>
+			<tr>
+				<td th:text="#{error-500.code}">Error code</td>
+				<td th:text="${error.status}" />
+			</tr>
+			<tr>
+				<td th:text="#{error-500.message}">Message</td>
+				<td th:text="${error.message}" />
+			</tr>
+			<tr>
+				<td th:text="#{error-500.stack-trace}">Stack trace</td>
+				<td><pre th:text="${error.stackTrace}"></pre></td>
+			</tr>
+		</table>
+	</body>
+</html>

@@ -1,0 +1,2 @@
+CREATE DATABASE IF NOT EXISTS modelmapper_db;
+CREATE DATABASE IF NOT EXISTS liquibase_db;
