@@ -1,6 +1,7 @@
 package com.github.marceloleite2604.tutorials.modelmapper.service;
 
 import java.io.File;
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -13,7 +14,7 @@ import org.springframework.validation.FieldError;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.github.marceloleite2604.tutorials.modelmapper.bo.UserBO;
-import com.github.marceloleite2604.tutorials.modelmapper.controller.PageController;
+import com.github.marceloleite2604.tutorials.modelmapper.controller.UserController;
 import com.github.marceloleite2604.tutorials.modelmapper.model.ThymeleafModelAttributeNames;
 import com.github.marceloleite2604.tutorials.modelmapper.model.dto.UserDTO;
 import com.github.marceloleite2604.tutorials.modelmapper.model.po.UserPO;
@@ -25,10 +26,20 @@ public class UserService extends AbstractService {
 	@Inject
 	private UserBO userBO;
 
-	public String getUser(String id, Model model) {
+	public String getUser(Model model) {
+		addUsersOnModel(model);
+		return Templates.USER;
+	}
+
+	private void addUsersOnModel(Model model) {
+		List<UserPO> users = userBO.findAll();
+		model.addAttribute(ThymeleafModelAttributeNames.USERS, userBO.mapAsDto(users));
+	}
+
+	public String getUserEdit(String id, Model model) {
 		UserDTO user = createOrRetrieveUser(id);
 		model.addAttribute(ThymeleafModelAttributeNames.USER, user);
-		return Templates.USER;
+		return Templates.USER_EDIT;
 	}
 
 	private UserDTO createOrRetrieveUser(String id) {
@@ -52,13 +63,22 @@ public class UserService extends AbstractService {
 
 		if (bindingResult.hasErrors()) {
 			model.addAttribute(ThymeleafModelAttributeNames.USER, user);
-			return Templates.USER;
+			return Templates.USER_EDIT;
 		}
 
-		controllerUtil.addInformationMessage(redirectAttributes, PageUserMessage.CREATED,
+		userBO.save(user);
+
+		PageUserMessage pageUserMessage;
+		if (userBO.isNew(user)) {
+			pageUserMessage = PageUserMessage.CREATED;
+		} else {
+			pageUserMessage = PageUserMessage.MODIFIED;
+		}
+
+		controllerUtil.addInformationMessage(redirectAttributes, pageUserMessage,
 				user.getUsername());
 
-		return controllerUtil.redirectTo(PageController.Paths.INDEX);
+		return controllerUtil.redirectTo(UserController.Paths.USER);
 	}
 
 	private void checkPasswordIsValid(UserDTO user, BindingResult bindingResult) {
@@ -74,6 +94,8 @@ public class UserService extends AbstractService {
 		public static final String USER_DIRECTORY = "user" + File.separator;
 
 		private static final String USER = USER_DIRECTORY + "user";
+
+		private static final String USER_EDIT = USER_DIRECTORY + "user-edit";
 
 		private Templates() {
 			// Private constructor to avoid object instantiation.

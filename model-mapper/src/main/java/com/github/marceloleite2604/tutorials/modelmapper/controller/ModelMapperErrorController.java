@@ -8,6 +8,7 @@ import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.web.servlet.error.ErrorController;
@@ -48,7 +49,7 @@ public class ModelMapperErrorController implements ErrorController {
 
 		int statusCode = controllerUtil.retrieveStatusCode(httpServletRequest);
 
-		if (statusCode == DEFAULT_ERROR_PAGE_CODE && !Objects.isNull(exception)) {
+		if (statusCode == DEFAULT_ERROR_PAGE_CODE && !Objects.isNull(exception) && !StringUtils.isBlank(exception.getMessage())) {
 			LOGGER.error("Handling exception", exception);
 		}
 

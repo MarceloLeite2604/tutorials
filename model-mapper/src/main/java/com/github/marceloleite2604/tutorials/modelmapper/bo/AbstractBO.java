@@ -25,9 +25,19 @@ public abstract class AbstractBO<I, P extends PersistentObject<I>, D extends Dat
 	public List<D> mapAsDto(List<P> pos) {
 		return getPoToDtoMapper().mapAsDto(pos);
 	}
+	
+	protected P save(P po) {
+		return getDAO().save(po);
+	}
+	
+	protected D save(D dto) {
+		P po = mapAsPo(dto);
+		po = getDAO().save(po);
+		return mapAsDto(po);
+	}
 
-	protected P save(P entity) {
-		return getDAO().save(entity);
+	public List<P> findAll() {
+		return getDAO().findAll();
 	}
 
 	public Optional<P> findById(I id) {

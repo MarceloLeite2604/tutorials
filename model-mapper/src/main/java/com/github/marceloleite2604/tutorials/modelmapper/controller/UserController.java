@@ -24,18 +24,26 @@ public class UserController {
 	private UserService userService;
 
 	@GetMapping(path = Paths.USER)
-	public String getUser(@RequestParam(required = false) String id, Model model) {
-		return userService.getUser(id, model);
+	public String getUser(Model model) {
+		return userService.getUser(model);
+	}
+	
+	@GetMapping(path = Paths.USER_EDIT)
+	public String getUserEdit(@RequestParam(required = false) String id, Model model) {
+		return userService.getUserEdit(id, model);
 	}
 
-	@PostMapping(path = Paths.USER)
+	@PostMapping(path = Paths.USER_EDIT)
 	public String postUser(@Validated(HttpPostValidationGroup.class) @ModelAttribute("user") UserDTO user,
 			BindingResult bindingResult, RedirectAttributes redirectAttributes, Model model) {
 		return userService.postUser(user, bindingResult, redirectAttributes, model);
 	}
 
 	public static final class Paths {
+		
 		public static final String USER = PathUtil.SEPARATOR + "user";
+		
+		public static final String USER_EDIT = PathUtil.SEPARATOR + "user" + PathUtil.SEPARATOR + "edit";
 
 		private Paths() {
 			// Private constructor to avoid object instantiation.

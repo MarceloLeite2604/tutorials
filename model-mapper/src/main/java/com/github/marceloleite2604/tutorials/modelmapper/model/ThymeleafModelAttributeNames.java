@@ -4,6 +4,8 @@ public final class ThymeleafModelAttributeNames {
 	
 	public static final String USER = "user";
 	
+	public static final String USERS = "users";
+	
 	public static final String DETAILED_ERROR_MESSAGE = "detailedErrorMessage";
 	
 	public static final String DETAILED_INFORMATION_MESSAGE = "detailedInformationMessage";

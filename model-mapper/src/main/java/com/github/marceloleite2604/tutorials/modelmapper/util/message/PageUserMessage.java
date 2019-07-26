@@ -2,8 +2,9 @@ package com.github.marceloleite2604.tutorials.modelmapper.util.message;
 
 public enum PageUserMessage implements Message {
 
-	CREATED("created"),
-	PASSWORD_NOT_BLANK("password.validation.not-blank");
+	CREATED("edit.created"),
+	MODIFIED("edit.modified"),
+	PASSWORD_NOT_BLANK("edit.password.validation.not-blank");
 
 	private static final String PREFIX = "user.";
 

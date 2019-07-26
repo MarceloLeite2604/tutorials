@@ -55,4 +55,19 @@ public class UserBO extends AbstractBO<UUID, UserPO, UserDTO> {
 
 		return !StringUtils.isBlank(user.getPassword());
 	}
+
+	@Override
+	public UserDTO save(UserDTO user) {
+
+		if (isNew(user)) {
+			user.setDeleted(false);
+			user.setEnabled(true);
+		}
+
+		return super.save(user);
+	}
+
+	public boolean isNew(UserDTO user) {
+		return StringUtils.isBlank(user.getId());
+	}
 }

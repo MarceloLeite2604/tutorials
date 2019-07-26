@@ -7,11 +7,10 @@
 	</head>
 	<body>
 		<h1 th:text="#{index.title}">Page title</h1>
-		<div th:insert="components/messages :: messages"></div>
 		<table>
 			<tr>
 				<td>
-					<a th:href="@{__${@userControllerPathsClass.USER}__}" th:text="#{index.create-user}"></a>
+					<a th:href="@{__${@userControllerPathsClass.USER}__}" th:text="#{index.user}"></a>
 				</td>
 			</tr>
 		</table>

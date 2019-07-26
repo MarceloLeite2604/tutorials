@@ -1,5 +1,7 @@
 package com.github.marceloleite2604.tutorials.modelmapper.dao;
 
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.repository.CrudRepository;
@@ -11,6 +13,13 @@ import com.github.marceloleite2604.tutorials.modelmapper.util.message.ErrorMessa
 public abstract class AbstractDAO<T extends PersistentObject<I>, I> {
 
 	protected abstract CrudRepository<T, I> getRepository();
+
+	public List<T> findAll() {
+		List<T> entities = new LinkedList<>();
+		getRepository().findAll()
+				.forEach(entities::add);
+		return entities;
+	}
 
 	public Optional<T> findById(I id) {
 		return getRepository().findById(id);

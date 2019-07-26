@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html
+	xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<title th:text="#{'user.edit.title.' + ${ @userBO.isNew(user) ? 'create' : 'update' }}">Page title</title>
+		<meta charset="utf-8" />
+	</head>
+	<body>
+		<h1 th:text="#{'user.edit.title.' + ${ @userBO.isNew(user) ? 'create' : 'update' }}">Page title</h1>
+		<form 
+			th:action="@{__${@userControllerPathsClass.USER_EDIT}__}" 
+			method="post" 
+			th:object="${__${@thymeleafModelAttributeNamesClass.USER}__}">
+			<table>
+				<tr>
+					<td>
+						<label 
+							for="name" 
+							th:text="#{user.edit.name.label}">
+							Name label
+						</label>
+					</td>
+					<td>
+						<input 
+							th:field="*{name}" 
+							type="text">
+					</td>
+					<td 
+						th:if="${#fields.hasErrors('name')}" 
+						th:errors="*{name}">Name Error
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<label 
+							for="username" 
+							th:text="#{user.edit.username.label}">
+							Username label
+						</label>
+					</td>
+					<td>
+						<input 
+							th:field="*{username}" 
+							type="text">
+					</td>
+					<td 
+						th:if="${#fields.hasErrors('username')}" 
+						th:errors="*{username}">Username Error
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<label 
+							for="password" 
+							th:text="#{user.edit.password.label}">
+							Password label
+						</label>
+					</td>
+					<td>
+						<input 
+							th:field="*{password}" 
+							type="password">
+					</td>
+					<td 
+						th:if="${#fields.hasErrors('password')}" 
+						th:errors="*{password}">Password error
+					</td>
+				</tr>
+				<tr>
+					<td colspan="2">
+						<input 
+							type="hidden" 
+							th:field="*{id}">
+						<input 
+							type="submit" 
+							th:value="#{'user.edit.submit-button.label.' + ${ @userBO.isNew(user) ? 'create' : 'update' }}">
+					</td>
+				<tr>
+			</table>
+		</form>
+	</body>
+</html>

@@ -39,6 +39,10 @@ public class UserPO implements PersistentObject<UUID> {
 	@Column(nullable = false)
 	private Boolean deleted;
 
+	private UserPO() {
+		// Private constructor to avoid object instantiation.
+	}
+
 	private UserPO(Builder builder) {
 		this.id = builder.id;
 		this.username = builder.username;
@@ -50,11 +54,19 @@ public class UserPO implements PersistentObject<UUID> {
 
 	@Override
 	public UUID getId() {
-		return null;
+		return id;
 	}
 
 	public void setId(UUID id) {
 		this.id = id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public String getUsername() {

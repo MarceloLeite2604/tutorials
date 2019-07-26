@@ -10,10 +10,10 @@ public class UserDTO implements DataTransferObject {
 
 	private String id;
 
-	@NotBlank(groups = HttpPostValidationGroup.class, message = "{users.username.validation.not-blank}")
+	@NotBlank(groups = HttpPostValidationGroup.class, message = "{user.edit.username.validation.not-blank}")
 	private String username;
 
-	@NotBlank(groups = HttpPostValidationGroup.class, message = "{users.name.validation.not-blank}")
+	@NotBlank(groups = HttpPostValidationGroup.class, message = "{user.edit.name.validation.not-blank}")
 	private String name;
 
 	private String password;
