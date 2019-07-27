@@ -67,6 +67,11 @@ public class UserBO extends AbstractBO<UUID, UserPO, UserDTO> {
 		return super.save(user);
 	}
 
+	@Override
+	public void delete(UserPO entity) {
+		super.delete(entity);
+	}
+
 	public boolean isNew(UserDTO user) {
 		return StringUtils.isBlank(user.getId());
 	}

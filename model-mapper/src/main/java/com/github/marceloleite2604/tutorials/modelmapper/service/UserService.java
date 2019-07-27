@@ -89,6 +89,13 @@ public class UserService extends AbstractService {
 		}
 	}
 
+	public String deleteUser(String id, RedirectAttributes redirectAttributes) {
+		UserPO user = userBO.findMandatoryById(UUID.fromString(id));
+		userBO.delete(user);
+		controllerUtil.addInformationMessage(redirectAttributes, PageUserMessage.DELETED, user.getUsername());
+		return controllerUtil.redirectTo(UserController.Paths.USER);
+	}
+
 	static final class Templates {
 
 		public static final String USER_DIRECTORY = "user" + File.separator;

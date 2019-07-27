@@ -4,7 +4,8 @@ public enum PageUserMessage implements Message {
 
 	CREATED("edit.created"),
 	MODIFIED("edit.modified"),
-	PASSWORD_NOT_BLANK("edit.password.validation.not-blank");
+	PASSWORD_NOT_BLANK("edit.password.validation.not-blank"),
+	DELETED("deleted");
 
 	private static final String PREFIX = "user.";
 

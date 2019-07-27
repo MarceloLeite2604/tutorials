@@ -38,12 +38,19 @@ public class UserController {
 			BindingResult bindingResult, RedirectAttributes redirectAttributes, Model model) {
 		return userService.postUser(user, bindingResult, redirectAttributes, model);
 	}
+	
+	@PostMapping(path = Paths.USER_DELETE)
+	public String deleteUser(@RequestParam String id, RedirectAttributes redirectAttributes) {
+		return userService.deleteUser(id, redirectAttributes);
+	}
 
 	public static final class Paths {
 		
 		public static final String USER = PathUtil.SEPARATOR + "user";
 		
-		public static final String USER_EDIT = PathUtil.SEPARATOR + "user" + PathUtil.SEPARATOR + "edit";
+		public static final String USER_EDIT = USER + PathUtil.SEPARATOR + "edit";
+		
+		public static final String USER_DELETE = USER + PathUtil.SEPARATOR + "delete";
 
 		private Paths() {
 			// Private constructor to avoid object instantiation.
