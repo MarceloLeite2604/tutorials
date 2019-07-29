@@ -19,8 +19,6 @@ public class MessageSourceConfiguration {
 
 	private static final String PAGES_MESSAGE_PROPERTIES_FILE_PATH = "classpath:i18n/messages/pages/messages";
 
-	private static final String TASKS_MESSAGE_PROPERTIES_FILE_PATH = "classpath:i18n/messages/tasks/messages";
-
 	public static final Locale LOCALE_BRAZILIAN_PORTUGUESE = Locale.forLanguageTag("pt-BR");
 
 	@Bean(BeanNames.LOCALE_RESOLVER)
@@ -34,7 +32,7 @@ public class MessageSourceConfiguration {
 	public MessageSource createMessageSource() {
 		ReloadableResourceBundleMessageSource messageSource = new ReloadableResourceBundleMessageSource();
 		messageSource.setBasenames(PAGES_MESSAGE_PROPERTIES_FILE_PATH,
-				TASKS_MESSAGE_PROPERTIES_FILE_PATH, ErrorMessage.MESSAGE_PROPERTIES_FILE_PATH);
+				ErrorMessage.MESSAGE_PROPERTIES_FILE_PATH);
 		messageSource.setDefaultEncoding(StandardCharsets.UTF_8.name());
 		return messageSource;
 	}
@@ -43,12 +41,12 @@ public class MessageSourceConfiguration {
 	public MessageLoader createMessageLoader(MessageSource messageSource) {
 		return new MessageLoader(messageSource, LOCALE_BRAZILIAN_PORTUGUESE);
 	}
-	
+
 	@Bean
 	public LocalValidatorFactoryBean getValidator(MessageSource messageSource) {
-	    LocalValidatorFactoryBean bean = new LocalValidatorFactoryBean();
-	    bean.setValidationMessageSource(messageSource);
-	    return bean;
+		LocalValidatorFactoryBean bean = new LocalValidatorFactoryBean();
+		bean.setValidationMessageSource(messageSource);
+		return bean;
 	}
 
 }

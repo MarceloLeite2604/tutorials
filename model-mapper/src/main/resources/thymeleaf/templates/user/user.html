@@ -6,6 +6,7 @@
 		<meta charset="utf-8" />
 	</head>
 	<body>
+		<div th:insert="components/header :: header"></div>
 		<h1 th:text="#{user.title}">Page title</h1>
 		<div th:insert="components/messages :: messages"></div>
 		<th:block th:if="${users?.size() > 0}">

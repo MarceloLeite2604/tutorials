@@ -6,6 +6,7 @@
 		<meta charset="utf-8" />
 	</head>
 	<body>
+		<div th:insert="components/header :: header"></div>
 		<h1 th:text="#{'user.edit.title.' + ${ @userBO.isNew(user) ? 'create' : 'update' }}">Page title</h1>
 		<form 
 			th:action="@{__${@userControllerPathsClass.USER_EDIT}__}" 

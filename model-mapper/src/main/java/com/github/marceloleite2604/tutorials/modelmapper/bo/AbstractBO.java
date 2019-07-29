@@ -9,7 +9,8 @@ import com.github.marceloleite2604.tutorials.modelmapper.model.mapper.PoToDtoMap
 import com.github.marceloleite2604.tutorials.modelmapper.model.po.PersistentObject;
 
 public abstract class AbstractBO<I, P extends PersistentObject<I>, D extends DataTransferObject> {
-
+	
+	
 	public P mapAsPo(D dto) {
 		return getPoToDtoMapper().mapAsPo(dto);
 	}

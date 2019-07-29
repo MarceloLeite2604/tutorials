@@ -5,16 +5,19 @@
 	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
                       http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
 
-	<changeSet author="Marcelo Leite" id="1"  labels="v1.0">
+	<changeSet 
+		author="Marcelo Leite" 
+		id="1"  
+		labels="v1.0">
 
-		<comment>Create "user" table.</comment>
+		<comment>Create "users" and games" table.</comment>
 
 		<createTable
 			schemaName="modelmapper_db" 
 			tableName="users">
 			<column 
 				name="id" 
-				type="BINARY(16)">
+				type="binary(16)">
 				<constraints 
 					nullable="false" 
 					primaryKey="true"
@@ -22,33 +25,79 @@
 			</column>
 			<column 
 				name="username" 
-				type="VARCHAR(64)">
+				type="varchar(64)">
 				<constraints 
 					nullable="false" 
 					unique="true"
-					uniqueConstraintName="usrs_uk" />
+					uniqueConstraintName="user_uk" />
 			</column>
 			<column 
 				name="password" 
-				type="VARCHAR2(128)">
+				type="varchar(128)">
 				<constraints 
 					nullable="false" />
 			</column>
 			<column 
 				name="enabled" 
-				type="CHAR(1)">
+				type="char(1)">
 				<constraints nullable="false" />
 			</column>
 			<column 
 				name="name" 
-				type="VARCHAR(32)">
+				type="varchar(32)">
 				<constraints nullable="false" />
 			</column>
 			<column 
 				name="deleted" 
-				type="CHAR(1)">
+				type="char(1)">
 				<constraints nullable="false" />
 			</column>
 		</createTable>
+		
+		<createTable
+			schemaName="modelmapper_db" 
+			tableName="games">
+			<column 
+				name="id" 
+				type="integer">
+				<constraints 
+					nullable="false" 
+					primaryKey="true"
+					primaryKeyName="game_pk" />
+			</column>
+			<column 
+				name="name" 
+				type="varchar(128)">
+				<constraints 
+					nullable="false" 
+					unique="true"
+					uniqueConstraintName="game_uk" />
+			</column>
+			<column 
+				name="developer" 
+				type="varchar(128)">
+				<constraints 
+					nullable="false" />
+			</column>
+			<column 
+				name="genre" 
+				type="varchar(32)">
+				<constraints nullable="false" />
+			</column>
+			<column 
+				name="release_year" 
+				type="integer">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+		
+		<addAutoIncrement
+			schemaName="modelmapper_db"
+			tableName="games" 
+            columnDataType="integer"
+            columnName="id"
+            incrementBy="1"
+            startWith="1"
+            />
 	</changeSet>
 </databaseChangeLog>

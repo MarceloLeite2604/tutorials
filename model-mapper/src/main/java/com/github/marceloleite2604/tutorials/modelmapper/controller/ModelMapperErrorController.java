@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import com.github.marceloleite2604.tutorials.modelmapper.model.ErrorInformation;
-import com.github.marceloleite2604.tutorials.modelmapper.util.ControllerUtil;
+import com.github.marceloleite2604.tutorials.modelmapper.util.ServiceUtil;
 
 @ControllerAdvice
 @Controller
@@ -40,7 +40,7 @@ public class ModelMapperErrorController implements ErrorController {
 	}
 
 	@Inject
-	private ControllerUtil controllerUtil;
+	private ServiceUtil controllerUtil;
 
 	@ExceptionHandler(value = Exception.class)
 	@GetMapping(path = "/error")

@@ -38,11 +38,6 @@ public class UserBO extends AbstractBO<UUID, UserPO, UserDTO> {
 		return userDAO;
 	}
 
-	@Bean(BeanNames.USER_PO_TO_DTO_MAPPER)
-	public PoToDtoMapper<UserPO, UserDTO> createPoToDtoMapper(ModelMapper modelMapper) {
-		return new PoToDtoMapper<>(modelMapper, UserPO.class, UserDTO.class);
-	}
-
 	public boolean isPasswordValid(UserDTO user) {
 
 		if (Objects.isNull(user)) {
@@ -74,5 +69,10 @@ public class UserBO extends AbstractBO<UUID, UserPO, UserDTO> {
 
 	public boolean isNew(UserDTO user) {
 		return StringUtils.isBlank(user.getId());
+	}
+	
+	@Bean(BeanNames.USER_PO_TO_DTO_MAPPER)
+	public PoToDtoMapper<UserPO, UserDTO> createPoToDtoMapper(ModelMapper modelMapper) {
+		return new PoToDtoMapper<>(modelMapper, UserPO.class, UserDTO.class);
 	}
 }

@@ -18,7 +18,7 @@ import com.github.marceloleite2604.tutorials.modelmapper.controller.UserControll
 import com.github.marceloleite2604.tutorials.modelmapper.model.ThymeleafModelAttributeNames;
 import com.github.marceloleite2604.tutorials.modelmapper.model.dto.UserDTO;
 import com.github.marceloleite2604.tutorials.modelmapper.model.po.UserPO;
-import com.github.marceloleite2604.tutorials.modelmapper.util.message.PageUserMessage;
+import com.github.marceloleite2604.tutorials.modelmapper.util.message.UserMessage;
 
 @Component
 public class UserService extends AbstractService {
@@ -68,23 +68,23 @@ public class UserService extends AbstractService {
 
 		userBO.save(user);
 
-		PageUserMessage pageUserMessage;
+		UserMessage userMessage;
 		if (userBO.isNew(user)) {
-			pageUserMessage = PageUserMessage.CREATED;
+			userMessage = UserMessage.CREATED;
 		} else {
-			pageUserMessage = PageUserMessage.MODIFIED;
+			userMessage = UserMessage.MODIFIED;
 		}
 
-		controllerUtil.addInformationMessage(redirectAttributes, pageUserMessage,
+		serviceUtil.addInformationMessage(redirectAttributes, userMessage,
 				user.getUsername());
 
-		return controllerUtil.redirectTo(UserController.Paths.USER);
+		return serviceUtil.redirectTo(UserController.Paths.USER);
 	}
 
 	private void checkPasswordIsValid(UserDTO user, BindingResult bindingResult) {
 		if (!userBO.isPasswordValid(user)) {
 			FieldError fieldError = new FieldError(ThymeleafModelAttributeNames.USER, "password",
-					messageLoader.getMessage(PageUserMessage.PASSWORD_NOT_BLANK));
+					messageLoader.getMessage(UserMessage.PASSWORD_NOT_BLANK));
 			bindingResult.addError(fieldError);
 		}
 	}
@@ -92,8 +92,8 @@ public class UserService extends AbstractService {
 	public String deleteUser(String id, RedirectAttributes redirectAttributes) {
 		UserPO user = userBO.findMandatoryById(UUID.fromString(id));
 		userBO.delete(user);
-		controllerUtil.addInformationMessage(redirectAttributes, PageUserMessage.DELETED, user.getUsername());
-		return controllerUtil.redirectTo(UserController.Paths.USER);
+		serviceUtil.addInformationMessage(redirectAttributes, UserMessage.DELETED, user.getUsername());
+		return serviceUtil.redirectTo(UserController.Paths.USER);
 	}
 
 	static final class Templates {

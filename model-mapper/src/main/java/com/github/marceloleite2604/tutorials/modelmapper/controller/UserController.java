@@ -24,7 +24,7 @@ public class UserController {
 	private UserService userService;
 
 	@GetMapping(path = Paths.USER)
-	public String getUser(Model model) {
+	public String getGame(Model model) {
 		return userService.getUser(model);
 	}
 	

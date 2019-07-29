@@ -3,6 +3,8 @@ package com.github.marceloleite2604.tutorials.modelmapper.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import com.github.marceloleite2604.tutorials.modelmapper.util.PathUtil;
+
 @Controller
 public class PageController {
 
@@ -13,7 +15,7 @@ public class PageController {
 	}
 	
 	public static final class Paths {
-		public static final String INDEX = "index";
+		public static final String INDEX = PathUtil.SEPARATOR + "index";
 		
 		private Paths() {
 			// Private constructor to avoid object instantiation.

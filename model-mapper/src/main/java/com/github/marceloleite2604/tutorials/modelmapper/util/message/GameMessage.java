@@ -1,17 +1,16 @@
 package com.github.marceloleite2604.tutorials.modelmapper.util.message;
 
-public enum PageUserMessage implements Message {
+public enum GameMessage implements Message {
 
 	CREATED("edit.created"),
 	MODIFIED("edit.modified"),
-	PASSWORD_NOT_BLANK("edit.password.validation.not-blank"),
 	DELETED("deleted");
 
-	private static final String PREFIX = "user.";
+	private static final String PREFIX = "game.";
 
 	private String code;
 
-	private PageUserMessage(String code) {
+	private GameMessage(String code) {
 		this.code = code;
 	}
 

@@ -21,7 +21,7 @@ import com.github.marceloleite2604.tutorials.modelmapper.util.message.Message;
 import com.github.marceloleite2604.tutorials.modelmapper.util.message.MessageLoader;
 
 @Component
-public class ControllerUtil {
+public class ServiceUtil {
 
 	private static final String BINDING_RESULT_ATTRIBUTE_PREFIX = "org.springframework.validation.BindingResult.";
 
