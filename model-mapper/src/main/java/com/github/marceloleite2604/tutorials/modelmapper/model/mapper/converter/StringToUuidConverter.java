@@ -20,5 +20,4 @@ public class StringToUuidConverter implements Converter<String, UUID> {
 
 		return UUID.fromString(string);
 	}
-
 }

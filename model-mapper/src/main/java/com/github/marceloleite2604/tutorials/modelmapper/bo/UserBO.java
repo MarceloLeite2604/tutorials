@@ -44,7 +44,7 @@ public class UserBO extends AbstractBO<UUID, UserPO, UserDTO> {
 			return true;
 		}
 
-		if (!Objects.isNull(user.getId())) {
+		if (!StringUtils.isBlank(user.getId())) {
 			return true;
 		}
 
@@ -63,6 +63,17 @@ public class UserBO extends AbstractBO<UUID, UserPO, UserDTO> {
 	}
 
 	@Override
+	public UserPO save(UserPO user) {
+
+		if (isNew(user)) {
+			user.setDeleted(false);
+			user.setEnabled(true);
+		}
+
+		return super.save(user);
+	}
+
+	@Override
 	public void delete(UserPO entity) {
 		super.delete(entity);
 	}
@@ -70,7 +81,11 @@ public class UserBO extends AbstractBO<UUID, UserPO, UserDTO> {
 	public boolean isNew(UserDTO user) {
 		return StringUtils.isBlank(user.getId());
 	}
-	
+
+	public boolean isNew(UserPO user) {
+		return Objects.isNull(user.getId());
+	}
+
 	@Bean(BeanNames.USER_PO_TO_DTO_MAPPER)
 	public PoToDtoMapper<UserPO, UserDTO> createPoToDtoMapper(ModelMapper modelMapper) {
 		return new PoToDtoMapper<>(modelMapper, UserPO.class, UserDTO.class);

@@ -81,6 +81,35 @@ public class UserService extends AbstractService {
 		return serviceUtil.redirectTo(UserController.Paths.USER);
 	}
 
+	public String postUserPo(UserPO user, BindingResult bindingResult,
+			RedirectAttributes redirectAttributes, Model model) {
+		
+		checkPasswordIsValid(user, bindingResult);
+
+		if (bindingResult.hasErrors()) {
+			model.addAttribute(ThymeleafModelAttributeNames.USER, user);
+			return Templates.USER_EDIT;
+		}
+
+		userBO.save(user);
+
+		UserMessage userMessage;
+		if (userBO.isNew(user)) {
+			userMessage = UserMessage.CREATED;
+		} else {
+			userMessage = UserMessage.MODIFIED;
+		}
+
+		serviceUtil.addInformationMessage(redirectAttributes, userMessage,
+				user.getUsername());
+
+		return serviceUtil.redirectTo(UserController.Paths.USER);
+	}
+	
+	private void checkPasswordIsValid(UserPO user, BindingResult bindingResult) {
+		checkPasswordIsValid(userBO.mapAsDto(user), bindingResult);
+	}
+
 	private void checkPasswordIsValid(UserDTO user, BindingResult bindingResult) {
 		if (!userBO.isPasswordValid(user)) {
 			FieldError fieldError = new FieldError(ThymeleafModelAttributeNames.USER, "password",

@@ -49,7 +49,7 @@
 						th:errors="*{username}">Username Error
 					</td>
 				</tr>
-				<tr>
+				<tr th:if="${@userBO.isNew(user)}">
 					<td>
 						<label 
 							for="password" 
