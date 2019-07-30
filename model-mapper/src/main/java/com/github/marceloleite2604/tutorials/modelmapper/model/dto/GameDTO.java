@@ -25,6 +25,7 @@ public class GameDTO implements DataTransferObject {
 	@NotNull(groups = HttpPostValidationGroup.class, message = "{game.edit.release-year.validation.not-null}")
 	private Integer releaseYear;
 
+	@SuppressWarnings("squid:S2637")
 	public GameDTO() {
 	}
 
