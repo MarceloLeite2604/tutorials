@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html
+	xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<title th:text="#{'game.edit.title.' + ${ @gameBO.isNew(game) ? 'create' : 'update' }}">Page title</title>
+		<meta charset="utf-8" />
+	</head>
+	<body>
+		<div th:insert="components/header :: header"></div>
+		<h1 th:text="#{'game.edit.title.' + ${ @gameBO.isNew(game) ? 'create' : 'update' }}">Page title</h1>
+		<form 
+			th:action="@{__${@gameControllerPathsClass.GAME_EDIT}__}" 
+			method="post" 
+			th:object="${__${@thymeleafModelAttributeNamesClass.GAME}__}">
+			<table>
+				<tr>
+					<td>
+						<label 
+							for="name" 
+							th:text="#{game.edit.name.label}">
+							Name label
+						</label>
+					</td>
+					<td>
+						<input 
+							th:field="*{name}" 
+							type="text">
+					</td>
+					<td 
+						th:if="${#fields.hasErrors('name')}" 
+						th:errors="*{name}">Name Error
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<label 
+							for="developer" 
+							th:text="#{game.edit.developer.label}">
+							Developer label
+						</label>
+					</td>
+					<td>
+						<input 
+							th:field="*{developer}" 
+							type="text">
+					</td>
+					<td 
+						th:if="${#fields.hasErrors('developer')}" 
+						th:errors="*{developer}">Developer Error
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<label 
+							for="genre" 
+							th:text="#{game.edit.genre.label}">
+							Genre label
+						</label>
+					</td>
+					<td>
+						<input 
+							th:field="*{genre}" 
+							type="text">
+					</td>
+					<td 
+						th:if="${#fields.hasErrors('genre')}" 
+						th:errors="*{genre}">Genre error
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<label 
+							for="releaseYear" 
+							th:text="#{game.edit.release-year.label}">
+							Release year label
+						</label>
+					</td>
+					<td>
+						<input 
+							th:field="*{releaseYear}" 
+							type="text">
+					</td>
+					<td 
+						th:if="${#fields.hasErrors('releaseYear')}" 
+						th:errors="*{releaseYear}">Release Year error
+					</td>
+				</tr>
+				<tr>
+					<td colspan="2">
+						<input 
+							type="hidden" 
+							th:field="*{id}">
+						<input 
+							type="submit" 
+							th:value="#{'game.edit.submit-button.label.' + ${ @gameBO.isNew(game) ? 'create' : 'update' }}">
+					</td>
+				<tr>
+			</table>
+		</form>
+	</body>
+</html>

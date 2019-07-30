@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html
+	xmlns:th="http://www.thymeleaf.org">
+	<head th:replace="components/head :: head(title = #{game.title})">
+	<body th:with="games = ${__${@thymeleafModelAttributeNamesClass.GAMES}__}">
+		<div th:insert="components/header :: header"></div>
+		<h1 th:text="#{game.title}">Page title</h1>
+		<div th:insert="components/messages :: messages"></div>
+		<th:block th:if="${games?.size() > 0}">
+			<table>
+				<tr>
+					<th th:text="#{game.edit.name.label}"></th>
+					<th th:text="#{game.edit.developer.label}"></th>
+					<th th:text="#{game.edit.genre.label}"></th>
+					<th th:text="#{game.edit.release-year.label}"></th>
+					<th 
+						th:text="#{game.actions}"
+						colspan="2">
+					</th>
+				</tr>
+				<th:block th:each="game : ${games}">
+					<tr>
+						<td th:text="${game.name}"></td>
+						<td th:text="${game.developer}"></td>
+						<td th:text="${game.genre}"></td>
+						<td th:text="${game.releaseYear}"></td>
+						<td>
+							<a 
+								th:href="@{__${@gameControllerPathsClass.GAME_EDIT}__(id=${game.id})}" 
+								th:text="#{game.modify}">
+							</a>
+						</td>
+						<td>
+							<a 
+								href="#" 
+								th:text="#{game.delete}"
+								th:attr="data-id=${game.id}"
+								th:onclick="deleteGame(this.dataset.id)">
+							</a>
+						</td>
+					</tr>
+				</th:block>
+			</table>
+		</th:block>
+		<th:block th:unless="${games?.size() > 0}">
+			<span th:text="#{game.empty}"></span>
+		</th:block>
+		<form 
+			id="form-game-create"
+			th:action="@{__${@gameControllerPathsClass.GAME_EDIT}__}">
+			<input 
+				type="submit" 
+				th:value="#{game.create}">
+		</form>
+		<th:block th:insert="components/form-delete :: form-delete(deletePath = ${@gameControllerPathsClass.GAME_DELETE})" />
+		<th:block th:insert="components/form-delete :: form-delete-javascript" />
+	</body>
+</html>

@@ -1,0 +1,4 @@
+[mysqld]
+# Force MySQL to create all tables with lowercase letters. 
+# This is necessary to avoid a bug on Liquibase when checking "databasechangelog" existence.  
+lower_case_table_names = 1
