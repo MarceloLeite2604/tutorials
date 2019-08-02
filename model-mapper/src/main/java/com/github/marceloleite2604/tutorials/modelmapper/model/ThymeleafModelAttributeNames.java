@@ -18,6 +18,12 @@ public final class ThymeleafModelAttributeNames {
 
 	public static final String GAME = "game";
 
+	public static final String LIBRARY = "library";
+
+	public static final String PREVIOUS_PAGE = "previousPage";
+
+	public static final String LIBRARIES = "libraries";
+
 	private ThymeleafModelAttributeNames() {
 		// Private constructor to avoid object instantiation.
 	}

@@ -26,7 +26,7 @@
 						<td th:text="${game.releaseYear}"></td>
 						<td>
 							<a 
-								th:href="@{__${@gameControllerPathsClass.GAME_EDIT}__(id=${game.id})}" 
+								th:href="@{__${@gameControllerPathsClass.EDIT}__(id=${game.id})}" 
 								th:text="#{game.modify}">
 							</a>
 						</td>
@@ -35,7 +35,7 @@
 								href="#" 
 								th:text="#{game.delete}"
 								th:attr="data-id=${game.id}"
-								th:onclick="deleteGame(this.dataset.id)">
+								th:onclick="delete(this.dataset.id)">
 							</a>
 						</td>
 					</tr>
@@ -45,14 +45,8 @@
 		<th:block th:unless="${games?.size() > 0}">
 			<span th:text="#{game.empty}"></span>
 		</th:block>
-		<form 
-			id="form-game-create"
-			th:action="@{__${@gameControllerPathsClass.GAME_EDIT}__}">
-			<input 
-				type="submit" 
-				th:value="#{game.create}">
-		</form>
-		<th:block th:insert="components/form-delete :: form-delete(deletePath = ${@gameControllerPathsClass.GAME_DELETE})" />
-		<th:block th:insert="components/form-delete :: form-delete-javascript" />
+		<th:block th:replace="components/form-create :: form-create(buttonLabel=#{game.create}, createPath = @{${@gameControllerPathsClass.EDIT}})" />
+		<th:block th:replace="components/form-delete :: form-delete(deletePath = ${@gameControllerPathsClass.DELETE})" />
+		<th:block th:replace="components/form-delete :: form-delete-javascript" />
 	</body>
 </html>

@@ -99,5 +99,39 @@
             incrementBy="1"
             startWith="1"
             />
+            
+		<createTable
+			schemaName="modelmapper_db" 
+			tableName="libraries">
+			<column 
+				name="id" 
+				type="binary(16)">
+				<constraints 
+					nullable="false" 
+					primaryKey="true"
+					primaryKeyName="libr_pk" />
+			</column>
+			<column 
+				name="user_id" 
+				type="binary(16)">
+				<constraints 
+					nullable="false"
+					foreignKeyName="libr_user_fk"
+					references="users(id)" />
+			</column>
+			<column 
+				name="game_id" 
+				type="integer">
+				<constraints 
+					nullable="false"
+					foreignKeyName="libr_game_fk"
+					references="games(id)" />
+			</column>
+			<column 
+				name="hours_played" 
+				type="float">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
 	</changeSet>
 </databaseChangeLog>

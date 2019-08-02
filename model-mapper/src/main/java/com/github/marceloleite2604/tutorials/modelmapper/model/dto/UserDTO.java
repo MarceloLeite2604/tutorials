@@ -4,7 +4,7 @@ import javax.validation.constraints.NotBlank;
 
 import com.github.marceloleite2604.tutorials.modelmapper.model.validation.HttpPostValidationGroup;
 
-public class UserDTO implements DataTransferObject {
+public class UserDTO implements DataTransferObject, Comparable<UserDTO> {
 
 	private static final long serialVersionUID = 1L;
 
@@ -116,6 +116,11 @@ public class UserDTO implements DataTransferObject {
 
 	public static Builder builder() {
 		return new Builder();
+	}
+	
+	@Override
+	public int compareTo(UserDTO other) {
+		return this.name.compareTo(other.getName());
 	}
 
 	public static final class Builder {

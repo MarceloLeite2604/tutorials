@@ -1,70 +1,43 @@
 <!DOCTYPE html>
-<html
-	xmlns:th="http://www.thymeleaf.org">
-	<head>
-		<title th:text="#{user.title}">Page title</title>
-		<meta charset="utf-8" />
-	</head>
-	<body>
-		<div th:insert="components/header :: header"></div>
-		<h1 th:text="#{user.title}">Page title</h1>
-		<div th:insert="components/messages :: messages"></div>
-		<th:block th:if="${users?.size() > 0}">
-			<table>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title th:text="#{user.title}">Page title</title>
+<meta charset="utf-8" />
+</head>
+<body
+	th:with="users = ${__${@thymeleafModelAttributeNamesClass.USERS}__}">
+	<div th:insert="components/header :: header"></div>
+	<h1 th:text="#{user.title}">Page title</h1>
+	<div th:insert="components/messages :: messages"></div>
+	<th:block th:if="${users?.size() > 0}">
+		<table>
+			<tr>
+				<th th:text="#{user.edit.username.label}"></th>
+				<th th:text="#{user.edit.name.label}"></th>
+				<th th:text="#{user.actions}" colspan="2"></th>
+			</tr>
+			<th:block
+				th:each="user : ${__${@thymeleafModelAttributeNamesClass.USERS}__}">
 				<tr>
-					<th th:text="#{user.edit.username.label}"></th>
-					<th th:text="#{user.edit.name.label}"></th>
-					<th 
-						th:text="#{user.actions}"
-						colspan="2">
-					</th>
+					<td th:text="${user.username}"></td>
+					<td th:text="${user.name}"></td>
+					<td><a
+						th:href="@{__${@userControllerPathsClass.EDIT}__(id=${user.id})}"
+						th:text="#{user.modify}"> </a></td>
+					<td><a href="#" th:text="#{user.delete}"
+						th:attr="data-id=${user.id}" th:onclick="delete(this.dataset.id)">
+					</a></td>
 				</tr>
-				<th:block th:each="user : ${__${@thymeleafModelAttributeNamesClass.USERS}__}">
-					<tr>
-						<td th:text="${user.username}"></td>
-						<td th:text="${user.name}"></td>
-						<td>
-							<a 
-								th:href="@{__${@userControllerPathsClass.USER_EDIT}__(id=${user.id})}" 
-								th:text="#{user.modify}">
-							</a>
-						</td>
-						<td>
-							<a 
-								href="#" 
-								th:text="#{user.delete}"
-								th:attr="data-id=${user.id}"
-								th:onclick="deleteUser(this.dataset.id)">
-							</a>
-						</td>
-					</tr>
-				</th:block>
-			</table>
-		</th:block>
-		<th:block th:unless="${users?.size() > 0}">
-			<span th:text="#{user.empty}"></span>
-		</th:block>
-		<form 
-			id="form-user-create"
-			th:action="@{__${@userControllerPathsClass.USER_EDIT}__}">
-			<input 
-				type="submit" 
-				th:value="#{user.create}">
-		</form>
-		<form 
-			id="form-user-delete"
-			th:action="@{__${@userControllerPathsClass.USER_DELETE}__}" 
-			method="post">
-			<input 
-				type="hidden" 
-				id="form-user-delete-id"
-				name="id">
-		</form>
-	</body>
-	<script type="text/javascript">
-		function deleteUser(id) {
-			document.getElementById('form-user-delete-id').value = id;
-			document.getElementById('form-user-delete').submit();
-		}  
-	</script>
+			</th:block>
+		</table>
+	</th:block>
+	<th:block th:unless="${users?.size() > 0}">
+		<span th:text="#{user.empty}"></span>
+	</th:block>
+	<th:block
+		th:replace="components/form-create :: form-create(buttonLabel=#{user.create}, createPath = @{${@userControllerPathsClass.EDIT}})" />
+	<th:block
+		th:replace="components/form-delete :: form-delete(deletePath = ${@userControllerPathsClass.DELETE})" />
+	<th:block th:replace="components/form-delete :: form-delete-javascript" />
+</body>
 </html>

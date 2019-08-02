@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<title>Form delete</title>
+		<meta charset="utf-8" />
+	</head>
+	<body>
+		<th:block th:fragment="form-create(buttonLabel, createPath)" >
+			<form 
+				id="form-create"
+				th:action="${createPath}">
+				<input 
+					type="submit" 
+					th:value="${buttonLabel}">
+				<input 
+					th:if="${previousPage}"
+					type="hidden"
+					name="previousPage"
+					th:value="${previousPage}">
+			</form>
+		</th:block>
+	</body>
+</html>

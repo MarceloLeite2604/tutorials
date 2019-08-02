@@ -16,7 +16,7 @@ import com.github.marceloleite2604.tutorials.modelmapper.model.po.converter.YesN
 
 @Entity(name = "users")
 @Table(name = "users")
-public class UserPO implements PersistentObject<UUID> {
+public class UserPO implements PersistentObject<UUID>, Comparable<UserPO> {
 
 	private static final long serialVersionUID = 1L;
 
@@ -106,6 +106,37 @@ public class UserPO implements PersistentObject<UUID> {
 		this.deleted = deleted;
 	}
 
+	@Override
+	public String toString() {
+		return "UserPO [id=" + id + ", username=" + username + ", name=" + name + ", password="
+				+ password + ", enabled=" + enabled + ", deleted=" + deleted + "]";
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		UserPO other = (UserPO) obj;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		return true;
+	}
+
 	public static Builder builder() {
 		return new Builder();
 	}
@@ -154,5 +185,10 @@ public class UserPO implements PersistentObject<UUID> {
 		public UserPO build() {
 			return new UserPO(this);
 		}
+	}
+
+	@Override
+	public int compareTo(UserPO other) {
+		return this.name.compareTo(other.getName());
 	}
 }

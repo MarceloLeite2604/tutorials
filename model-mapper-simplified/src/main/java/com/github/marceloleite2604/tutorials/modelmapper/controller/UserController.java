@@ -41,9 +41,10 @@ public class UserController {
 	}
 	
 	@PostMapping(path = Paths.USER_EDIT_PO)
-	public String postUserPO(@Validated(HttpPostValidationGroup.class) @ModelAttribute("user") UserPO user,
-			BindingResult bindingResult, RedirectAttributes redirectAttributes, Model model) {
-		return userService.postUserPo(user, bindingResult, redirectAttributes, model);
+	public String update(UserPO user) {
+		// validate(user);
+		// database.save(user);
+		return "ok";
 	}
 	
 	@PostMapping(path = Paths.USER_DELETE)

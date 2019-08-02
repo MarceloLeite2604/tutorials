@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html
+	xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<title th:text="#{library.game.title}">Page title</title>
+		<meta charset="utf-8" />
+	</head>
+	<body th:with="games = ${__${@thymeleafModelAttributeNamesClass.GAMES}__}, libraries = ${__${@thymeleafModelAttributeNamesClass.LIBRARIES}__}">
+		<div th:insert="components/header :: header"></div>
+		<h1 th:text="#{library.game.title}">Page title</h1>
+		<div th:insert="components/messages :: messages"></div>
+		<th:block th:if="${games?.size() > 0}">
+			<table>
+				<tr>
+					<th th:text="#{game.edit.name.label}"></th>
+					<th th:text="#{library.users-count.label}"></th>
+					<th 
+						th:text="#{library.actions}"
+						colspan="2">
+					</th>
+				</tr>
+				<th:block th:each="game : ${games}">
+					<tr>
+						<td th:text="${game.name}"></td>
+						<td th:text="${@libraryBO.retrieveByGame(libraries, game)?.size()}"></td>
+						<td>
+							<a 
+								th:href="@{__${@libraryControllerPathsClass.LIBRARY}__(gameId=${game.id})}" 
+								th:text="#{library.select}">
+							</a>
+						</td>
+						<td>
+							<a 
+								href="#" 
+								th:text="#{library.delete}"
+								th:attr="data-id=${library.id}"
+								th:onclick="delete(this.dataset.id)">
+							</a>
+						</td>
+					</tr>
+				</th:block>
+			</table>
+		</th:block>
+		<th:block th:unless="${users?.size() > 0}">
+			<span th:text="#{library.empty}"></span>
+		</th:block>
+		<th:block th:insert="components/form-delete :: form-delete(deletePath = ${@libraryControllerPathsClass.DELETE})" />
+		<th:block th:insert="components/form-delete :: form-delete-javascript" />
+	</body>
+</html>
