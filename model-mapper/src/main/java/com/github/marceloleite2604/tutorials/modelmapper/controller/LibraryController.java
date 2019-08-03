@@ -23,12 +23,17 @@ public class LibraryController {
 	@Inject
 	private LibraryService libraryService;
 
-	@GetMapping(path = Paths.BY_USER)
+	@GetMapping(path = Paths.USER)
 	public String getLibraryUser(Model model) {
 		return libraryService.getLibraryUser(model);
 	}
 
-	@GetMapping(path = Paths.BY_GAME)
+	@GetMapping(path = Paths.USER_RECORDS)
+	public String getLibraryUserRecords(@RequestParam String userId, Model model) {
+		return libraryService.getLibraryUserRecords(userId, model);
+	}
+
+	@GetMapping(path = Paths.GAME)
 	public String getLibraryGame(Model model) {
 		return libraryService.getLibraryGame(model);
 	}
@@ -36,33 +41,39 @@ public class LibraryController {
 	@GetMapping(path = Paths.EDIT)
 	public String getLibraryEdit(@RequestParam(required = false) String libraryId,
 			@RequestParam(required = false) String userId,
-			@RequestParam(required = false) Integer gameId, @RequestParam String previousPage,
+			@RequestParam(required = false) Integer gameId, @RequestParam String redirectPath,
 			Model model) {
-		return libraryService.getLibraryEdit(libraryId, userId, gameId, previousPage, model);
+		return libraryService.getLibraryEdit(libraryId, userId, gameId, redirectPath, model);
 	}
 
 	@PostMapping(path = Paths.EDIT)
 	public String postLibraryEdit(
 			@Validated(HttpPostValidationGroup.class) @ModelAttribute("library") LibraryDTO library,
-			@RequestParam String previousPage, BindingResult bindingResult,
+			@RequestParam String redirectPath, BindingResult bindingResult,
 			RedirectAttributes redirectAttributes, Model model) {
-		return libraryService.postLibraryEdit(library, previousPage, bindingResult,
+		return libraryService.postLibraryEdit(library, redirectPath, bindingResult,
 				redirectAttributes, model);
 	}
 
 	@PostMapping(path = Paths.DELETE)
-	public String postLibraryDelete(@RequestParam(required = true) String libraryId,
+	public String postLibraryDelete(@RequestParam String id, @RequestParam String redirectPath,
 			RedirectAttributes redirectAttributes) {
-		return libraryService.postLibraryDelete(libraryId, redirectAttributes);
+		return libraryService.postLibraryDelete(id, redirectPath, redirectAttributes);
 	}
 
 	public static final class Paths {
 
 		public static final String LIBRARY = PathUtil.SEPARATOR + "library";
 
-		public static final String BY_USER = LIBRARY + UserController.Paths.USER;
+		public static final String USER = LIBRARY + UserController.Paths.USER;
 
-		public static final String BY_GAME = LIBRARY + GameController.Paths.GAME;
+		public static final String RECORDS = "records";
+
+		public static final String USER_RECORDS = USER + PathUtil.SEPARATOR + RECORDS;
+
+		public static final String GAME = LIBRARY + GameController.Paths.GAME;
+
+		public static final String GAME_RECORDS = GAME + PathUtil.SEPARATOR + RECORDS;
 
 		public static final String DELETE = LIBRARY + PathUtil.SEPARATOR + "delete";
 

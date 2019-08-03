@@ -9,7 +9,7 @@
 		<div th:insert="components/header :: header"></div>
 		<h1 th:text="#{'library.edit.title.' + ${ @libraryBO.isNew(library) ? 'create' : 'update' }}">Page title</h1>
 		<form 
-			th:action="@{__${@libraryControllerPathsClass.EDIT}__(previousPage=${previousPage})}" 
+			th:action="@{${@libraryControllerPathsClass.EDIT}}" 
 			method="post" 
 			th:object="${__${@thymeleafModelAttributeNamesClass.LIBRARY}__}">
 			<table>
@@ -17,7 +17,7 @@
 					<td>
 						<label 
 							th:for="*{user?.id}" 
-							th:text="#{library.edit.user.label}">
+							th:text="#{user.label}">
 							User label
 						</label>
 					</td>
@@ -49,13 +49,13 @@
 					<td 
 						th:if="${#fields.hasErrors('user.id')}" 
 						th:errors="*{name}">Name Error
-					</td>
+					</td>	
 				</tr>
 				<tr>
 					<td>
 						<label 
 							th:for="*{game?.id}" 
-							th:text="#{library.edit.game.label}">
+							th:text="#{game.label}">
 							Game label
 						</label>
 					</td>
@@ -93,7 +93,7 @@
 					<td>
 						<label 
 							th:for="*{hoursPlayed}" 
-							th:text="#{library.edit.hoursPlayed.label}">
+							th:text="#{library.hours-played.label}">
 							Hours played label
 						</label>
 					</td>
@@ -112,6 +112,10 @@
 						<input 
 							type="hidden" 
 							th:field="*{id}">
+						<input 
+							type="hidden" 
+							th:name="${@thymeleafModelAttributeNamesClass.REDIRECT_PATH}"
+							th:value="${__${@thymeleafModelAttributeNamesClass.REDIRECT_PATH}__}">
 						<input 
 							type="submit" 
 							th:value="#{'library.edit.submit-button.label.' + ${ @libraryBO.isNew(library) ? 'create' : 'update' }}">

@@ -19,7 +19,7 @@ public class LibraryPO implements PersistentObject<UUID> {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@Column
+	@Column(name = "id", nullable = false)
 	@GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
 	@GeneratedValue(generator = "UUID")
 	@Type(type = "uuid-binary")

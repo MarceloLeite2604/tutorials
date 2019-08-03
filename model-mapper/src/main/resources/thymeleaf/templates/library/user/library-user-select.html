@@ -12,14 +12,14 @@
 		<th:block th:if="${users?.size() > 0}">
 			<table>
 				<tr>
-					<th th:text="#{user.edit.username.label}"></th>
+					<th th:text="#{user.username.label}"></th>
 					<th th:text="#{library.games-count.label}"></th>
 				</tr>
 				<th:block th:each="user : ${users}">
 					<tr>
 						<td >
 							<a
-								th:href="@{__${@libraryControllerPathsClass.EDIT}__(userId=${user.id}, previousPage='library-user')}" 
+								th:href="@{__${@libraryControllerPathsClass.USER_RECORDS}__(userId=${user.id}, previousPage='library-user')}" 
 								th:text="${user.username}"></a>
 						</td>
 						<td th:text="${@libraryBO.retrieveByUser(libraries, user)?.size()}"></td>
@@ -30,8 +30,5 @@
 		<th:block th:unless="${users?.size() > 0}">
 			<span th:text="#{library.empty}"></span>
 		</th:block>
-		<th:block th:replace="components/form-create :: form-create(buttonLabel=#{library.create}, createPath=@{${@libraryControllerPathsClass.EDIT}}, previousPage='library-user')" />
-		<th:block th:replace="components/form-delete :: form-delete(deletePath = ${@libraryControllerPathsClass.DELETE})" />
-		<th:block th:replace="components/form-delete :: form-delete-javascript" />
 	</body>
 </html>

@@ -1,5 +1,6 @@
 package com.github.marceloleite2604.tutorials.modelmapper.dao;
 
+import java.util.List;
 import java.util.UUID;
 
 import javax.inject.Inject;
@@ -24,6 +25,10 @@ public class LibraryDAO extends AbstractDAO<LibraryPO, UUID> {
 	@Override
 	protected Class<LibraryPO> getPersistentObjectClass() {
 		return LibraryPO.class;
+	}
+
+	public List<LibraryPO> findAllByUserId(UUID userId) {
+		return librariesRepository.findAllByUserId(userId);
 	}
 
 }

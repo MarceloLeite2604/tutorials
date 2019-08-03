@@ -1,6 +1,6 @@
 package com.github.marceloleite2604.tutorials.modelmapper.model.dto;
 
-public class LibraryDTO implements DataTransferObject {
+public class LibraryDTO implements DataTransferObject<String> {
 
 	private static final long serialVersionUID = 1L;
 
@@ -23,6 +23,7 @@ public class LibraryDTO implements DataTransferObject {
 		super();
 	}
 
+	@Override
 	public String getId() {
 		return id;
 	}

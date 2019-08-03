@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html
+	xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<title th:text="#{library.game.title}">Page title</title>
+		<meta charset="utf-8" />
+	</head>
+	<body th:with="games = ${__${@thymeleafModelAttributeNamesClass.GAMES}__}, libraries = ${__${@thymeleafModelAttributeNamesClass.LIBRARIES}__}">
+		<div th:insert="components/header :: header"></div>
+		<h1 th:text="#{library.game.title}">Page title</h1>
+		<div th:insert="components/messages :: messages"></div>
+		<th:block th:if="${games?.size() > 0}">
+			<table>
+				<tr>
+					<th th:text="#{game.name.label}"></th>
+					<th th:text="#{library.users-count.label}"></th>
+				</tr>
+				<th:block th:each="game : ${games}">
+					<tr>
+						<td>
+							<a
+								th:href="@{__${@libraryControllerPathsClass.EDIT}__(gameId=${game.id}, previousPage='library-game')}" 
+								th:text="${game.name}"></a>
+						</td>
+						<td th:text="${@libraryBO.retrieveByGame(libraries, game)?.size()}"></td>
+					</tr>
+				</th:block>
+			</table>
+		</th:block>
+		<th:block th:unless="${games?.size() > 0}">
+			<span th:text="#{library.empty}"></span>
+		</th:block>
+	</body>
+</html>

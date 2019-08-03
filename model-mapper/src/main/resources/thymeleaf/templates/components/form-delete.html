@@ -13,12 +13,18 @@
 				<input 
 					type="hidden" 
 					id="id"
-					name="id">
+					name="id" />
+				<input 
+					th:if="${redirectPath}"
+					type="hidden" 
+					id="redirectPath"
+					name="redirectPath"
+					th:value="${redirectPath}" />
 			</form>
 		</th:block>
 		<th:block th:fragment="form-delete-javascript" >
 			<script type="text/javascript">
-				function delete(id) {
+				function deleteElement(id) {
 					$("#form-delete #id").val(id);
 					$("#form-delete").submit();
 				}  

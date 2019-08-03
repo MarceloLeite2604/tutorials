@@ -4,7 +4,7 @@ import javax.validation.constraints.NotBlank;
 
 import com.github.marceloleite2604.tutorials.modelmapper.model.validation.HttpPostValidationGroup;
 
-public class UserDTO implements DataTransferObject, Comparable<UserDTO> {
+public class UserDTO implements DataTransferObject<String>, Comparable<UserDTO> {
 
 	private static final long serialVersionUID = 1L;
 
@@ -34,6 +34,7 @@ public class UserDTO implements DataTransferObject, Comparable<UserDTO> {
 	public UserDTO() {
 	}
 
+	@Override
 	public String getId() {
 		return id;
 	}

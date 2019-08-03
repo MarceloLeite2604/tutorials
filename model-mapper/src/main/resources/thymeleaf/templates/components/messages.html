@@ -5,27 +5,27 @@
 		<meta charset="utf-8" />
 	</head>
 	<body>
-		<div th:fragment="messages" >
+		<th:block  th:fragment="messages"> 
 			<div th:if="${__${@thymeleafModelAttributeNamesClass.ERROR_MESSAGE}__}">
 			<span
 				class="messagePanel__error"
 				th:text="${__${@thymeleafModelAttributeNamesClass.ERROR_MESSAGE}__}">Error message</span>
-		</div>
-		<div th:if="${__${@thymeleafModelAttributeNamesClass.INFORMATION_MESSAGE}__}">
-			<span
-				class="messagePanel__info"
-				th:text="${__${@thymeleafModelAttributeNamesClass.INFORMATION_MESSAGE}__}">Information
-				message</span>
-		</div>
-		<div class="messagePanel__error" th:if="${__${@thymeleafModelAttributeNamesClass.DETAILED_ERROR_MESSAGE}__}">
-			<span
-				th:text="${__${@thymeleafModelAttributeNamesClass.DETAILED_ERROR_MESSAGE}__.message}">List error message title</span>
-			<ul th:style="'text-align: initial'">
-				<th:block th:each="detail : ${__${@thymeleafModelAttributeNamesClass.DETAILED_ERROR_MESSAGE}__.details}">
-					<li th:text=${detail} />
-				</th:block>
-			</ul>
-		</div>
-	</div>
-</body>
+			</div>
+			<div th:if="${__${@thymeleafModelAttributeNamesClass.INFORMATION_MESSAGE}__}">
+				<span
+					class="messagePanel__info"
+					th:text="${__${@thymeleafModelAttributeNamesClass.INFORMATION_MESSAGE}__}">Information
+					message</span>
+			</div>
+			<div class="messagePanel__error" th:if="${__${@thymeleafModelAttributeNamesClass.DETAILED_ERROR_MESSAGE}__}">
+				<span
+					th:text="${__${@thymeleafModelAttributeNamesClass.DETAILED_ERROR_MESSAGE}__.message}">List error message title</span>
+				<ul th:style="'text-align: initial'">
+					<th:block th:each="detail : ${__${@thymeleafModelAttributeNamesClass.DETAILED_ERROR_MESSAGE}__.details}">
+						<li th:text=${detail} />
+					</th:block>
+				</ul>
+			</div>
+		</th:block>
+	</body>
 </html>

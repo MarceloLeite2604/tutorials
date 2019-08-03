@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html
+	xmlns:th="http://www.thymeleaf.org">
+	<head th:replace="components/head :: head(title = #{library.user.title})" />
+	<body 
+		th:with="user = ${__${@thymeleafModelAttributeNamesClass.USER}__}, 
+			libraries = ${__${@thymeleafModelAttributeNamesClass.LIBRARIES}__},
+			currentPath = ${@libraryControllerPathsClass.USER_RECORDS}+'?userId='+${user.id}">
+			
+		<th:block th:replace="components/header :: header"></th:block>
+		<h1 th:text="#{library.user.subtitle(${user.username})}"></h1>
+		<th:block th:if="${libraries?.size() > 0}">
+			<table>
+				<tr>
+					<th th:text="#{game.name.label}"></th>
+					<th th:text="#{library.hours-played.label}"></th>
+					<th 
+						th:text="#{page.actions}" 
+						colspan="2"></th>
+				</tr>
+				<th:block th:each="library : ${libraries}">
+					<tr>
+						<td th:text="${library.game.name}"></td>
+						<td th:text="${library.hoursPlayed}"></td>
+						<td>
+							<a
+								th:href="@{__${@libraryControllerPathsClass.EDIT}__(libraryId=${library.id}, redirectPath=${currentPath})}"
+								th:text="#{page.modify}"> </a></td>
+						<td>
+							<a 
+								href="#" 
+								th:text="#{page.delete}"
+								th:attr="data-id=${library.id}" 
+								th:onclick="deleteElement(this.dataset.id)">
+							</a>
+						</td>
+					</tr>
+				</th:block>
+			</table>
+		</th:block>
+		<th:block th:unless="${libraries?.size() > 0}">
+			<span th:text="#{library.empty}"></span>
+		</th:block>
+		<th:block th:replace="components/form-create :: form-create(buttonLabel = #{library.create}, createPath = @{${@libraryControllerPathsClass.EDIT}}, redirectPath = ${currentPath}, additionalParameterName1 = 'userId', additionalParameterValue1 = ${user.id})" />
+		<th:block th:replace="components/form-delete :: form-delete(deletePath = ${@libraryControllerPathsClass.DELETE}, redirectPath = ${currentPath})" />
+		<th:block th:replace="components/form-delete :: form-delete-javascript" />
+	</body>
+</html>

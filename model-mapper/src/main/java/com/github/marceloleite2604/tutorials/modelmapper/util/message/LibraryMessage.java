@@ -4,7 +4,7 @@ public enum LibraryMessage implements Message {
 
 	CREATED("edit.created"),
 	MODIFIED("edit.modified"),
-	DELETED("edit.deleted");
+	DELETED("deleted");
 
 	private static final String PREFIX = "library.";
 

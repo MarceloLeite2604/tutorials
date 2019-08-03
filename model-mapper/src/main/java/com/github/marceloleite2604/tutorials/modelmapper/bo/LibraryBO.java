@@ -1,5 +1,6 @@
 package com.github.marceloleite2604.tutorials.modelmapper.bo;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
 import java.util.function.Function;
@@ -20,6 +21,8 @@ import com.github.marceloleite2604.tutorials.modelmapper.dao.LibraryDAO;
 import com.github.marceloleite2604.tutorials.modelmapper.model.dto.GameDTO;
 import com.github.marceloleite2604.tutorials.modelmapper.model.dto.LibraryDTO;
 import com.github.marceloleite2604.tutorials.modelmapper.model.dto.UserDTO;
+import com.github.marceloleite2604.tutorials.modelmapper.model.dto.comparator.LibraryDtoByGameComparator;
+import com.github.marceloleite2604.tutorials.modelmapper.model.dto.comparator.LibraryDtoByUserComparator;
 import com.github.marceloleite2604.tutorials.modelmapper.model.mapper.PoToDtoMapper;
 import com.github.marceloleite2604.tutorials.modelmapper.model.po.LibraryPO;
 
@@ -32,6 +35,12 @@ public class LibraryBO extends AbstractBO<UUID, LibraryPO, LibraryDTO> {
 	@Inject
 	@Named(BeanNames.LIBRARY_PO_TO_DTO_MAPPER)
 	private PoToDtoMapper<LibraryPO, LibraryDTO> poToDtoMapper;
+
+	@Inject
+	private LibraryDtoByUserComparator libraryDtoByUserComparator;
+
+	@Inject
+	private LibraryDtoByGameComparator libraryDtoByGameComparator;
 
 	@Override
 	protected PoToDtoMapper<LibraryPO, LibraryDTO> getPoToDtoMapper() {
@@ -96,5 +105,17 @@ public class LibraryBO extends AbstractBO<UUID, LibraryPO, LibraryDTO> {
 				.map(function)
 				.distinct()
 				.collect(Collectors.toList());
+	}
+
+	public List<LibraryPO> findAllByUserId(UUID userId) {
+		return libraryDAO.findAllByUserId(userId);
+	}
+
+	public void sortByUser(List<LibraryDTO> libraries) {
+		Collections.sort(libraries, libraryDtoByUserComparator);
+	}
+	
+	public void sortByGame(List<LibraryDTO> libraries) {
+		Collections.sort(libraries, libraryDtoByGameComparator);
 	}
 }

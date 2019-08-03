@@ -20,7 +20,7 @@ public final class ThymeleafModelAttributeNames {
 
 	public static final String LIBRARY = "library";
 
-	public static final String PREVIOUS_PAGE = "previousPage";
+	public static final String REDIRECT_PATH = "redirectPath";
 
 	public static final String LIBRARIES = "libraries";
 
