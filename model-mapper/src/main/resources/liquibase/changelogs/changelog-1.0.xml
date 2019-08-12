@@ -134,4 +134,666 @@
 			</column>
 		</createTable>
 	</changeSet>
+	
+	<changeSet 
+		author="Marcelo Leite" 
+		id="2"  
+		labels="v1.0">
+		
+		<comment>Create users on database.</comment>
+		
+		<insert
+			schemaName="modelmapper_db"
+			tableName="users">
+			
+			<column
+				name="id"
+				valueComputed="unhex(replace('${user.lillian.id}', '-', ''))">
+			</column>
+			<column
+				name="name"
+				value="Lillian Stevens">
+			</column>
+			<column
+				name="username"
+				value="lillian.stevens50@example.com">
+			</column>
+			<column
+				name="password"
+				value="collie">
+			</column>
+			<column
+				name="enabled"
+				value="Y">
+			</column>
+			<column
+				name="deleted"
+				value="N">
+			</column>
+			
+		</insert>
+		
+		<insert
+			schemaName="modelmapper_db"
+			tableName="users">
+			
+			<column
+				name="id"
+				valueComputed="unhex(replace('${user.anna.id}', '-', ''))">
+			</column>
+			<column
+				name="name"
+				value="Anna Lewis">
+			</column>
+			<column
+				name="username"
+				value="anna.lewis30@example.com">
+			</column>
+			<column
+				name="password"
+				value="jarhead">
+			</column>
+			<column
+				name="enabled"
+				value="Y">
+			</column>
+			<column
+				name="deleted"
+				value="N">
+			</column>
+			
+		</insert>
+		
+		<insert
+			schemaName="modelmapper_db"
+			tableName="users">
+			
+			<column
+				name="id"
+				valueComputed="unhex(replace('${user.renee.id}', '-', ''))">
+			</column>
+			<column
+				name="name"
+				value="Renee Jensen">
+			</column>
+			<column
+				name="username"
+				value="renee.jensen22@example.com">
+			</column>
+			<column
+				name="password"
+				value="canuck">
+			</column>
+			<column
+				name="enabled"
+				value="Y">
+			</column>
+			<column
+				name="deleted"
+				value="N">
+			</column>
+			
+		</insert>
+		
+		<insert
+			schemaName="modelmapper_db"
+			tableName="users">
+			
+			<column
+				name="id"
+				valueComputed="unhex(replace('${user.andrew.id}', '-', ''))">
+			</column>
+			<column
+				name="name"
+				value="Andrew Graves">
+			</column>
+			<column
+				name="username"
+				value="andrew.graves76@example.com">
+			</column>
+			<column
+				name="password"
+				value="1269">
+			</column>
+			<column
+				name="enabled"
+				value="Y">
+			</column>
+			<column
+				name="deleted"
+				value="N">
+			</column>
+			
+		</insert>
+		
+		<insert
+			schemaName="modelmapper_db"
+			tableName="users">
+			
+			<column
+				name="id"
+				valueComputed="unhex(replace('${user.jo.id}', '-', ''))">
+			</column>
+			<column
+				name="name"
+				value="Jo Gordon">
+			</column>
+			<column
+				name="username"
+				value="jo.gordon97@example.com">
+			</column>
+			<column
+				name="password"
+				value="links">
+			</column>
+			<column
+				name="enabled"
+				value="Y">
+			</column>
+			<column
+				name="deleted"
+				value="N">
+			</column>
+			
+		</insert>
+		
+	</changeSet>
+	
+	<changeSet 
+		author="Marcelo Leite" 
+		id="3"  
+		labels="v1.0">
+		
+		<comment>Create games on database.</comment>
+		
+		<insert
+			schemaName="modelmapper_db"
+			tableName="games">
+			
+			<column
+				name="id"
+				value="${game.monster-hunter.id}">
+			</column>
+			<column
+				name="name"
+				value="Monster Hunter: World">
+			</column>
+			<column
+				name="developer"
+				value="Capcom">
+			</column>
+			<column
+				name="genre"
+				value="Action RPG">
+			</column>
+			<column
+				name="release_year"
+				value="2018">
+			</column>
+			
+		</insert>
+		
+		<insert
+			schemaName="modelmapper_db"
+			tableName="games">
+			
+			<column
+				name="id"
+				value="${game.god-of-war.id}">
+			</column>
+			<column
+				name="name"
+				value="God Of War">
+			</column>
+			<column
+				name="developer"
+				value="Santa Monica Studio">
+			</column>
+			<column
+				name="genre"
+				value="Hack And Slash">
+			</column>
+			<column
+				name="release_year"
+				value="2018">
+			</column>
+			
+		</insert>
+		
+		<insert
+			schemaName="modelmapper_db"
+			tableName="games">
+			
+			<column
+				name="id"
+				value="${game.horizon-zero-dawn.id}">
+			</column>
+			<column
+				name="name"
+				value="Horizon Zero Dawn">
+			</column>
+			<column
+				name="developer"
+				value="Guerrilla Games">
+			</column>
+			<column
+				name="genre"
+				value="Action and Adventure">
+			</column>
+			<column
+				name="release_year"
+				value="2017">
+			</column>
+			
+		</insert>
+		
+		<insert
+			schemaName="modelmapper_db"
+			tableName="games">
+			
+			<column
+				name="id"
+				value="${game.super-mario-odyssey.id}">
+			</column>
+			<column
+				name="name"
+				value="Super Mario Odyssey">
+			</column>
+			<column
+				name="developer"
+				value="Nintendo">
+			</column>
+			<column
+				name="genre"
+				value="Platform">
+			</column>
+			<column
+				name="release_year"
+				value="2017">
+			</column>
+			
+		</insert>
+		
+		<insert
+			schemaName="modelmapper_db"
+			tableName="games">
+			
+			<column
+				name="id"
+				value="${game.cuphead.id}">
+			</column>
+			<column
+				name="name"
+				value="Cuphead">
+			</column>
+			<column
+				name="developer"
+				value="Studio MDHR Entertainment">
+			</column>
+			<column
+				name="genre"
+				value="Run and Gun">
+			</column>
+			<column
+				name="release_year"
+				value="2017">
+			</column>
+			
+		</insert>
+		
+	</changeSet>
+	
+	<changeSet 
+		author="Marcelo Leite" 
+		id="4"  
+		labels="v1.0">
+		
+		<comment>Create libraries on database.</comment>
+		
+		<insert
+			schemaName="modelmapper_db"
+			tableName="libraries">
+			
+			<column
+				name="id"
+				valueComputed="unhex(replace(uuid(), '-', ''))">
+			</column>
+			<column
+				name="user_id"
+				valueComputed="unhex(replace('${user.lillian.id}', '-', ''))">
+			</column>
+			<column
+				name="game_id"
+				value="${game.monster-hunter.id}">
+			</column>
+			<column
+				name="hours_played"
+				value="47">
+			</column>
+			
+		</insert>
+		
+		<insert
+			schemaName="modelmapper_db"
+			tableName="libraries">
+			
+			<column
+				name="id"
+				valueComputed="unhex(replace(uuid(), '-', ''))">
+			</column>
+			<column
+				name="user_id"
+				valueComputed="unhex(replace('${user.lillian.id}', '-', ''))">
+			</column>
+			<column
+				name="game_id"
+				value="${game.god-of-war.id}">
+			</column>
+			<column
+				name="hours_played"
+				value="81">
+			</column>
+			
+		</insert>
+		
+		<insert
+			schemaName="modelmapper_db"
+			tableName="libraries">
+			
+			<column
+				name="id"
+				valueComputed="unhex(replace(uuid(), '-', ''))">
+			</column>
+			<column
+				name="user_id"
+				valueComputed="unhex(replace('${user.lillian.id}', '-', ''))">
+			</column>
+			<column
+				name="game_id"
+				value="${game.horizon-zero-dawn.id}">
+			</column>
+			<column
+				name="hours_played"
+				value="148">
+			</column>
+			
+		</insert>
+		
+		<insert
+			schemaName="modelmapper_db"
+			tableName="libraries">
+			
+			<column
+				name="id"
+				valueComputed="unhex(replace(uuid(), '-', ''))">
+			</column>
+			<column
+				name="user_id"
+				valueComputed="unhex(replace('${user.lillian.id}', '-', ''))">
+			</column>
+			<column
+				name="game_id"
+				value="${game.super-mario-odyssey.id}">
+			</column>
+			<column
+				name="hours_played"
+				value="63">
+			</column>
+			
+		</insert>
+		
+		<insert
+			schemaName="modelmapper_db"
+			tableName="libraries">
+			
+			<column
+				name="id"
+				valueComputed="unhex(replace(uuid(), '-', ''))">
+			</column>
+			<column
+				name="user_id"
+				valueComputed="unhex(replace('${user.lillian.id}', '-', ''))">
+			</column>
+			<column
+				name="game_id"
+				value="${game.cuphead.id}">
+			</column>
+			<column
+				name="hours_played"
+				value="33">
+			</column>
+			
+		</insert>
+		
+		<insert
+			schemaName="modelmapper_db"
+			tableName="libraries">
+			
+			<column
+				name="id"
+				valueComputed="unhex(replace(uuid(), '-', ''))">
+			</column>
+			<column
+				name="user_id"
+				valueComputed="unhex(replace('${user.anna.id}', '-', ''))">
+			</column>
+			<column
+				name="game_id"
+				value="${game.god-of-war.id}">
+			</column>
+			<column
+				name="hours_played"
+				value="54">
+			</column>
+			
+		</insert>
+		
+		<insert
+			schemaName="modelmapper_db"
+			tableName="libraries">
+			
+			<column
+				name="id"
+				valueComputed="unhex(replace(uuid(), '-', ''))">
+			</column>
+			<column
+				name="user_id"
+				valueComputed="unhex(replace('${user.anna.id}', '-', ''))">
+			</column>
+			<column
+				name="game_id"
+				value="${game.horizon-zero-dawn.id}">
+			</column>
+			<column
+				name="hours_played"
+				value="181">
+			</column>
+			
+		</insert>
+		
+		<insert
+			schemaName="modelmapper_db"
+			tableName="libraries">
+			
+			<column
+				name="id"
+				valueComputed="unhex(replace(uuid(), '-', ''))">
+			</column>
+			<column
+				name="user_id"
+				valueComputed="unhex(replace('${user.anna.id}', '-', ''))">
+			</column>
+			<column
+				name="game_id"
+				value="${game.cuphead.id}">
+			</column>
+			<column
+				name="hours_played"
+				value="38">
+			</column>
+			
+		</insert>
+		
+		<insert
+			schemaName="modelmapper_db"
+			tableName="libraries">
+			
+			<column
+				name="id"
+				valueComputed="unhex(replace(uuid(), '-', ''))">
+			</column>
+			<column
+				name="user_id"
+				valueComputed="unhex(replace('${user.renee.id}', '-', ''))">
+			</column>
+			<column
+				name="game_id"
+				value="${game.super-mario-odyssey.id}">
+			</column>
+			<column
+				name="hours_played"
+				value="103">
+			</column>
+			
+		</insert>
+		
+		<insert
+			schemaName="modelmapper_db"
+			tableName="libraries">
+			
+			<column
+				name="id"
+				valueComputed="unhex(replace(uuid(), '-', ''))">
+			</column>
+			<column
+				name="user_id"
+				valueComputed="unhex(replace('${user.renee.id}', '-', ''))">
+			</column>
+			<column
+				name="game_id"
+				value="${game.cuphead.id}">
+			</column>
+			<column
+				name="hours_played"
+				value="112">
+			</column>
+			
+		</insert>
+		
+		<insert
+			schemaName="modelmapper_db"
+			tableName="libraries">
+			
+			<column
+				name="id"
+				valueComputed="unhex(replace(uuid(), '-', ''))">
+			</column>
+			<column
+				name="user_id"
+				valueComputed="unhex(replace('${user.andrew.id}', '-', ''))">
+			</column>
+			<column
+				name="game_id"
+				value="${game.monster-hunter.id}">
+			</column>
+			<column
+				name="hours_played"
+				value="117">
+			</column>
+			
+		</insert>
+		
+		<insert
+			schemaName="modelmapper_db"
+			tableName="libraries">
+			
+			<column
+				name="id"
+				valueComputed="unhex(replace(uuid(), '-', ''))">
+			</column>
+			<column
+				name="user_id"
+				valueComputed="unhex(replace('${user.andrew.id}', '-', ''))">
+			</column>
+			<column
+				name="game_id"
+				value="${game.god-of-war.id}">
+			</column>
+			<column
+				name="hours_played"
+				value="28">
+			</column>
+			
+		</insert>
+		
+		<insert
+			schemaName="modelmapper_db"
+			tableName="libraries">
+			
+			<column
+				name="id"
+				valueComputed="unhex(replace(uuid(), '-', ''))">
+			</column>
+			<column
+				name="user_id"
+				valueComputed="unhex(replace('${user.andrew.id}', '-', ''))">
+			</column>
+			<column
+				name="game_id"
+				value="${game.super-mario-odyssey.id}">
+			</column>
+			<column
+				name="hours_played"
+				value="74">
+			</column>
+			
+		</insert>
+		
+		<insert
+			schemaName="modelmapper_db"
+			tableName="libraries">
+			
+			<column
+				name="id"
+				valueComputed="unhex(replace(uuid(), '-', ''))">
+			</column>
+			<column
+				name="user_id"
+				valueComputed="unhex(replace('${user.andrew.id}', '-', ''))">
+			</column>
+			<column
+				name="game_id"
+				value="${game.cuphead.id}">
+			</column>
+			<column
+				name="hours_played"
+				value="33">
+			</column>
+			
+		</insert>
+		
+		<insert
+			schemaName="modelmapper_db"
+			tableName="libraries">
+			
+			<column
+				name="id"
+				valueComputed="unhex(replace(uuid(), '-', ''))">
+			</column>
+			<column
+				name="user_id"
+				valueComputed="unhex(replace('${user.jo.id}', '-', ''))">
+			</column>
+			<column
+				name="game_id"
+				value="${game.super-mario-odyssey.id}">
+			</column>
+			<column
+				name="hours_played"
+				value="209">
+			</column>
+			
+		</insert>
+		
+	</changeSet>
 </databaseChangeLog>

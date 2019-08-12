@@ -22,6 +22,6 @@ public class UserDtoToUserPoPropertyMapper extends PropertyMap<UserDTO, UserPO> 
 	@Override
 	protected void configure() {
 		using(stringToUuidConverter).map(source.getId(), destination.getId());
-		// using(userDtoToStringPasswordConverter).map(source, destination.getPassword());
+		using(userDtoToStringPasswordConverter).map(source, destination.getPassword());
 	}
 }

@@ -8,7 +8,7 @@ import com.github.marceloleite2604.tutorials.modelmapper.model.dto.DataTransferO
 import com.github.marceloleite2604.tutorials.modelmapper.model.mapper.PoToDtoMapper;
 import com.github.marceloleite2604.tutorials.modelmapper.model.po.PersistentObject;
 
-public abstract class AbstractBO<I, P extends PersistentObject<I>, D extends DataTransferObject> {
+public abstract class AbstractBO<I, P extends PersistentObject<I>, D extends DataTransferObject<?>> {
 	
 	
 	public P mapAsPo(D dto) {

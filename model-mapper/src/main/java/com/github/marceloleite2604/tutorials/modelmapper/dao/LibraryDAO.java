@@ -31,4 +31,8 @@ public class LibraryDAO extends AbstractDAO<LibraryPO, UUID> {
 		return librariesRepository.findAllByUserId(userId);
 	}
 
+	public List<LibraryPO> findAllByGameId(int gameId) {
+		return librariesRepository.findAllByGameId(gameId);
+	}
+
 }

@@ -19,8 +19,9 @@
 					<tr>
 						<td>
 							<a
-								th:href="@{__${@libraryControllerPathsClass.EDIT}__(gameId=${game.id}, previousPage='library-game')}" 
-								th:text="${game.name}"></a>
+								th:href="@{__${@libraryControllerPathsClass.GAME_RECORDS}__(gameId=${game.id})}" 
+								th:text="${game.name}">
+							</a>
 						</td>
 						<td th:text="${@libraryBO.retrieveByGame(libraries, game)?.size()}"></td>
 					</tr>

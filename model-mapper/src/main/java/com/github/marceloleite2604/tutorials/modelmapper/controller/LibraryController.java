@@ -37,6 +37,11 @@ public class LibraryController {
 	public String getLibraryGame(Model model) {
 		return libraryService.getLibraryGame(model);
 	}
+	
+	@GetMapping(path = Paths.GAME_RECORDS)
+	public String getLibraryGameRecords(@RequestParam Integer gameId, Model model) {
+		return libraryService.getLibraryGameRecords(gameId, model);
+	}
 
 	@GetMapping(path = Paths.EDIT)
 	public String getLibraryEdit(@RequestParam(required = false) String libraryId,

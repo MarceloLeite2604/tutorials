@@ -5,6 +5,44 @@
 	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
                       http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
 
-	<!-- <property name="name" value="value" /> -->
+	<property 
+		name="user.lillian.id" 
+		value="0dff2011-9401-4ba9-823e-5de0af38368b" />
+		
+	<property 
+		name="user.anna.id" 
+		value="937f1e66-a498-4b47-adad-123a37e469f4" />
+		
+	<property 
+		name="user.renee.id" 
+		value="83b7f4d4-4e0d-4838-8a1a-5c80851a0c44" />
+		
+	<property 
+		name="user.andrew.id" 
+		value="153ae5e4-5e4a-4bbb-b85e-e5c0d02c74fa" />
+		
+	<property 
+		name="user.jo.id" 
+		value="4f672f62-b7cd-450f-bc98-28cffe4ad520" />
+		
+	<property 
+		name="game.monster-hunter.id" 
+		value="1" />
+		
+	<property 
+		name="game.god-of-war.id" 
+		value="2" />
+		
+	<property 
+		name="game.horizon-zero-dawn.id" 
+		value="3" />
+		
+	<property 
+		name="game.super-mario-odyssey.id" 
+		value="4" />
+		
+	<property 
+		name="game.cuphead.id" 
+		value="5" />
 
 </databaseChangeLog>

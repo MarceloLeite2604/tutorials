@@ -10,7 +10,7 @@ import org.springframework.util.CollectionUtils;
 import com.github.marceloleite2604.tutorials.modelmapper.model.dto.DataTransferObject;
 import com.github.marceloleite2604.tutorials.modelmapper.model.po.PersistentObject;
 
-public class PoToDtoMapper<P extends PersistentObject<?>, D extends DataTransferObject> {
+public class PoToDtoMapper<P extends PersistentObject<?>, D extends DataTransferObject<?>> {
 
 	private Class<P> poClass;
 

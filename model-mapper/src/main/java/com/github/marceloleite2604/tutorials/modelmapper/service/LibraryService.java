@@ -1,7 +1,6 @@
 package com.github.marceloleite2604.tutorials.modelmapper.service;
 
 import java.io.File;
-import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -38,18 +37,29 @@ public class LibraryService extends AbstractService {
 	private LibraryBO libraryBO;
 
 	public String getLibraryUser(Model model) {
-		addUsersAndLibrariesOnModel(model);
+		addLibrariesUsersAndGamesOnModel(model);
 		return Templates.USER_SELECT;
 	}
 
-	private void addUsersAndLibrariesOnModel(Model model) {
-		List<LibraryDTO> libraries = libraryBO.mapAsDto(libraryBO.findAll());
-		model.addAttribute(ThymeleafModelAttributeNames.LIBRARIES, libraries);
-		addUsersOnModel(model, libraries);
+	public String getLibraryGame(Model model) {
+		addLibrariesUsersAndGamesOnModel(model);
+		return Templates.GAME_SELECT;
 	}
 
-	private void addUsersOnModel(Model model) {
-		addUsersOnModel(model, null);
+	private void addLibrariesUsersAndGamesOnModel(Model model) {
+
+		List<LibraryDTO> libraries = libraryBO.mapAsDto(libraryBO.findAll());
+		model.addAttribute(ThymeleafModelAttributeNames.LIBRARIES, libraries);
+
+		addUsersOnModel(model);
+		addGamesOnModel(model);
+	}
+
+	public String getLibraryUserRecords(String userId, Model model) {
+		UUID userUuid = UUID.fromString(userId);
+		addUserOnModel(userUuid, model);
+		addUserLibrariesOnModel(userUuid, model);
+		return Templates.USER;
 	}
 
 	private void addUserOnModel(UUID userId, Model model) {
@@ -57,105 +67,72 @@ public class LibraryService extends AbstractService {
 		model.addAttribute(ThymeleafModelAttributeNames.USER, user);
 	}
 
-	private void addUsersOnModel(Model model, List<LibraryDTO> libraries) {
-		List<UserDTO> users;
-
-		if (Objects.isNull(libraries)) {
-			users = userBO.mapAsDto(userBO.findAll());
-		} else {
-			users = libraryBO.retrieveUsers(libraries);
-		}
-
-		Collections.sort(users);
-		model.addAttribute(ThymeleafModelAttributeNames.USERS, users);
+	private UserDTO retrieveUser(UUID userId) {
+		return userBO.mapAsDto(userBO.findMandatoryById(userId));
 	}
 
-	public String getLibraryGame(Model model) {
-		addGamesAndLibrariesOnModel(model);
-		return Templates.GAME_SELECT;
-	}
-
-	private void addGamesAndLibrariesOnModel(Model model) {
-		List<LibraryDTO> libraries = libraryBO.mapAsDto(libraryBO.findAll());
+	private void addUserLibrariesOnModel(UUID userId, Model model) {
+		List<LibraryDTO> libraries = libraryBO.mapAsDto(libraryBO.findAllByUserId(userId));
+		libraryBO.sortByGame(libraries);
 		model.addAttribute(ThymeleafModelAttributeNames.LIBRARIES, libraries);
-
-		addGamesOnModel(model, libraries);
 	}
 
-	private void addGamesOnModel(Model model) {
-		addGamesOnModel(model, null);
+	public String getLibraryGameRecords(int gameId, Model model) {
+		addGameOnModel(gameId, model);
+		addGameLibrariesOnModel(gameId, model);
+		return Templates.GAME;
 	}
 
-	private void addGamesOnModel(Model model, List<LibraryDTO> libraries) {
-		List<GameDTO> games;
+	private void addGameOnModel(int gameId, Model model) {
+		GameDTO game = retrieveGame(gameId);
+		model.addAttribute(ThymeleafModelAttributeNames.GAME, game);
+	}
 
-		if (Objects.isNull(libraries)) {
-			games = gameBO.mapAsDto(gameBO.findAll());
-		} else {
-			games = libraryBO.retrieveGames(libraries);
-		}
+	private GameDTO retrieveGame(int gameId) {
+		return gameBO.mapAsDto(gameBO.findMandatoryById(gameId));
+	}
 
-		Collections.sort(games);
-		model.addAttribute(ThymeleafModelAttributeNames.GAMES, games);
+	private void addGameLibrariesOnModel(int gameId, Model model) {
+		List<LibraryDTO> libraries = libraryBO.mapAsDto(libraryBO.findAllByGameId(gameId));
+		libraryBO.sortByUser(libraries);
+		model.addAttribute(ThymeleafModelAttributeNames.LIBRARIES, libraries);
 	}
 
 	public String getLibraryEdit(String libraryId, String userId, Integer gameId,
 			String redirectPath, Model model) {
 
-		LibraryDTO library = createOrRetrieveLibrary(libraryId);
-		
-		if (libraryBO.isNew(library)) {
-			if (StringUtils.isNotBlank(userId)) {
-				UserDTO user = new UserDTO();
-				user.setId(userId);
-				library.setUser(user);
-			}
-			
-			if (!Objects.isNull(gameId)) {
-				GameDTO game = new GameDTO();
-				game.setId(gameId);
-				library.setGame(game);
-			}
-			
-			// Convert to PO and then back to DTO to retrieve user and game properties.
-			library = libraryBO.mapAsDto(libraryBO.mapAsPo(library));
-		}
-		
-		addUsersOnModel(model);
-		addGamesOnModel(model);
+		addLibraryEditAttributesOnModel(libraryId, userId, gameId, redirectPath, model);
 
-//		if (StringUtils.isNotBlank(actualUserId)) {
-//			UUID userUuid = UUID.fromString(actualUserId);
-//			addUserOnModelAndLibrary(userUuid, model, library);
-//		} else {
-//			addUsersOnModel(model);
-//		}
-//
-//		if (!Objects.isNull(actualGameId)) {
-//			addGameOnModelAndLibrary(actualGameId, model, library);
-//		} else {
-//			addGamesOnModel(model);
-//		}
-
-		model.addAttribute(ThymeleafModelAttributeNames.REDIRECT_PATH, redirectPath);
-		model.addAttribute(ThymeleafModelAttributeNames.LIBRARY, library);
 		return Templates.EDIT;
 	}
 
-	private void addUserOnModelAndLibrary(UUID userId, Model model, LibraryDTO library) {
-		UserDTO user = retrieveUser(userId);
-		model.addAttribute(ThymeleafModelAttributeNames.USER, user);
-		library.setUser(user);
+	private void addLibraryEditAttributesOnModel(String libraryId, String userId, Integer gameId,
+			String redirectPath, Model model) {
+		addLibraryOnModel(libraryId, userId, gameId, model);
+
+		if (!StringUtils.isEmpty(userId)) {
+			UUID userUuid = UUID.fromString(userId);
+			addUserOnModel(userUuid, model);
+		} else {
+			addUsersOnModel(model);
+		}
+
+		if (!Objects.isNull(gameId)) {
+				addGameOnModel(gameId, model);
+		} else {
+			addGamesOnModel(model);
+		}
+
+		model.addAttribute(ThymeleafModelAttributeNames.REDIRECT_PATH, redirectPath);
 	}
 
-	private UserDTO retrieveUser(UUID userId) {
-		return userBO.mapAsDto(userBO.findMandatoryById(userId));
-	}
+	private void addLibraryOnModel(String libraryId, String userId, Integer gameId, Model model) {
+		LibraryDTO library = createOrRetrieveLibrary(libraryId);
 
-	private void addGameOnModelAndLibrary(Integer gameId, Model model, LibraryDTO library) {
-		GameDTO game = gameBO.mapAsDto(gameBO.findMandatoryById(gameId));
-		library.setGame(game);
-		model.addAttribute(ThymeleafModelAttributeNames.USER, game);
+		if (libraryBO.isNew(library)) {
+			library = populateLibraryDetails(library, userId, gameId);
+		}
+		model.addAttribute(ThymeleafModelAttributeNames.LIBRARY, library);
 	}
 
 	private LibraryDTO createOrRetrieveLibrary(String id) {
@@ -172,16 +149,43 @@ public class LibraryService extends AbstractService {
 		return libraryDTO;
 	}
 
+	private LibraryDTO populateLibraryDetails(LibraryDTO library, String userId, Integer gameId) {
+
+		if (StringUtils.isNotBlank(userId)) {
+			UserDTO user = new UserDTO();
+			user.setId(userId);
+			library.setUser(user);
+		}
+
+		if (!Objects.isNull(gameId)) {
+			GameDTO game = new GameDTO();
+			game.setId(gameId);
+			library.setGame(game);
+		}
+
+		// Convert to PO and then back to DTO to retrieve user and game properties.
+		return libraryBO.mapAsDto(libraryBO.mapAsPo(library));
+	}
+
+	private void addUsersOnModel(Model model) {
+		List<UserDTO> users = userBO.mapAsDto(userBO.findAll());
+		model.addAttribute(ThymeleafModelAttributeNames.USERS, users);
+	}
+
+	private void addGamesOnModel(Model model) {
+		List<GameDTO> games = gameBO.mapAsDto(gameBO.findAll());
+		model.addAttribute(ThymeleafModelAttributeNames.GAMES, games);
+	}
+
 	public String postLibraryEdit(LibraryDTO library, String previousPage,
 			BindingResult bindingResult, RedirectAttributes redirectAttributes, Model model) {
 
 		if (bindingResult.hasErrors()) {
-			model.addAttribute(ThymeleafModelAttributeNames.LIBRARY, library);
+			addLibraryEditAttributesOnModel(library, previousPage, model);
 			return Templates.EDIT;
 		}
 
 		LibraryPO libraryPO = libraryBO.mapAsPo(library);
-
 		libraryPO = libraryBO.save(libraryPO);
 
 		LibraryMessage libraryMessage;
@@ -202,6 +206,18 @@ public class LibraryService extends AbstractService {
 		return serviceUtil.redirectTo(previousPage);
 	}
 
+	private void addLibraryEditAttributesOnModel(LibraryDTO library, String redirectPath,
+			Model model) {
+
+		String userId = library.getUser()
+				.getId();
+
+		Integer gameId = library.getGame()
+				.getId();
+
+		addLibraryEditAttributesOnModel(library.getId(), userId, gameId, redirectPath, model);
+	}
+
 	public String postLibraryDelete(String id, String redirectPath,
 			RedirectAttributes redirectAttributes) {
 		LibraryPO library = libraryBO.findMandatoryById(UUID.fromString(id));
@@ -216,19 +232,6 @@ public class LibraryService extends AbstractService {
 		serviceUtil.addInformationMessage(redirectAttributes, LibraryMessage.DELETED, gameName,
 				username);
 		return serviceUtil.redirectTo(redirectPath);
-	}
-
-	public String getLibraryUserRecords(String userId, Model model) {
-		UUID userUuid = UUID.fromString(userId);
-		addUserOnModel(userUuid, model);
-		addUserLibrariesOnModel(userUuid, model);
-		return Templates.USER;
-	}
-
-	private void addUserLibrariesOnModel(UUID userId, Model model) {
-		List<LibraryDTO> libraries = libraryBO.mapAsDto(libraryBO.findAllByUserId(userId));
-		libraryBO.sortByGame(libraries);
-		model.addAttribute(ThymeleafModelAttributeNames.LIBRARIES, libraries);
 	}
 
 	static final class Templates {

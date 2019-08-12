@@ -19,8 +19,9 @@
 					<tr>
 						<td >
 							<a
-								th:href="@{__${@libraryControllerPathsClass.USER_RECORDS}__(userId=${user.id}, previousPage='library-user')}" 
-								th:text="${user.username}"></a>
+								th:href="@{__${@libraryControllerPathsClass.USER_RECORDS}__(userId=${user.id})}" 
+								th:text="${user.username}">
+							</a>
 						</td>
 						<td th:text="${@libraryBO.retrieveByUser(libraries, user)?.size()}"></td>
 					</tr>

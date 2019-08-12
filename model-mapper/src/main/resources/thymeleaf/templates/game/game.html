@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html
-	xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org">
 	<head th:replace="components/head :: head(title = #{game.title})">
 	<body th:with="games = ${__${@thymeleafModelAttributeNamesClass.GAMES}__}">
 		<div th:insert="components/header :: header"></div>
@@ -14,7 +13,7 @@
 					<th th:text="#{game.genre.label}"></th>
 					<th th:text="#{game.release-year.label}"></th>
 					<th 
-						th:text="#{game.actions}"
+						th:text="#{page.actions}"
 						colspan="2">
 					</th>
 				</tr>
@@ -27,13 +26,13 @@
 						<td>
 							<a 
 								th:href="@{__${@gameControllerPathsClass.EDIT}__(id=${game.id})}" 
-								th:text="#{game.modify}">
+								th:text="#{page.modify}">
 							</a>
 						</td>
 						<td>
 							<a 
 								href="#" 
-								th:text="#{game.delete}"
+								th:text="#{page.delete}"
 								th:attr="data-id=${game.id}"
 								th:onclick="delete(this.dataset.id)">
 							</a>

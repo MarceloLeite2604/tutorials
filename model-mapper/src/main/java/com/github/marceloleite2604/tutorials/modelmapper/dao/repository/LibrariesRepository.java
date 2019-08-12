@@ -11,4 +11,6 @@ public interface LibrariesRepository extends CrudRepository<LibraryPO, UUID> {
 
 	List<LibraryPO> findAllByUserId(UUID userId);
 
+	List<LibraryPO> findAllByGameId(int gameId);
+
 }

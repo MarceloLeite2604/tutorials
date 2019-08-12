@@ -58,7 +58,6 @@ public class LibraryBO extends AbstractBO<UUID, LibraryPO, LibraryDTO> {
 
 	@Override
 	public LibraryPO save(LibraryPO po) {
-		// TODO Auto-generated method stub
 		return super.save(po);
 	}
 
@@ -109,6 +108,10 @@ public class LibraryBO extends AbstractBO<UUID, LibraryPO, LibraryDTO> {
 
 	public List<LibraryPO> findAllByUserId(UUID userId) {
 		return libraryDAO.findAllByUserId(userId);
+	}
+	
+	public List<LibraryPO> findAllByGameId(int gameId) {
+		return libraryDAO.findAllByGameId(gameId);
 	}
 
 	public void sortByUser(List<LibraryDTO> libraries) {
