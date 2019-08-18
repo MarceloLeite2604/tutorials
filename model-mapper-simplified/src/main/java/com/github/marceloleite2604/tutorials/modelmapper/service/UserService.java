@@ -56,7 +56,7 @@ public class UserService extends AbstractService {
 		return userDTO;
 	}
 
-	public String postUser(UserDTO user, BindingResult bindingResult,
+	public String postUserEdit(UserDTO user, BindingResult bindingResult,
 			RedirectAttributes redirectAttributes, Model model) {
 
 		checkPasswordIsValid(user, bindingResult);

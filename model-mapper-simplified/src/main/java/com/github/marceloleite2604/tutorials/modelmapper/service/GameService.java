@@ -25,9 +25,13 @@ public class GameService extends AbstractService {
 	private GameBO gameBO;
 
 	public String getGame(Model model) {
+		addGamesOnModel(model);
+		return Templates.GAME;
+	}
+
+	private void addGamesOnModel(Model model) {
 		List<GamePO> games = gameBO.findAll();
 		model.addAttribute(ThymeleafModelAttributeNames.GAMES, games);
-		return Templates.GAME;
 	}
 
 	public String getGameEdit(Integer id, Model model) {
@@ -49,7 +53,7 @@ public class GameService extends AbstractService {
 		return gameDTO;
 	}
 
-	public String postGame(GameDTO game, BindingResult bindingResult,
+	public String postGameEdit(GameDTO game, BindingResult bindingResult,
 			RedirectAttributes redirectAttributes, Model model) {
 
 		if (bindingResult.hasErrors()) {

@@ -18,6 +18,19 @@
 					<a th:href="@{__${@gameControllerPathsClass.GAME}__}" th:text="#{index.game}"></a>
 				</td>
 			</tr>
+			<tr>
+				<td>
+					<span th:text="#{index.library}"></span>
+					<ul>
+						<li>
+							<a th:href="@{__${@libraryControllerPathsClass.USER}__}" th:text="#{index.library.user}"></a>
+						</li>
+						<li>
+							<a th:href="@{__${@libraryControllerPathsClass.GAME}__}" th:text="#{index.library.game}"></a>
+						</li>
+					</ul>
+				</td>
+			</tr>
 		</table>
 	</body>
 </html>

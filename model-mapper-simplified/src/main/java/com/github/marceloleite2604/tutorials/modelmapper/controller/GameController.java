@@ -28,19 +28,19 @@ public class GameController {
 		return gameService.getGame(model);
 	}
 
-	@GetMapping(path = Paths.GAME_EDIT)
+	@GetMapping(path = Paths.EDIT)
 	public String getGameEdit(@RequestParam(required = false) Integer id, Model model) {
 		return gameService.getGameEdit(id, model);
 	}
 
-	@PostMapping(path = Paths.GAME_EDIT)
+	@PostMapping(path = Paths.EDIT)
 	public String postGame(
 			@Validated(HttpPostValidationGroup.class) @ModelAttribute("game") GameDTO game,
 			BindingResult bindingResult, RedirectAttributes redirectAttributes, Model model) {
-		return gameService.postGame(game, bindingResult, redirectAttributes, model);
+		return gameService.postGameEdit(game, bindingResult, redirectAttributes, model);
 	}
 
-	@PostMapping(path = Paths.GAME_DELETE)
+	@PostMapping(path = Paths.DELETE)
 	public String deleteGame(@RequestParam Integer id, RedirectAttributes redirectAttributes) {
 		return gameService.deleteGame(id, redirectAttributes);
 	}
@@ -49,9 +49,9 @@ public class GameController {
 
 		public static final String GAME = PathUtil.SEPARATOR + "game";
 
-		public static final String GAME_EDIT = GAME + PathUtil.SEPARATOR + "edit";
+		public static final String EDIT = GAME + PathUtil.SEPARATOR + "edit";
 
-		public static final String GAME_DELETE = GAME + PathUtil.SEPARATOR + "delete";
+		public static final String DELETE = GAME + PathUtil.SEPARATOR + "delete";
 
 		private Paths() {
 			// Private constructor to avoid object instantiation.

@@ -6,7 +6,7 @@ import javax.validation.constraints.NotNull;
 
 import com.github.marceloleite2604.tutorials.modelmapper.model.validation.HttpPostValidationGroup;
 
-public class GameDTO implements DataTransferObject {
+public class GameDTO implements DataTransferObject<Integer>, Comparable<GameDTO> {
 
 	private static final long serialVersionUID = 1L;
 
@@ -37,6 +37,7 @@ public class GameDTO implements DataTransferObject {
 		this.releaseYear = builder.releaseYear;
 	}
 
+	@Override
 	public Integer getId() {
 		return id;
 	}
@@ -107,6 +108,11 @@ public class GameDTO implements DataTransferObject {
 	public String toString() {
 		return "GamePO [id=" + id + ", name=" + name + ", developer=" + developer + ", genre="
 				+ genre + ", releaseYear=" + releaseYear + "]";
+	}
+
+	@Override
+	public int compareTo(GameDTO other) {
+		return this.name.compareTo(other.getName());
 	}
 
 	public static Builder builder() {

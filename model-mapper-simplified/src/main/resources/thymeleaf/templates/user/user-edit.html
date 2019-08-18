@@ -9,7 +9,7 @@
 		<div th:insert="components/header :: header"></div>
 		<h1 th:text="#{'user.edit.title.' + ${ @userBO.isNew(user) ? 'create' : 'update' }}">Page title</h1>
 		<form 
-			th:action="@{__${@userControllerPathsClass.USER_EDIT}__}" 
+			th:action="@{__${@userControllerPathsClass.EDIT}__}" 
 			method="post" 
 			th:object="${__${@thymeleafModelAttributeNamesClass.USER}__}">
 			<table>
@@ -17,7 +17,7 @@
 					<td>
 						<label 
 							for="name" 
-							th:text="#{user.edit.name.label}">
+							th:text="#{user.name.label}">
 							Name label
 						</label>
 					</td>
@@ -35,7 +35,7 @@
 					<td>
 						<label 
 							for="username" 
-							th:text="#{user.edit.username.label}">
+							th:text="#{user.username.label}">
 							Username label
 						</label>
 					</td>
@@ -53,7 +53,7 @@
 					<td>
 						<label 
 							for="password" 
-							th:text="#{user.edit.password.label}">
+							th:text="#{user.password.label}">
 							Password label
 						</label>
 					</td>

@@ -9,7 +9,7 @@
 		<div th:insert="components/header :: header"></div>
 		<h1 th:text="#{'game.edit.title.' + ${ @gameBO.isNew(game) ? 'create' : 'update' }}">Page title</h1>
 		<form 
-			th:action="@{__${@gameControllerPathsClass.GAME_EDIT}__}" 
+			th:action="@{__${@gameControllerPathsClass.EDIT}__}" 
 			method="post" 
 			th:object="${__${@thymeleafModelAttributeNamesClass.GAME}__}">
 			<table>
@@ -17,7 +17,7 @@
 					<td>
 						<label 
 							for="name" 
-							th:text="#{game.edit.name.label}">
+							th:text="#{game.name.label}">
 							Name label
 						</label>
 					</td>
@@ -35,7 +35,7 @@
 					<td>
 						<label 
 							for="developer" 
-							th:text="#{game.edit.developer.label}">
+							th:text="#{game.developer.label}">
 							Developer label
 						</label>
 					</td>
@@ -53,7 +53,7 @@
 					<td>
 						<label 
 							for="genre" 
-							th:text="#{game.edit.genre.label}">
+							th:text="#{game.genre.label}">
 							Genre label
 						</label>
 					</td>
@@ -71,7 +71,7 @@
 					<td>
 						<label 
 							for="releaseYear" 
-							th:text="#{game.edit.release-year.label}">
+							th:text="#{game.release-year.label}">
 							Release year label
 						</label>
 					</td>

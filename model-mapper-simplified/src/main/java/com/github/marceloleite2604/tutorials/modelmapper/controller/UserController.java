@@ -29,25 +29,24 @@ public class UserController {
 		return userService.getUser(model);
 	}
 	
-	@GetMapping(path = Paths.USER_EDIT)
+	@GetMapping(path = Paths.EDIT)
 	public String getUserEdit(@RequestParam(required = false) String id, Model model) {
 		return userService.getUserEdit(id, model);
 	}
 
-	@PostMapping(path = Paths.USER_EDIT)
-	public String postUser(@Validated(HttpPostValidationGroup.class) @ModelAttribute("user") UserDTO user,
+	@PostMapping(path = Paths.EDIT)
+	public String postUserEdit(@Validated(HttpPostValidationGroup.class) @ModelAttribute("user") UserDTO user,
 			BindingResult bindingResult, RedirectAttributes redirectAttributes, Model model) {
-		return userService.postUser(user, bindingResult, redirectAttributes, model);
+		return userService.postUserEdit(user, bindingResult, redirectAttributes, model);
 	}
 	
-	@PostMapping(path = Paths.USER_EDIT_PO)
-	public String update(UserPO user) {
-		// validate(user);
-		// database.save(user);
-		return "ok";
+	@PostMapping(path = Paths.EDIT_PO)
+	public String postUserPO(@Validated(HttpPostValidationGroup.class) @ModelAttribute("user") UserPO user,
+			BindingResult bindingResult, RedirectAttributes redirectAttributes, Model model) {
+		return userService.postUserPo(user, bindingResult, redirectAttributes, model);
 	}
 	
-	@PostMapping(path = Paths.USER_DELETE)
+	@PostMapping(path = Paths.DELETE)
 	public String deleteUser(@RequestParam String id, RedirectAttributes redirectAttributes) {
 		return userService.deleteUser(id, redirectAttributes);
 	}
@@ -56,11 +55,11 @@ public class UserController {
 		
 		public static final String USER = PathUtil.SEPARATOR + "user";
 		
-		public static final String USER_EDIT = USER + PathUtil.SEPARATOR + "edit";
+		public static final String EDIT = USER + PathUtil.SEPARATOR + "edit";
 		
-		public static final String USER_EDIT_PO = USER + PathUtil.SEPARATOR + "edit-po";
+		public static final String EDIT_PO = USER + PathUtil.SEPARATOR + "edit-po";
 		
-		public static final String USER_DELETE = USER + PathUtil.SEPARATOR + "delete";
+		public static final String DELETE = USER + PathUtil.SEPARATOR + "delete";
 
 		private Paths() {
 			// Private constructor to avoid object instantiation.

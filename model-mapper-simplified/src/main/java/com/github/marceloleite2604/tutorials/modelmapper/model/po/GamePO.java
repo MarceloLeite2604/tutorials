@@ -9,7 +9,7 @@ import javax.persistence.Table;
 
 @Entity(name = "games")
 @Table(name = "games")
-public class GamePO implements PersistentObject<Integer> {
+public class GamePO implements PersistentObject<Integer>, Comparable<GamePO> {
 
 	private static final long serialVersionUID = 1L;
 
@@ -156,5 +156,10 @@ public class GamePO implements PersistentObject<Integer> {
 		public GamePO build() {
 			return new GamePO(this);
 		}
+	}
+
+	@Override
+	public int compareTo(GamePO other) {
+		return this.name.compareTo(other.getName());
 	}
 }

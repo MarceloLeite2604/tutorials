@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html
+	xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<title th:text="#{library.user.title}">Page title</title>
+		<meta charset="utf-8" />
+	</head>
+	<body th:with="users = ${__${@thymeleafModelAttributeNamesClass.USERS}__}, libraries = ${__${@thymeleafModelAttributeNamesClass.LIBRARIES}__}">
+		<div th:insert="components/header :: header"></div>
+		<h1 th:text="#{library.user.title}">Page title</h1>
+		<div th:insert="components/messages :: messages"></div>
+		<th:block th:if="${users?.size() > 0}">
+			<table>
+				<tr>
+					<th th:text="#{user.username.label}"></th>
+					<th th:text="#{library.games-count.label}"></th>
+				</tr>
+				<th:block th:each="user : ${users}">
+					<tr>
+						<td >
+							<a
+								th:href="@{__${@libraryControllerPathsClass.USER_RECORDS}__(userId=${user.id})}" 
+								th:text="${user.username}">
+							</a>
+						</td>
+						<td th:text="${@libraryBO.retrieveByUser(libraries, user)?.size()}"></td>
+					</tr>
+				</th:block>
+			</table>
+		</th:block>
+		<th:block th:unless="${users?.size() > 0}">
+			<span th:text="#{library.empty}"></span>
+		</th:block>
+	</body>
+</html>

@@ -1,9 +1,9 @@
 package com.github.marceloleite2604.tutorials.modelmapper.bo;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
-import java.util.Optional;
 import java.util.UUID;
 
 import javax.inject.Inject;
@@ -12,6 +12,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
+import org.springframework.util.CollectionUtils;
 
 import com.github.marceloleite2604.tutorials.modelmapper.dao.UserDAO;
 import com.github.marceloleite2604.tutorials.modelmapper.model.dto.UserDTO;
@@ -21,11 +22,11 @@ import com.github.marceloleite2604.tutorials.modelmapper.model.po.UserPO;
 public class UserBO {
 
 	@Inject
-	@Lazy
-	private ModelMapper modelMapper;
+	private UserDAO userDAO;
 
 	@Inject
-	private UserDAO userDAO;
+	@Lazy
+	private ModelMapper modelMapper;
 
 	public boolean isPasswordValid(UserDTO user) {
 
@@ -41,18 +42,24 @@ public class UserBO {
 	}
 
 	public UserDTO save(UserDTO user) {
-		UserPO userPO = modelMapper.map(user, UserPO.class);
+
+		UserPO userPO = mapAsPo(user);
 		UserPO savedUserPO = save(userPO);
-		UserDTO savedUserDTO = modelMapper.map(savedUserPO, UserDTO.class);
-		return savedUserDTO;
+		return mapAsDto(savedUserPO);
 	}
 
 	public UserPO save(UserPO user) {
+
+		if (isNew(user)) {
+			user.setDeleted(false);
+			user.setEnabled(true);
+		}
+
 		return userDAO.save(user);
 	}
 
-	public void delete(UserPO user) {
-		userDAO.delete(user);
+	public void delete(UserPO entity) {
+		userDAO.delete(entity);
 	}
 
 	public boolean isNew(UserDTO user) {
@@ -62,32 +69,35 @@ public class UserBO {
 	public boolean isNew(UserPO user) {
 		return Objects.isNull(user.getId());
 	}
-	
-	public List<UserPO> findAll() {
-		return userDAO.findAll();
+
+	private UserPO mapAsPo(UserDTO user) {
+		return modelMapper.map(user, UserPO.class);
 	}
 
-	public Optional<UserPO> findById(UUID id) {
-		return userDAO.findById(id);
+	public UserDTO mapAsDto(UserPO user) {
+		return modelMapper.map(user, UserDTO.class);
 	}
 
 	public UserPO findMandatoryById(UUID id) {
 		return userDAO.findMandatoryById(id);
 	}
-	
-	public List<UserDTO> mapAsDto(List<UserPO> userPOs) {
-		List<UserDTO> userDTOs =  new ArrayList<>(userPOs.size());
-		for (UserPO userPO : userPOs) {
-			userDTOs.add(mapAsDto(userPO));
-		}
-		return userDTOs;
+
+	public List<UserPO> findAll() {
+		return userDAO.findAll();
 	}
 
-	public UserDTO mapAsDto(UserPO gamePO) {
-		return modelMapper.map(gamePO, UserDTO.class);
-	}
-	
-	public UserPO mapAsPo(UserDTO gameDTO) {
-		return modelMapper.map(gameDTO, UserPO.class);
+	public List<UserDTO> mapAsDto(List<UserPO> users) {
+
+		if (CollectionUtils.isEmpty(users)) {
+			return Collections.emptyList();
+		}
+
+		List<UserDTO> userDTOs = new ArrayList<>(users.size());
+		for (UserPO userPO : users) {
+			UserDTO userDTO = mapAsDto(userPO);
+			userDTOs.add(userDTO);
+		}
+
+		return userDTOs;
 	}
 }

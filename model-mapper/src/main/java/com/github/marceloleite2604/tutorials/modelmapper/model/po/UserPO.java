@@ -90,7 +90,7 @@ public class UserPO implements PersistentObject<UUID>, Comparable<UserPO> {
 		this.password = password;
 	}
 
-	public Boolean getEnabled() {
+	public Boolean isEnabled() {
 		return enabled;
 	}
 
@@ -98,7 +98,7 @@ public class UserPO implements PersistentObject<UUID>, Comparable<UserPO> {
 		this.enabled = enabled;
 	}
 
-	public Boolean getDeleted() {
+	public Boolean isDeleted() {
 		return deleted;
 	}
 
@@ -132,8 +132,9 @@ public class UserPO implements PersistentObject<UUID>, Comparable<UserPO> {
 		if (id == null) {
 			if (other.id != null)
 				return false;
-		} else if (!id.equals(other.id))
+		} else if (!id.equals(other.id)) {
 			return false;
+		}
 		return true;
 	}
 
