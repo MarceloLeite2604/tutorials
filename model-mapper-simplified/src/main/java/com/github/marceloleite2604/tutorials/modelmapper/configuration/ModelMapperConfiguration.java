@@ -16,6 +16,7 @@ import com.github.marceloleite2604.tutorials.modelmapper.bo.UserBO;
 import com.github.marceloleite2604.tutorials.modelmapper.model.dto.UserDTO;
 import com.github.marceloleite2604.tutorials.modelmapper.model.po.UserPO;
 
+@SuppressWarnings("squid:CommentedOutCodeLine")
 @Configuration
 public class ModelMapperConfiguration {
 
@@ -29,6 +30,19 @@ public class ModelMapperConfiguration {
 		modelMapper.getConfiguration()
 				.setSkipNullEnabled(true);
 
+		// createUserDtoToUserPoPropertyMap(modelMapper);
+		createWrongUserDtoToUserPoPropertyMap(modelMapper);
+
+		// After adding all type maps on ModelMapper, we request it to validate our
+		// construction. If something is awkward or a property mapping is amiss,
+		// ModelMapper will throw us an exception.
+		modelMapper.validate();
+
+		return modelMapper;
+	}
+
+	@SuppressWarnings("unused")
+	private void createUserDtoToUserPoPropertyMap(ModelMapper modelMapper) {
 		PropertyMap<UserDTO, UserPO> userDtoToUserPoPropertyMap = new PropertyMap<>() {
 
 			@Override
@@ -89,8 +103,9 @@ public class ModelMapperConfiguration {
 
 				// If we do not want to map some fields, we can use the "skip" method.
 				skip(source.isEnabled(), destination.isEnabled());
-				// Note: if our source object does not have a corresponding field, you can use the source object itself. 
-				// For example: 
+				// Note: if our source object does not have a corresponding field, you can use
+				// the source object itself.
+				// For example:
 				// skip(source, destination.isEnabled());
 
 				// An alternative way to skip is just use the "skip" method and then use the
@@ -101,12 +116,43 @@ public class ModelMapperConfiguration {
 		};
 
 		modelMapper.addMappings(userDtoToUserPoPropertyMap);
+	}
 
-		// After adding all type maps on ModelMapper, we request it to validate our
-		// construction. If something is awkward or a property mapping is amiss,
-		// ModelMapper will throw us an exception.
-		modelMapper.validate();
+	/**
+	 * This method will create a really simplified UserDTO to UserPO mapper. It will
+	 * only map the "id" field.
+	 */
+	@SuppressWarnings("unused")
+	private void createWrongUserDtoToUserPoPropertyMap(ModelMapper modelMapper) {
+		PropertyMap<UserDTO, UserPO> userDtoToUserPoPropertyMap = new PropertyMap<>() {
 
-		return modelMapper;
+			@Override
+			protected void configure() {
+
+				Condition<String, String> stringIsNotNullOrBlank = context -> StringUtils
+						.isNotBlank(context.getSource());
+
+				Converter<String, UUID> stringToUuidConverter = context -> UUID
+						.fromString(context.getSource());
+
+				Converter<UserDTO, String> userDtoPasswordConverter = context -> {
+					UserDTO user = context.getSource();
+
+					if (StringUtils.isBlank(user.getPassword())) {
+						UUID uuid = UUID.fromString(user.getId());
+						return userBO.findMandatoryById(uuid)
+								.getPassword();
+					}
+					
+					return user.getPassword();
+				};
+
+				when(stringIsNotNullOrBlank).using(stringToUuidConverter)
+						.map(source.getId(), destination.getId());
+				using(userDtoPasswordConverter).map(source, destination.getPassword());
+			}
+		};
+
+		modelMapper.addMappings(userDtoToUserPoPropertyMap);
 	}
 }
