@@ -73,6 +73,12 @@
 							type="hidden" 
 							th:field="*{id}">
 						<input 
+							type="hidden" 
+							th:field="*{enabled}">
+						<input 
+							type="hidden" 
+							th:field="*{deleted}">
+						<input 
 							type="submit" 
 							th:value="#{'user.edit.submit-button.label.' + ${ @userBO.isNew(user) ? 'create' : 'update' }}">
 					</td>

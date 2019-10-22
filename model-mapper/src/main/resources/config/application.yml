@@ -19,11 +19,11 @@ spring:
     show-sql: true
       
 server:
-  port: 8080
+  port: 8082
   error:
     include-stacktrace: always
   servlet:
-    contextPath: /model-mapper
+    contextPath: /tipo-steam
     
 model-mapper:
   database:
