@@ -1,0 +1,17 @@
+server:
+  port: 8080
+spring:
+  data:
+    mongodb:
+      host: localhost
+      port: 27017
+      authentication-database: admin
+      database: spring-reactor
+      username: root
+      password: spring-reactor-is-awesome
+spring-reactor-user-loader:
+  wait-interval: 200
+  users-retrieved: 5000
+  random-user-service:
+    scheme: https
+    host: randomuser.me

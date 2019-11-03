@@ -1,0 +1,15 @@
+version: '3.1'
+
+services:
+
+  mongo:
+    container_name: mongo-spring-reactor 
+    image: mongo:latest
+    restart: always
+    ports:
+      - 27017:27017
+    volumes:
+      - ./mongo/data/db:/data/db:rw
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: spring-reactor-is-awesome

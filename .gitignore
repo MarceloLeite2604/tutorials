@@ -36,3 +36,6 @@ spring/spring-hsqldb/hsqldb/*
 
 # Diretorio de backup do projeto "model-mapper-simplified"
 **/model-mapper-simplified-bkp
+
+# Diretório de arquivos do container MongoDB utilizado no Spring Reactor.
+**/spring/reactor/docker/mongo/data

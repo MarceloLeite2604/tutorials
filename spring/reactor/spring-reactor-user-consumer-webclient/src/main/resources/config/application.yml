@@ -1,0 +1,8 @@
+server:
+  port: 8082
+spring-reactor-user-consumer:
+  users-retrieved: 300000
+  user-service:
+    scheme: http
+    host: localhost
+    port: 8081
