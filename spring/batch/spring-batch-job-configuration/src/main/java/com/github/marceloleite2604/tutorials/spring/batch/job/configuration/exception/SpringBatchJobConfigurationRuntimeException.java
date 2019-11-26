@@ -4,11 +4,11 @@ public class SpringBatchJobConfigurationRuntimeException extends RuntimeExceptio
 
 	private static final long serialVersionUID = 1L;
 
-	public SpringBatchJobConfigurationRuntimeException(String message, Throwable cause) {
-		super(message, cause);
+	public SpringBatchJobConfigurationRuntimeException(String mensagem, Throwable motivo) {
+		super(mensagem, motivo);
 	}
 
-	public SpringBatchJobConfigurationRuntimeException(String message) {
-		super(message);
+	public SpringBatchJobConfigurationRuntimeException(String mensagem) {
+		super(mensagem);
 	}
 }

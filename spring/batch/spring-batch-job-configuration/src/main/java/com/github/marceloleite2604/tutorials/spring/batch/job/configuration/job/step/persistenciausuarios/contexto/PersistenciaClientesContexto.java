@@ -1,20 +1,15 @@
 package com.github.marceloleite2604.tutorials.spring.batch.job.configuration.job.step.persistenciausuarios.contexto;
 
-import java.util.Properties;
-
+import com.github.marceloleite2604.tutorials.spring.batch.job.configuration.bo.PropriedadeBO;
 import javax.inject.Inject;
-import javax.inject.Named;
-
+import org.apache.commons.lang3.math.NumberUtils;
 import org.springframework.batch.core.configuration.annotation.StepScope;
 import org.springframework.batch.item.ExecutionContext;
 import org.springframework.stereotype.Component;
 
-import com.github.marceloleite2604.tutorials.spring.batch.job.configuration.diversos.NomesBeans;
-import com.github.marceloleite2604.tutorials.spring.batch.job.configuration.job.step.geral.AbstractContexto;
-
 @Component
 @StepScope
-public class PersistenciaClientesContexto extends AbstractContexto {
+public class PersistenciaClientesContexto {
 
 	private String caminhoArquivoTemporario;
 
@@ -23,8 +18,7 @@ public class PersistenciaClientesContexto extends AbstractContexto {
 	private long totalDeRegistros;
 
 	@Inject
-	@Named(NomesBeans.PERSISTENCIA_USUARIOS_PROPERTIES)
-	private Properties persistirClientesProperties;
+	private PropriedadeBO propriedadeBO;
 
 	public String getCaminhoArquivoTemporario() {
 		return caminhoArquivoTemporario;
@@ -57,19 +51,21 @@ public class PersistenciaClientesContexto extends AbstractContexto {
 	}
 
 	private String obterCaminhoArquivoTemporario(ExecutionContext executionContext) {
-		return adquirir(PersistenciaClientesContextoPropriedade.CAMINHO_ARQUIVO_DE_USUARIOS,
+		return propriedadeBO.obterObrigatorio(
+				PersistenciaClientesContextoPropriedade.CAMINHO_ARQUIVO_DE_USUARIOS,
 				executionContext);
 	}
 
 	private Long obterTotalDeRegistros(ExecutionContext executionContext) {
-		String valor = adquirir(PersistenciaClientesContextoPropriedade.TOTAL_DE_REGISTROS,
-				executionContext);
+		String valor = propriedadeBO.obterObrigatorio(
+				PersistenciaClientesContextoPropriedade.TOTAL_DE_REGISTROS, executionContext);
 		return Long.parseLong(valor);
 	}
 
 	private Long obterRegistrosEscritos(ExecutionContext executionContext) {
-		String valor = adquirir(PersistenciaClientesContextoPropriedade.REGISTROS_ESCRITOS,
-				executionContext);
+		String valor = propriedadeBO.obter(
+				PersistenciaClientesContextoPropriedade.REGISTROS_ESCRITOS, executionContext,
+				NumberUtils.LONG_ZERO.toString());
 		return Long.parseLong(valor);
 	}
 
@@ -80,23 +76,17 @@ public class PersistenciaClientesContexto extends AbstractContexto {
 	}
 
 	private void definirRegistrosEscritos(ExecutionContext executionContext) {
-		definir(PersistenciaClientesContextoPropriedade.REGISTROS_ESCRITOS,
+		propriedadeBO.definir(PersistenciaClientesContextoPropriedade.REGISTROS_ESCRITOS,
 				Long.toString(registrosEscritos), executionContext);
 	}
 
 	private void definirTotalDeRegistros(ExecutionContext executionContext) {
-		definir(PersistenciaClientesContextoPropriedade.TOTAL_DE_REGISTROS,
+		propriedadeBO.definir(PersistenciaClientesContextoPropriedade.TOTAL_DE_REGISTROS,
 				Long.toString(totalDeRegistros), executionContext);
 	}
 
 	private void definirCaminhoArquivoTemporario(ExecutionContext executionContext) {
-		definir(PersistenciaClientesContextoPropriedade.CAMINHO_ARQUIVO_DE_USUARIOS,
+		propriedadeBO.definir(PersistenciaClientesContextoPropriedade.CAMINHO_ARQUIVO_DE_USUARIOS,
 				caminhoArquivoTemporario, executionContext);
 	}
-
-	@Override
-	protected Properties obterProperties() {
-		return persistirClientesProperties;
-	}
-
 }

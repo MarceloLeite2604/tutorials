@@ -8,11 +8,10 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.task.SimpleAsyncTaskExecutor;
 import org.springframework.core.task.TaskExecutor;
-
-import com.github.marceloleite2604.tutorials.spring.batch.job.configuration.diversos.NomesBeans;
+import com.github.marceloleite2604.tutorials.spring.batch.job.configuration.configuration.NomesBeans;
 import com.github.marceloleite2604.tutorials.spring.batch.job.configuration.job.DefinicoesJobCriacaoUsuarios;
 import com.github.marceloleite2604.tutorials.spring.batch.job.configuration.job.step.persistenciausuarios.PersistenciaUsuariosStepPartitioner;
-import com.github.marceloleite2604.tutorials.spring.batch.job.configuration.propriedade.job.persistenciaclientes.PersistenciaUsuariosProperties;
+import com.github.marceloleite2604.tutorials.spring.batch.job.configuration.properties.PersistenciaUsuariosProperties;
 
 @Configuration
 public class PersistenciaUsuariosManagerStepConfiguration {
@@ -29,7 +28,7 @@ public class PersistenciaUsuariosManagerStepConfiguration {
 				.partitioner(DefinicoesJobCriacaoUsuarios.NOME_STEP_PERSISTENCIA_USUARIOS_WORKER,
 						persistenciaUsuariosStepPartitioner)
 				.taskExecutor(taskExecutor)
-				.gridSize(persistenciaUsuariosProperties.getQuantidadeDeLeitores())
+				.gridSize(persistenciaUsuariosProperties.getQuantidadeDeProcessos())
 				.step(persistenciaUsuariosWorkerStep)
 
 				.build();

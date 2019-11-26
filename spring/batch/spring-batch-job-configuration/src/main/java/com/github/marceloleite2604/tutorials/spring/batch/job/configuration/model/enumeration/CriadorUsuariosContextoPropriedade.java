@@ -1,4 +1,4 @@
-package com.github.marceloleite2604.tutorials.spring.batch.job.configuration.propriedade.job;
+package com.github.marceloleite2604.tutorials.spring.batch.job.configuration.model.enumeration;
 
 import com.github.marceloleite2604.tutorials.spring.batch.job.configuration.model.Propriedade;
 

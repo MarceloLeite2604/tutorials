@@ -1,12 +1,11 @@
 package com.github.marceloleite2604.tutorials.spring.batch.job.configuration.job;
 
+import com.github.marceloleite2604.tutorials.spring.batch.job.configuration.model.enumeration.CriadorUsuariosContextoPropriedade;
 import org.springframework.batch.core.JobExecution;
 import org.springframework.batch.core.JobExecutionListener;
 import org.springframework.batch.core.JobParameters;
 import org.springframework.batch.item.ExecutionContext;
 import org.springframework.stereotype.Component;
-
-import com.github.marceloleite2604.tutorials.spring.batch.job.configuration.propriedade.job.CriadorUsuariosContextoPropriedade;
 
 @Component
 public class CriadorUsuariosJobExecutionListener implements JobExecutionListener {

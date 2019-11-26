@@ -1,26 +1,22 @@
 package com.github.marceloleite2604.tutorials.spring.batch.job.configuration.job.step.aquisicaousuarios.contexto;
 
+import com.github.marceloleite2604.tutorials.spring.batch.job.configuration.bo.PropriedadeBO;
+import com.github.marceloleite2604.tutorials.spring.batch.job.configuration.model.enumeration.CriadorUsuariosContextoPropriedade;
+import com.github.marceloleite2604.tutorials.spring.batch.job.configuration.properties.CriadorUsuariosProperties;
+import com.github.marceloleite2604.tutorials.spring.batch.job.configuration.util.ArquivoUsuariosUtil;
+import com.github.marceloleite2604.tutorials.spring.batch.job.configuration.util.LocalDateTimeUtil;
 import java.time.LocalDateTime;
 import java.util.Map;
-import java.util.Properties;
-
 import javax.inject.Inject;
-import javax.inject.Named;
-
+import org.apache.commons.lang3.math.NumberUtils;
 import org.springframework.batch.core.configuration.annotation.StepScope;
 import org.springframework.batch.item.ExecutionContext;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
-import com.github.marceloleite2604.tutorials.spring.batch.job.configuration.diversos.NomesBeans;
-import com.github.marceloleite2604.tutorials.spring.batch.job.configuration.job.step.geral.AbstractContexto;
-import com.github.marceloleite2604.tutorials.spring.batch.job.configuration.propriedade.job.CriadorUsuariosContextoPropriedade;
-import com.github.marceloleite2604.tutorials.spring.batch.job.configuration.util.ArquivoUsuariosUtil;
-import com.github.marceloleite2604.tutorials.spring.batch.job.configuration.util.LocalDateTimeUtil;
-
 @Component
 @StepScope
-public class AquisicaoUsuariosContexto extends AbstractContexto {
+public class AquisicaoUsuariosContexto {
 
 	private long totalDeRegistros;
 
@@ -31,11 +27,16 @@ public class AquisicaoUsuariosContexto extends AbstractContexto {
 	private String caminhoArquivoDeUsuarios;
 
 	@Inject
-	@Named(NomesBeans.AQUISICAO_USUARIOS_PROPERTIES)
-	private Properties aquisicaoUsuariosProperties;
+	private PropriedadeBO propriedadeBO;
+
+	@Inject
+	private CriadorUsuariosProperties criadorUsuariosPropriedades;
 
 	@Inject
 	private ArquivoUsuariosUtil arquivoUsuariosUtil;
+	
+	@Inject
+	private LocalDateTimeUtil localDateTimeUtil;
 
 	@Value("#{jobParameters}")
 	private Map<String, Object> jobParameters;
@@ -74,26 +75,32 @@ public class AquisicaoUsuariosContexto extends AbstractContexto {
 	}
 
 	private String obterCaminhoArquivoDeUsuarios(ExecutionContext executionContext) {
-		return adquirir(AquisicaoUsuariosContextoPropriedade.CAMINHO_ARQUIVO_DE_USUARIOS,
+		return propriedadeBO.obter(AquisicaoUsuariosContextoPropriedade.CAMINHO_ARQUIVO_DE_USUARIOS,
 				executionContext, obterValorPadraoCaminhoArquivoUsuarios());
 	}
 
 	private Long obterRegistrosEscritos(ExecutionContext executionContext) {
-		String valor = adquirir(AquisicaoUsuariosContextoPropriedade.REGISTROS_ESCRITOS,
-				executionContext);
-		return Long.parseLong(valor);
+		String stringValor = propriedadeBO.obter(
+				AquisicaoUsuariosContextoPropriedade.REGISTROS_ESCRITOS, executionContext, NumberUtils.LONG_ZERO.toString());
+		return Long.parseLong(stringValor);
 	}
 
 	private Long obterRegistrosLidos(ExecutionContext executionContext) {
-		String valor = adquirir(AquisicaoUsuariosContextoPropriedade.REGISTROS_LIDOS,
-				executionContext, obterRegistrosEscritos(executionContext).toString());
-		return Long.parseLong(valor);
+		String stringValor = propriedadeBO.obter(
+				AquisicaoUsuariosContextoPropriedade.REGISTROS_LIDOS, executionContext, NumberUtils.LONG_ZERO.toString());
+		return Long.parseLong(stringValor);
 	}
 
 	private Long obterTotalRegistros(ExecutionContext executionContext) {
-		String valor = adquirir(AquisicaoUsuariosContextoPropriedade.TOTAL_DE_REGISTROS,
-				executionContext);
-		return Long.parseLong(valor);
+
+		String valorPadraoTotalRegistros = Long
+				.toString(criadorUsuariosPropriedades.getTotalDeRegistros());
+
+		String stringValor = propriedadeBO.obter(
+				AquisicaoUsuariosContextoPropriedade.TOTAL_DE_REGISTROS, executionContext,
+				valorPadraoTotalRegistros);
+
+		return Long.parseLong(stringValor);
 	}
 
 	public void salvarContexto(ExecutionContext executionContext) {
@@ -104,22 +111,22 @@ public class AquisicaoUsuariosContexto extends AbstractContexto {
 	}
 
 	private void definirRegistrosLidos(ExecutionContext executionContext) {
-		definir(AquisicaoUsuariosContextoPropriedade.REGISTROS_LIDOS, Long.toString(registrosLidos),
-				executionContext);
+		propriedadeBO.definir(AquisicaoUsuariosContextoPropriedade.REGISTROS_LIDOS,
+				Long.toString(registrosLidos), executionContext);
 	}
 
 	private void definirRegistrosEscritos(ExecutionContext executionContext) {
-		definir(AquisicaoUsuariosContextoPropriedade.REGISTROS_ESCRITOS,
+		propriedadeBO.definir(AquisicaoUsuariosContextoPropriedade.REGISTROS_ESCRITOS,
 				Long.toString(registrosEscritos), executionContext);
 	}
 
 	private void definirTotalRegistros(ExecutionContext executionContext) {
-		definir(AquisicaoUsuariosContextoPropriedade.TOTAL_DE_REGISTROS,
+		propriedadeBO.definir(AquisicaoUsuariosContextoPropriedade.TOTAL_DE_REGISTROS,
 				Long.toString(totalDeRegistros), executionContext);
 	}
 
 	private void definirCaminhoArquivoDeUsuarios(ExecutionContext executionContext) {
-		definir(AquisicaoUsuariosContextoPropriedade.CAMINHO_ARQUIVO_DE_USUARIOS,
+		propriedadeBO.definir(AquisicaoUsuariosContextoPropriedade.CAMINHO_ARQUIVO_DE_USUARIOS,
 				caminhoArquivoDeUsuarios, executionContext);
 	}
 
@@ -128,16 +135,11 @@ public class AquisicaoUsuariosContexto extends AbstractContexto {
 			String instante = (String) jobParameters
 					.get(CriadorUsuariosContextoPropriedade.INSTANTE.getNome());
 
-			LocalDateTime localDateTime = LocalDateTimeUtil.parseDataParaNomeArquivo(instante);
+			LocalDateTime localDateTime = localDateTimeUtil.parseDataParaNomeArquivo(instante);
 
 			valorPadraoCaminhoArquivoUsuarios = arquivoUsuariosUtil
 					.elaborarCaminhoArquivo(localDateTime);
 		}
 		return valorPadraoCaminhoArquivoUsuarios;
-	}
-
-	@Override
-	protected Properties obterProperties() {
-		return aquisicaoUsuariosProperties;
 	}
 }

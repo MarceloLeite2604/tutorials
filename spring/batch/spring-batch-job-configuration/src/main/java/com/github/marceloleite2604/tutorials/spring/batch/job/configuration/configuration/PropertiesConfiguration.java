@@ -1,58 +1,27 @@
 package com.github.marceloleite2604.tutorials.spring.batch.job.configuration.configuration;
 
-import java.util.Properties;
-
-import javax.inject.Named;
-
+import com.github.marceloleite2604.tutorials.spring.batch.job.configuration.properties.BancoProperties;
+import com.github.marceloleite2604.tutorials.spring.batch.job.configuration.properties.CaminhosProperties;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-
-import com.github.marceloleite2604.tutorials.spring.batch.job.configuration.diversos.NomesBeans;
-import com.github.marceloleite2604.tutorials.spring.batch.job.configuration.propriedade.CaminhosPropriedades;
-import com.github.marceloleite2604.tutorials.spring.batch.job.configuration.util.PropriedadeUtil;
+import org.springframework.validation.annotation.Validated;
 
 @Configuration
 public class PropertiesConfiguration {
 
-	@Bean(NomesBeans.ENCRYPTOR_DECRYPTOR_PROPERTIES)
-	@ConfigurationProperties(CaminhosPropriedades.CRIPTOGRAFIA)
-	public Properties criarEncryptorDecryptorProperties() {
-		return new Properties();
+	@Bean(NomesBeans.SPRING_BATCH_BANCO_PROPERTIES)
+	@ConfigurationProperties(CaminhosProperties.BANCO_SPRING_BATCH)
+	@Validated
+	public BancoProperties criarSpringBatchBancoPropriedades() {
+		return new BancoProperties();
 	}
 
-	@Bean(NomesBeans.SPRING_BATCH_DATA_SOURCE_PROPERTIES)
-	@ConfigurationProperties(CaminhosPropriedades.BANCO_SPRING_BATCH)
-	public Properties criarBatchDataSourceProperties() {
-		return new Properties();
-	}
-
-	@Bean(NomesBeans.PROGRAMA_DATA_SOURCE_PROPERTIES)
-	@ConfigurationProperties(CaminhosPropriedades.BANCO_PROGRAMA)
-	public Properties criarProgramaDataSourceProperties() {
-		return new Properties();
-	}
-
-	@Bean(NomesBeans.CRIADOR_USUARIOS_PROPERTIES)
-	@ConfigurationProperties(CaminhosPropriedades.CRIADOR_USUARIOS)
-	public Properties criarCriadorUsuariosProperties() {
-		return new Properties();
-	}
-
-	@Bean(NomesBeans.AQUISICAO_USUARIOS_PROPERTIES)
-	@ConfigurationProperties(CaminhosPropriedades.AQUISICAO_USUARIOS)
-	public Properties criarAquisicaoUsuariosProperties(
-			@Named(NomesBeans.CRIADOR_USUARIOS_PROPERTIES) Properties criadorUsuariosProperties) {
-		
-		return PropriedadeUtil.clonar(criadorUsuariosProperties);
-	}
-
-	@Bean(NomesBeans.PERSISTENCIA_USUARIOS_PROPERTIES)
-	@ConfigurationProperties(CaminhosPropriedades.PERSISTENCIA_USUARIOS)
-	public Properties criarPersistenciaUsuariosProperties(
-			@Named(NomesBeans.CRIADOR_USUARIOS_PROPERTIES) Properties criadorUsuariosProperties) {
-		
-		return PropriedadeUtil.clonar(criadorUsuariosProperties);
+	@Bean(NomesBeans.PROGRAMA_BANCO_PROPERTIES)
+	@ConfigurationProperties(CaminhosProperties.BANCO_PROGRAMA)
+	@Validated
+	public BancoProperties criarProgramaBancoPropriedades() {
+		return new BancoProperties();
 	}
 
 }

@@ -1,17 +1,10 @@
 package com.github.marceloleite2604.tutorials.spring.batch.job.configuration.util;
 
+import com.github.marceloleite2604.util.file.FileUtil;
 import java.io.File;
-import java.io.IOException;
-import java.nio.file.Paths;
 import java.util.List;
-import java.util.Optional;
-
 import javax.inject.Inject;
-
-import org.apache.commons.io.FileUtils;
 import org.springframework.stereotype.Component;
-
-import com.github.marceloleite2604.tutorials.spring.batch.job.configuration.exception.SpringBatchJobConfigurationRuntimeException;
 
 @Component
 public class ArquivoUtil {
@@ -19,54 +12,35 @@ public class ArquivoUtil {
 	@Inject
 	private ContadorLinhasArquivo contadorLinhasArquivo;
 
+	@Inject
+	private FileUtil fileUtil;
+
 	public void excluirArquivo(String caminho) {
-		File arquivo = new File(caminho);
-		if (arquivo.exists()) {
-			try {
-				FileUtils.forceDelete(arquivo);
-			} catch (IOException excecao) {
-				throw new SpringBatchJobConfigurationRuntimeException("Erro ao tentar excluir o arquivo \"" + caminho + "\".",
-						excecao);
-			}
-		}
+		fileUtil.delete(caminho);
 	}
 
 	public void excluirArquivos(List<String> caminhos) {
-		for (String caminho : caminhos) {
-			excluirArquivo(caminho);
-		}
+		caminhos.stream()
+				.forEach(this::excluirArquivo);
 	}
 
-	public String obterNomeArquivo(String caminho) {
-		return new File(caminho).getName()
-				.replaceAll("\\.[^\\.]*$", "");
+	public String obterNomeArquivoSemExtensao(String caminho) {
+		return fileUtil.retrieveFileNameWithoutExtension(caminho);
 	}
 
 	public File obterDiretorio(String caminho) {
-		return Optional.ofNullable(new File(caminho).getParentFile())
-				.orElse(new File("."));
+		return fileUtil.retrieveDirectory(caminho);
 	}
 
 	public long obterTotalLinhasArquivo(String caminhoArquivo) {
 		return contadorLinhasArquivo.contabilizarLinhas(caminhoArquivo);
 	}
 
-	public String obterNomeArquivoSemExtensao(String caminhoArquivo) {
-		return new File(caminhoArquivo).getName()
-				.replaceAll("\\.[^\\.]*$", "");
-	}
-
 	public String formatarCaminhoDiretorio(String caminhoDiretorio) {
-		String diretorio = caminhoDiretorio;
-
-		if (!diretorio.endsWith(File.separator)) {
-			diretorio += File.separator;
-		}
-
-		return diretorio;
+		return fileUtil.appendSeparatorIfNecessary(caminhoDiretorio);
 	}
-	
+
 	public boolean existe(String caminhoArquivo) {
-		return Paths.get(caminhoArquivo).toFile().exists();
+		return fileUtil.fileExists(caminhoArquivo);
 	}
 }

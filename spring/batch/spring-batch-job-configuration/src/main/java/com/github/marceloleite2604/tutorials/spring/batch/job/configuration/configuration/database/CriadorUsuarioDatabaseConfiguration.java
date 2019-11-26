@@ -1,5 +1,6 @@
 package com.github.marceloleite2604.tutorials.spring.batch.job.configuration.configuration.database;
 
+import com.github.marceloleite2604.tutorials.spring.batch.job.configuration.configuration.NomesBeans;
 import java.util.HashMap;
 
 import javax.inject.Named;
@@ -13,8 +14,6 @@ import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
-
-import com.github.marceloleite2604.tutorials.spring.batch.job.configuration.diversos.NomesBeans;
 
 @Configuration
 @EnableJpaRepositories(
@@ -36,8 +35,8 @@ public class CriadorUsuarioDatabaseConfiguration {
 		entityManagerFactoryBean.setJpaVendorAdapter(new HibernateJpaVendorAdapter());
 
 		HashMap<String, Object> properties = new HashMap<>();
-		properties.put("hibernate.hbm2ddl.auto", environment.getProperty("hibernate.hbm2ddl.auto"));
-		properties.put("hibernate.dialect", environment.getProperty("hibernate.dialect"));
+		properties.put("hibernate.hbm2ddl.auto", environment.getProperty("spring.jpa.hibernate.hbm2ddl.auto"));
+		properties.put("hibernate.dialect", environment.getProperty("spring.jpa.properties.hibernate.dialect"));
 		entityManagerFactoryBean.setJpaPropertyMap(properties);
 
 		return entityManagerFactoryBean;

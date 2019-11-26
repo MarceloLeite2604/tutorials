@@ -1,23 +1,19 @@
 package com.github.marceloleite2604.tutorials.spring.batch.job.configuration.job.step.persistenciausuarios;
 
+import com.github.marceloleite2604.tutorials.spring.batch.job.configuration.job.step.persistenciausuarios.contexto.PersistenciaClientesContextoPropriedade;
+import com.github.marceloleite2604.tutorials.spring.batch.job.configuration.model.enumeration.CriadorUsuariosContextoPropriedade;
+import com.github.marceloleite2604.tutorials.spring.batch.job.configuration.util.ArquivoUsuariosUtil;
+import com.github.marceloleite2604.tutorials.spring.batch.job.configuration.util.LocalDateTimeUtil;
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
-
 import javax.inject.Inject;
-
 import org.springframework.batch.core.configuration.annotation.StepScope;
 import org.springframework.batch.core.partition.support.Partitioner;
 import org.springframework.batch.item.ExecutionContext;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
-
-import com.github.marceloleite2604.tutorials.spring.batch.job.configuration.job.step.geral.DivisorArquivo;
-import com.github.marceloleite2604.tutorials.spring.batch.job.configuration.job.step.persistenciausuarios.contexto.PersistenciaClientesContextoPropriedade;
-import com.github.marceloleite2604.tutorials.spring.batch.job.configuration.propriedade.job.CriadorUsuariosContextoPropriedade;
-import com.github.marceloleite2604.tutorials.spring.batch.job.configuration.util.ArquivoUsuariosUtil;
-import com.github.marceloleite2604.tutorials.spring.batch.job.configuration.util.LocalDateTimeUtil;
 
 @Component
 @StepScope
@@ -28,6 +24,9 @@ public class PersistenciaUsuariosStepPartitioner implements Partitioner {
 
 	@Inject
 	private ArquivoUsuariosUtil arquivoUsuariosUtil;
+	
+	@Inject
+	private LocalDateTimeUtil localDateTimeUtil;
 
 	@Value("#{jobParameters}")
 	private Map<String, Object> jobParameters;
@@ -38,7 +37,7 @@ public class PersistenciaUsuariosStepPartitioner implements Partitioner {
 		String instante = (String) jobParameters
 				.get(CriadorUsuariosContextoPropriedade.INSTANTE.getNome());
 
-		LocalDateTime localDateTime = LocalDateTimeUtil.parseDataParaNomeArquivo(instante);
+		LocalDateTime localDateTime = localDateTimeUtil.parseDataParaNomeArquivo(instante);
 
 		String caminhoArquivoSaida = arquivoUsuariosUtil.elaborarCaminhoArquivo(localDateTime);
 

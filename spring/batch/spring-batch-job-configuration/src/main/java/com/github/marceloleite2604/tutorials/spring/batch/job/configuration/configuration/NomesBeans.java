@@ -1,27 +1,18 @@
-package com.github.marceloleite2604.tutorials.spring.batch.job.configuration.diversos;
+package com.github.marceloleite2604.tutorials.spring.batch.job.configuration.configuration;
 
 public final class NomesBeans {
 	
-	public static final String ENCRYPTOR_DECRYPTOR_PROPERTIES = "encryptorDecryptorProperties";
-	
-	public static final String CRIADOR_USUARIOS_PROPERTIES = "criadorUsuariosProperties";
+	public static final String SPRING_BATCH_BANCO_PROPERTIES = "springBatchBancoProperties";
 
-	public static final String AQUISICAO_USUARIOS_PROPERTIES = "aquisicaoUsuariosProperties";
-
-	public static final String PERSISTENCIA_USUARIOS_PROPERTIES = "persistenciaUsuariosProperties";
+	public static final String SPRING_BATCH_DATA_SOURCE = "springBatchDataSource";
 	
-	public static final String PROGRAMA_DATA_SOURCE_PROPERTIES = "programaDataSourceProperties";
+	public static final String PROGRAMA_BANCO_PROPERTIES = "programaBancoProperties";
 
 	public static final String PROGRAMA_DATA_SOURCE = "programaDataSource";
 
 	public static final String PROGRAMA_ENTITY_MANAGER_FACTORY_BEAN = "programaEntityManagerFactoryBean";
 
 	public static final String PROGRAMA_TRANSACTION_MANAGER = "programaTransactionManager";
-
-	public static final String SPRING_BATCH_DATA_SOURCE_PROPERTIES = "springBatchDataSourceProperties";
-	
-	public static final String SPRING_BATCH_DATA_SOURCE = "springBatchDataSource";
-	
 	
 	public static final String PREPARO_AMBIENTE_STEP = "preparoAmbienteStep";
 	
@@ -37,7 +28,11 @@ public final class NomesBeans {
 
 	public static final String TASK_EXECUTOR_PERSISTENCIA_USUARIOS = "taskExecutorPersistenciaUsuarios";
 
-	
+	public static final String SLED = "sled";
+
+	public static final String FILE_UTIL = "fileUtil";
+
+	public static final String REST_TEMPLATE = "restTemplate";	
 	
 	private NomesBeans() {
 		// Construtor privado para evitar a criação de objetos deste tipo.

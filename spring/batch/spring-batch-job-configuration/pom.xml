@@ -35,10 +35,17 @@
 			<dependencies>
 				<dependency>
 					<groupId>com.oracle.jdbc</groupId>
-					<artifactId>ojdbc7</artifactId>
-					<version>12.1.0</version>
+					<artifactId>ojdbc8</artifactId>
+					<version>12.2.0.1</version>
 				</dependency>
 			</dependencies>
+			<repositories>
+				<repository>
+					<id>xwiki-externals</id>
+					<name>XWiki Externals Repository</name>
+					<url>https://maven.xwiki.org/externals</url>
+				</repository>
+			</repositories>
 		</profile>
 		<profile>
 			<id>mysql</id>
@@ -93,6 +100,11 @@
 		</dependency>
 
 		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpclient</artifactId>
+		</dependency>
+
+		<dependency>
 			<groupId>commons-io</groupId>
 			<artifactId>commons-io</artifactId>
 			<version>[2,3)</version>
@@ -104,15 +116,32 @@
 		</dependency>
 
 		<dependency>
+			<groupId>org.hibernate.validator</groupId>
+			<artifactId>hibernate-validator</artifactId>
+		</dependency>
+
+
+		<dependency>
 			<groupId>com.github.marceloleite2604</groupId>
-			<artifactId>encryptor-decryptor</artifactId>
-			<version>[2,3)</version>
+			<artifactId>sled</artifactId>
+			<version>1.1</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.github.marceloleite2604</groupId>
+			<artifactId>util</artifactId>
+			<version>1.1</version>
 		</dependency>
 
 		<dependency>
 			<groupId>javax.inject</groupId>
 			<artifactId>javax.inject</artifactId>
 			<version>1</version>
+		</dependency>
+
+		<dependency>
+			<groupId>javax.validation</groupId>
+			<artifactId>validation-api</artifactId>
 		</dependency>
 
 		<dependency>

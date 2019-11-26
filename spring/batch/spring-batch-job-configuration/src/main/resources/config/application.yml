@@ -2,25 +2,26 @@
 criador-usuarios:
   diretorio-arquivo-de-usuarios: output/
   total-de-registros: 5000
-  aquisicao-usuarios:
-    tamanho-do-chunk: 500
-  persistencia-usuarios:
-    quantidade-de-leitores: 4
-    tamanho-do-chunk: 100
   fator-chance-lancamento-excecao: 0.05
-
-# Configurações de criptografia.
-criptografia:
-  algoritmo-riptografia: DESede
-  modo-feedback: CBC
-  modo-preenchimento: PKCS5Padding
-  chave: Oypn30NJfByzStoCmFf+/XAa4KTq6q7+
-    
+  # Configurações de criptografia.
+  criptografia:
+    algoritmo-criptografia: DESede
+    modo-feedback: CBC
+    modo-preenchimento: PKCS5Padding
+    chave: Oypn30NJfByzStoCmFf+/XAa4KTq6q7+
+  aquisicao-usuarios:
+    tamanho-do-lote: 500
+  persistencia-usuarios:
+    quantidade-de-processos: 4
+    tamanho-do-lote: 100
+  
 spring:
   profiles:
     active:
     - "@profileAtivo@"
-    
+  jpa:
+    hibernate:
+      ddl-auto: validate
 logging:
   level:
     com.github.marceloleite2604.tutorials.spring.batch.job.configuration: DEBUG

@@ -1,36 +1,31 @@
 package com.github.marceloleite2604.tutorials.spring.batch.job.configuration.configuration;
 
-import java.util.Properties;
-
-import javax.inject.Named;
-
+import com.github.marceloleite2604.sled.Sled;
+import com.github.marceloleite2604.tutorials.spring.batch.job.configuration.properties.CriptografiaProperties;
+import com.github.marceloleite2604.util.file.FileUtil;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.client.RestTemplate;
 
-import com.github.marceloleite2604.encryptor.EncryptorDecryptor;
-import com.github.marceloleite2604.tutorials.spring.batch.job.configuration.diversos.NomesBeans;
-import com.github.marceloleite2604.tutorials.spring.batch.job.configuration.propriedade.CriptografiaPropriedade;
-import com.github.marceloleite2604.tutorials.spring.batch.job.configuration.util.PropriedadeUtil;
-
 @Configuration
 public class ProgramaConfiguration {
+	
+	@Bean(NomesBeans.FILE_UTIL)
+	public FileUtil criarFileUtil() {
+		return new FileUtil();
+	}
 
-	@Bean
-	public EncryptorDecryptor criarEncryptorDecryptor(
-			@Named(NomesBeans.ENCRYPTOR_DECRYPTOR_PROPERTIES) Properties encryptorDecryptorProperties) {
-		return EncryptorDecryptor.builder()
-				.cryptographicAlgorythm(
-						PropriedadeUtil.obter(CriptografiaPropriedade.ALGORITMO_CRIPTOGRAFIA,
-								encryptorDecryptorProperties))
-				.feedbackMode(PropriedadeUtil.obter(CriptografiaPropriedade.MODO_FEEDBACK,
-						encryptorDecryptorProperties))
-				.paddingScheme(PropriedadeUtil.obter(CriptografiaPropriedade.MODO_PREENCHIMENTO,
-						encryptorDecryptorProperties))
+	@Bean(NomesBeans.SLED)
+	public Sled criarSled(
+			CriptografiaProperties criptografiaPropriedades) {
+		return Sled.builder()
+				.cryptographicAlgorithm(criptografiaPropriedades.getAlgoritmoCriptografia())
+				.feedbackMode(criptografiaPropriedades.getModoFeedback())
+				.paddingScheme(criptografiaPropriedades.getModoPreenchimento())
 				.build();
 	}
 
-	@Bean
+	@Bean(NomesBeans.REST_TEMPLATE)
 	public RestTemplate criarRestTemplate() {
 		return new RestTemplate();
 	}

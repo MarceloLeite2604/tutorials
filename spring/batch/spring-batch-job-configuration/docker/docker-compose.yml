@@ -3,9 +3,7 @@ version: "3.3"
 services:
 
   mysql:
-    build:
-      context: mysql/
-    container_name: mysql
+    container_name: spring-batch-mysql
     image: mysql:latest
     ports:
       - 3306:3306

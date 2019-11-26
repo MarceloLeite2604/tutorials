@@ -1,4 +1,4 @@
-package com.github.marceloleite2604.tutorials.spring.batch.job.configuration.job.step.geral;
+package com.github.marceloleite2604.tutorials.spring.batch.job.configuration.job.step.persistenciausuarios;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;

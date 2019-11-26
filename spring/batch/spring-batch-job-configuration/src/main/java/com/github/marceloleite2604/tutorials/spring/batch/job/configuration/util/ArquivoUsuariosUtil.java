@@ -1,17 +1,16 @@
 package com.github.marceloleite2604.tutorials.spring.batch.job.configuration.util;
 
+import com.github.marceloleite2604.tutorials.spring.batch.job.configuration.exception.SpringBatchJobConfigurationRuntimeException;
+import com.github.marceloleite2604.tutorials.spring.batch.job.configuration.properties.CriadorUsuariosProperties;
+import com.github.marceloleite2604.util.file.FileUtil;
 import java.io.File;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
-
 import javax.inject.Inject;
-
 import org.springframework.stereotype.Component;
-
-import com.github.marceloleite2604.tutorials.spring.batch.job.configuration.propriedade.job.CriadorUsuariosProperties;
 
 @Component
 public final class ArquivoUsuariosUtil {
@@ -34,9 +33,15 @@ public final class ArquivoUsuariosUtil {
 	@Inject
 	private ArquivoUtil arquivoUtil;
 
+	@Inject
+	private FileUtil fileUtil;
+	
+	@Inject
+	private LocalDateTimeUtil localDateTimeUtil;
+
 	public String elaborarNomeArquivo(LocalDateTime localDateTime) {
 		return String.format(TEMPLATE_NOME_ARQUIVO,
-				LocalDateTimeUtil.formatarParaNomeDeArquivo(localDateTime));
+				localDateTimeUtil.formatarParaNomeDeArquivo(localDateTime));
 	}
 
 	public String elaborarCaminhoArquivo(LocalDateTime localDateTime) {
@@ -57,9 +62,9 @@ public final class ArquivoUsuariosUtil {
 	public List<String> obterCaminhoTodosArquivosDaData(LocalDateTime localDateTime) {
 
 		String inicioNomeArquivos = PREFIXO_NOME_ARQUIVO
-				+ LocalDateTimeUtil.formatarParaNomeDeArquivo(localDateTime);
+				+ localDateTimeUtil.formatarParaNomeDeArquivo(localDateTime);
 
-		File diretorioUsuarios = new File(obterCaminhoDiretorioUsuarios());
+		File diretorioUsuarios = obterDiretorioUsuarios();
 
 		File[] vetorCaminhoArquivos = diretorioUsuarios
 				.listFiles((diretorio, nome) -> nome.startsWith(inicioNomeArquivos));
@@ -72,12 +77,23 @@ public final class ArquivoUsuariosUtil {
 		return new ArrayList<>(caminhoArquivos);
 	}
 
+	private File obterDiretorioUsuarios() {
+		String caminhoDiretorioUsuarios = obterCaminhoDiretorioUsuarios();
+		File diretorioUsuarios = new File(caminhoDiretorioUsuarios);
+
+		if (!fileUtil.fileExists(diretorioUsuarios.toPath())) {
+			throw new SpringBatchJobConfigurationRuntimeException(
+					"O diretório \"" + caminhoDiretorioUsuarios + "\" não existe.");
+		}
+		return diretorioUsuarios;
+	}
+
 	public List<String> obterCaminhoArquivosTemporariosDaData(LocalDateTime localDateTime) {
 
 		String inicioNomeArquivos = PREFIXO_NOME_ARQUIVO
-				+ LocalDateTimeUtil.formatarParaNomeDeArquivo(localDateTime);
+				+ localDateTimeUtil.formatarParaNomeDeArquivo(localDateTime);
 
-		File diretorioUsuarios = new File(obterCaminhoDiretorioUsuarios());
+		File diretorioUsuarios = obterDiretorioUsuarios();
 
 		File[] vetorCaminhoArquivos = diretorioUsuarios
 				.listFiles((diretorio, nome) -> nome.startsWith(inicioNomeArquivos)

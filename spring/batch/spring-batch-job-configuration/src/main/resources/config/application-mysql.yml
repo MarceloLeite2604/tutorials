@@ -1,14 +1,32 @@
+spring:
+  jpa:
+    properties:
+      hibernate.dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+
 # Configurações do banco de dados MySQL.
-banco:
-  spring-batch:
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/spring_batch_db?useSSL=false&allowPublicKeyRetrieval=true
-    username: spring_batch
-    senha: 080CoY1pgozX7g1fQ9gkLw==
-  programa:
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/programa_db?useSSL=false&allowPublicKeyRetrieval=true
-    username: programa
-    senha: 5/0n9mDe6xcey5oQowUZuA==
-
-
+criador-usuarios:
+  banco:
+    spring-batch:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      scheme: jdbc:mysql
+      host: localhost
+      port: 3306
+      path: spring_batch_db
+      usuario: spring_batch
+      senha-criptografada: 080CoY1pgozX7g1fQ9gkLw==
+      maximo-conexoes-aguardo: 4
+      total-de-conexoes: 6
+      outras-propriedades:
+        - allowPubllicKeyRetrieval: true
+    programa:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      scheme: jdbc:mysql
+      host: localhost
+      port: 3306
+      path: programa_db
+      usuario: programa
+      senha-criptografada: 5/0n9mDe6xcey5oQowUZuA==
+      maximo-conexoes-aguardo: 4
+      total-de-conexoes: 6
+      outras-propriedades:
+        - allowPubllicKeyRetrieval: true

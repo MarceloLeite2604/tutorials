@@ -1,34 +1,18 @@
-# Configurações gerais do job criador de usuários.
-criador-usuarios:
-  diretorio-arquivo-de-usuarios: output/
-  total-de-registros: 5000
-  aquisicao-usuarios:
-    tamanho-do-chunk: 500
-  persistencia-usuarios:
-    quantidade-de-leitores: 4
-    tamanho-do-chunk: 100
-  fator-chance-lancamento-excecao: 0.05
+spring:
+  jpa:
+    properties:
+      hibernate.dialect: org.hibernate.dialect.Oracle10gDialect
 
-# Configurações de criptografia.
-criptografia:
-  algoritmo-riptografia: DESede
-  modo-feedback: CBC
-  modo-preenchimento: PKCS5Padding
-  chave: Oypn30NJfByzStoCmFf+/XAa4KTq6q7+
-  
-logging:
-  level:
-    com.github.marceloleite2604.tutorials.spring.batch.job.configuration: DEBUG
-  
 # Configurações do banco de dados Oracle.
-banco:
-  spring-batch:
-    driver-class-name: oracle.jdbc.driver.OracleDriver
-    url: jdbc:oracle:thin:@localhost:1521:XE
-    username: SPRING_BATCH
-    senha: 5lHe55R56OHHS+sdSvEbow==
-  programa:
-    driver-class-name: oracle.jdbc.driver.OracleDriver
-    url: jdbc:oracle:thin:@localhost:1521:XE 
-    username: SPRING_JOB_CONFIGURATION
-    senha: Gs9H64msEr7GCyq6k0lYMwCLDGlAmhf/BoUXADK+evk=
+criador-usuarios:
+  banco:
+    spring-batch:
+      driver-class-name: oracle.jdbc.driver.OracleDriver
+      url: jdbc:oracle:thin:@localhost:1521:XE
+      username: SPRING_BATCH
+      senha-criptografada: 5lHe55R56OHHS+sdSvEbow==
+    programa:
+      driver-class-name: oracle.jdbc.driver.OracleDriver
+      url: jdbc:oracle:thin:@localhost:1521:XE 
+      username: SPRING_JOB_CONFIGURATION
+      senha-criptografada: Gs9H64msEr7GCyq6k0lYMwCLDGlAmhf/BoUXADK+evk=

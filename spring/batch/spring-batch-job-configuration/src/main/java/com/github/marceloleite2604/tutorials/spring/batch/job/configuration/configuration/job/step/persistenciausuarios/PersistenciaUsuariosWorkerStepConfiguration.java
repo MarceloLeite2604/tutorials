@@ -4,15 +4,14 @@ import org.springframework.batch.core.Step;
 import org.springframework.batch.core.configuration.annotation.StepBuilderFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
-
-import com.github.marceloleite2604.tutorials.spring.batch.job.configuration.diversos.NomesBeans;
+import com.github.marceloleite2604.tutorials.spring.batch.job.configuration.configuration.NomesBeans;
 import com.github.marceloleite2604.tutorials.spring.batch.job.configuration.job.DefinicoesJobCriacaoUsuarios;
 import com.github.marceloleite2604.tutorials.spring.batch.job.configuration.job.step.persistenciausuarios.PersistenciaUsuariosItemProcessor;
 import com.github.marceloleite2604.tutorials.spring.batch.job.configuration.job.step.persistenciausuarios.PersistenciaUsuariosItemStreamReader;
 import com.github.marceloleite2604.tutorials.spring.batch.job.configuration.job.step.persistenciausuarios.PersistenciaUsuariosItemStreamWriter;
 import com.github.marceloleite2604.tutorials.spring.batch.job.configuration.model.csv.UsuarioCsvVO;
 import com.github.marceloleite2604.tutorials.spring.batch.job.configuration.model.po.UsuarioPO;
-import com.github.marceloleite2604.tutorials.spring.batch.job.configuration.propriedade.job.persistenciaclientes.PersistenciaUsuariosProperties;
+import com.github.marceloleite2604.tutorials.spring.batch.job.configuration.properties.PersistenciaUsuariosProperties;
 
 @Component
 public class PersistenciaUsuariosWorkerStepConfiguration {
@@ -26,7 +25,7 @@ public class PersistenciaUsuariosWorkerStepConfiguration {
 
 		return stepBuilderFactory
 				.get(DefinicoesJobCriacaoUsuarios.NOME_STEP_PERSISTENCIA_USUARIOS_WORKER)
-				.<UsuarioCsvVO, UsuarioPO>chunk(persistenciaUsuariosProperties.getTamanhoDoChunk())
+				.<UsuarioCsvVO, UsuarioPO>chunk(persistenciaUsuariosProperties.getTamanhoDoLote())
 				.reader(persistenciaUsuariosItemStreamReader)
 				.processor(persistenciaUsuariosItemProcessor)
 				.writer(persistenciaUsuariosItemStreamWriter)

@@ -1,39 +1,48 @@
 package com.github.marceloleite2604.tutorials.spring.batch.job.configuration.configuration.database;
 
-import java.util.Properties;
-
+import com.github.marceloleite2604.tutorials.spring.batch.job.configuration.configuration.NomesBeans;
+import com.github.marceloleite2604.tutorials.spring.batch.job.configuration.exception.SpringBatchJobConfigurationRuntimeException;
+import com.github.marceloleite2604.tutorials.spring.batch.job.configuration.properties.BancoProperties;
+import com.github.marceloleite2604.tutorials.spring.batch.job.configuration.util.CriptografiaUtil;
+import java.net.URISyntaxException;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 import javax.inject.Named;
 import javax.sql.DataSource;
-
 import org.apache.commons.dbcp2.ConnectionFactory;
 import org.apache.commons.dbcp2.DriverManagerConnectionFactory;
 import org.apache.commons.dbcp2.PoolableConnection;
 import org.apache.commons.dbcp2.PoolableConnectionFactory;
 import org.apache.commons.dbcp2.PoolingDataSource;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.pool2.impl.GenericObjectPool;
+import org.apache.http.NameValuePair;
+import org.apache.http.client.utils.URIBuilder;
+import org.apache.http.message.BasicNameValuePair;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 
-import com.github.marceloleite2604.tutorials.spring.batch.job.configuration.diversos.NomesBeans;
-import com.github.marceloleite2604.tutorials.spring.batch.job.configuration.util.CriptografiaUtil;
-
 @Configuration
 public class SpringBatchDataSourceConfiguration {
 
-	private static final int MAXIMO_CONEXOES_EM_AGUARDO = 4;
-
-	private static final int TOTAL_CONEXOES = 6;
+	private static final String MENSAGEM_ERRO_ELABORACAO_URL_BANCO = "Não foi possível elaborar a URL de acesso ao banco.";
 
 	@Bean(NomesBeans.SPRING_BATCH_DATA_SOURCE)
 	@Primary
 	public DataSource criarSpringBatchDataSource(
-			@Named(NomesBeans.SPRING_BATCH_DATA_SOURCE_PROPERTIES) Properties springBatchDataSourceProperties,
+			@Named(NomesBeans.SPRING_BATCH_BANCO_PROPERTIES) BancoProperties springBatchBancoPropriedades,
 			CriptografiaUtil criptografiaUtil) {
-		String usuario = springBatchDataSourceProperties.getProperty("username");
-		String senha = criptografiaUtil
-				.decriptografar(springBatchDataSourceProperties.getProperty("senha"));
-		String url = springBatchDataSourceProperties.getProperty("url");
+		return criarDataSource(springBatchBancoPropriedades, criptografiaUtil);
+	}
+
+	private DataSource criarDataSource(BancoProperties bancoPropriedades,
+			CriptografiaUtil criptografiaUtil) {
+		String usuario = bancoPropriedades.getUsuario();
+		String senha = criptografiaUtil.decriptografar(bancoPropriedades.getSenhaCriptografada());
+
+		String url = elaborarUrl(bancoPropriedades);
 
 		ConnectionFactory connectionFactory = new DriverManagerConnectionFactory(url, usuario,
 				senha);
@@ -44,8 +53,8 @@ public class SpringBatchDataSourceConfiguration {
 		GenericObjectPool<PoolableConnection> genericObjectPool = new GenericObjectPool<>(
 				poolableConnectionFactory);
 
-		genericObjectPool.setMaxIdle(MAXIMO_CONEXOES_EM_AGUARDO);
-		genericObjectPool.setMaxTotal(TOTAL_CONEXOES);
+		genericObjectPool.setMaxIdle(bancoPropriedades.getMaximoConexoesAguardo());
+		genericObjectPool.setMaxTotal(bancoPropriedades.getTotalDeConexoes());
 
 		poolableConnectionFactory.setPool(genericObjectPool);
 		return new PoolingDataSource<>(genericObjectPool);
@@ -53,27 +62,39 @@ public class SpringBatchDataSourceConfiguration {
 
 	@Bean(NomesBeans.PROGRAMA_DATA_SOURCE)
 	public DataSource criarProgramaDataSource(
-			@Named(NomesBeans.PROGRAMA_DATA_SOURCE_PROPERTIES) Properties programaDataSourceProperties,
-			CriptografiaUtil criptografia) {
+			@Named(NomesBeans.PROGRAMA_BANCO_PROPERTIES) BancoProperties programaBancoPropriedades,
+			CriptografiaUtil criptografiaUtil) {
 
-		String usuario = programaDataSourceProperties.getProperty("username");
-		String senha = criptografia
-				.decriptografar(programaDataSourceProperties.getProperty("senha"));
-		String url = programaDataSourceProperties.getProperty("url");
-
-		ConnectionFactory connectionFactory = new DriverManagerConnectionFactory(url, usuario,
-				senha);
-
-		PoolableConnectionFactory poolableConnectionFactory = new PoolableConnectionFactory(
-				connectionFactory, null);
-
-		GenericObjectPool<PoolableConnection> genericObjectPool = new GenericObjectPool<>(
-				poolableConnectionFactory);
-
-		genericObjectPool.setMaxIdle(MAXIMO_CONEXOES_EM_AGUARDO);
-		genericObjectPool.setMaxTotal(TOTAL_CONEXOES);
-
-		poolableConnectionFactory.setPool(genericObjectPool);
-		return new PoolingDataSource<>(genericObjectPool);
+		return criarDataSource(programaBancoPropriedades, criptografiaUtil);
 	}
+
+	private String elaborarUrl(BancoProperties bancoPropriedades) {
+		
+		if (!StringUtils.isBlank(bancoPropriedades.getUrl())) {
+			return bancoPropriedades.getUrl();
+		}
+		
+		try {
+			// TODO Validar propriedades 
+			return new URIBuilder().setScheme(bancoPropriedades.getScheme())
+					.setHost(bancoPropriedades.getHost())
+					.setPort(bancoPropriedades.getPort())
+					.setPath(bancoPropriedades.getPath())
+					.setParameters(elaborarParametros(
+							bancoPropriedades.getOutrasPropriedades()))
+					.build()
+					.toASCIIString();
+		} catch (URISyntaxException excecao) {
+			throw new SpringBatchJobConfigurationRuntimeException(
+					MENSAGEM_ERRO_ELABORACAO_URL_BANCO, excecao);
+		}
+	}
+
+	private List<NameValuePair> elaborarParametros(Map<String, String> parametros) {
+		return parametros.entrySet()
+				.stream()
+				.map(entry -> new BasicNameValuePair(entry.getKey(), entry.getValue()))
+				.collect(Collectors.toList());
+	}
+
 }
