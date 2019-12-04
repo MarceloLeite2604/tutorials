@@ -1,0 +1,26 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "br.com.github.marceloleite2604.tutorials.grpc.primenumbers";
+option java_outer_classname = "PrimeNumbersProto";
+
+package primenumbers;
+
+service PrimeNumbers {
+  
+  rpc IsPrime(Number) returns (Boolean) {}
+
+  rpc AllPrimesUntil(Number) returns (stream Number) {}
+
+  rpc AreAllPrimes(stream Number) returns (Boolean) {}
+
+  rpc WhichArePrimes(stream Number) returns (stream Boolean) {}
+}
+
+message Number {
+    int32 value = 1;
+}
+
+message Boolean {
+    bool value = 1;
+}
