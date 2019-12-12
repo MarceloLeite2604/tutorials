@@ -1,0 +1,9 @@
+rabbitmq-client:
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: rabbitmq-client
+    password: rabbitmq-client
+    request-topic: user-creation-request-topic
+    routing-key: user.creation.request
+    response-queue: user-creation-response

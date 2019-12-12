@@ -1,0 +1,10 @@
+rabbitmq-server:
+  failure-ratio: 0.5
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: rabbitmq-server
+    password: rabbitmq-server
+    request-queue: user-creation-request
+    response-topic: user-creation-response-topic
+    response-routing-key: user.creation.response

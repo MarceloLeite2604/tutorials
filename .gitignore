@@ -39,3 +39,6 @@ spring/spring-hsqldb/hsqldb/*
 
 # Diretório de arquivos do container MongoDB utilizado no Spring Reactor.
 **/spring/reactor/docker/mongo/data
+
+# Diretório de arquivos do containter RabbitMQ utilizado no exemplo de RabbitMQ.
+**/rabbitmq/docker/rabbitmq/data
