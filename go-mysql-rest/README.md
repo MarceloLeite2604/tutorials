@@ -1,6 +1,6 @@
 # Go-mysql-rest
 
-This project is an example of REST API consumption and MySQL persistence and retrieval using Go.
+This project is an example of REST API consumption, MySQL persistence and retrieval using Go.
 
 ## Project Contents
 1. A [docker-composer yaml file](docker/docker-compose.yml)
