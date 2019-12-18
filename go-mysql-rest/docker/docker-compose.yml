@@ -1,0 +1,16 @@
+version: "3.3"
+
+services:
+  go-mysql-server:
+    container_name: go-mysql-server
+    image: mysql:8.0.18
+    restart: always
+    ports:
+      - "3306:3306"
+      - "33060:33060"
+    volumes:
+      - "./mysql/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d:ro"
+      - "./mysql/conf.d:/etc/mysql/conf.d:ro"
+    environment:
+      MYSQL_ROOT_PASSWORD: mysql-is-awesome
+      

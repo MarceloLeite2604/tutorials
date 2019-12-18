@@ -1,0 +1,9 @@
+go-mysql:
+  mysql:
+    username: go_mysql_user
+    password: thisismypassword
+    protocol: tcp
+    host: localhost
+    port: 3306
+    database: go_mysql_example_db
+
