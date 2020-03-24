@@ -42,3 +42,6 @@ spring/spring-hsqldb/hsqldb/*
 
 # Diretório de arquivos do containter RabbitMQ utilizado no exemplo de RabbitMQ.
 **/rabbitmq/docker/rabbitmq/data
+
+# Diretório que armazena o token de identificação com o Google Cloud Platform
+**/gcp/sheets-api/tokens
