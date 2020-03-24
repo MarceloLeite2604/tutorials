@@ -45,3 +45,6 @@ spring/spring-hsqldb/hsqldb/*
 
 # Diretório que armazena o token de identificação com o Google Cloud Platform
 **/gcp/sheets-api/tokens
+
+# Arquivos de credenciais do GCP.
+**/gcp/**/*.json
