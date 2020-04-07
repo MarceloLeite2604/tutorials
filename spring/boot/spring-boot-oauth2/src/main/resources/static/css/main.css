@@ -1,0 +1,12 @@
+div.login-button {
+    margin: 5px 0px;
+    padding: 5px 0px;
+    text-align: center;
+    max-width: 200px;
+    border: solid 1px #aaa;
+    border-radius: 8px;
+}
+
+div.title {
+    margin-bottom: 40px;
+}

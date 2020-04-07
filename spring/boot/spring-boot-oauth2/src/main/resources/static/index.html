@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <title>Spring Boot OAuth2</title>
+    <base href="/"/>
+    <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/main.css">
+
+    <script type="text/javascript" src="/webjars/jquery/jquery.min.js"></script>
+    <script type="text/javascript" src="/webjars/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/webjars/js-cookie/js.cookie.js"></script>
+
+    <script type="text/javascript" src="/js/csrf.js"></script>
+    <script type="text/javascript" src="/js/error.js"></script>
+    <script type="text/javascript" src="/js/logout.js"></script>
+    <script type="text/javascript" src="/js/user.js"></script>
+</head>
+<body>
+    <div class="container title">
+        <h1>Spring Boot OAuth2</h1>
+    </div>
+
+    <div class="container unauthenticated">
+        <p>Escolha uma das contas abaixo para login.</p>
+        <div class="login-buttons">
+            <div class="login-button">
+                <a href="/oauth2/authorization/github">
+                    <img height="36" src="image/github-36.png">
+                </a>
+            </div>
+            <div class="login-button">
+                <a href="/oauth2/authorization/google">
+                    <img height="36" src="image/google-36.png">
+                </a>
+            </div>
+            <div class="login-button">
+                <a href="/oauth2/authorization/okta">
+                    <img height="36" src="image/okta-36.png">
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="container authenticated">
+        Bem-vindo <span id="user"></span>.
+        <div>
+            <button onClick="logout()" class="btn btn-primary">Logout</button>
+        </div>
+    </div>
+</body>
+</html>

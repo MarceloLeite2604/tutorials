@@ -1,0 +1,26 @@
+spring:
+  security:
+    oauth2:
+      client:
+        registration:
+          github:
+            clientId: fe23b90c0a445ca5a4ee
+            clientSecret: d8d311d8786539d0c55176641b18fcdebfa32143
+          google:
+            clientId: 470525624483-62fuop4m71mskhmbuoq3mgtegk5li954.apps.googleusercontent.com
+            clientSecret: mO9u55ZQxE5jYLkFwt8Y2XH-
+          okta:
+            clientId: 0oa5cb8v9lliLgBNJ4x6
+            clientSecret: KX7KXs8Q5wcRhT0pu1XfKOmF5PslEStscOwe_9q5
+            redirect-uri: "{baseUrl}/login/oauth2/code/{registrationId}"
+            scope:
+              - openid
+              - profile
+            client-authentication-method: basic
+            authorization-grant-type: authorization_code
+        provider:
+          okta:
+            authorization-uri: https://dev-260323.okta.com/oauth2/default/v1/authorize
+            token-uri: https://dev-260323.okta.com/oauth2/default/v1/token
+            user-info-uri:  https://dev-260323.okta.com/oauth2/default/v1/userinfo
+            jwk-set-uri: https://dev-260323.okta.com/oauth2/default/v1/keys
