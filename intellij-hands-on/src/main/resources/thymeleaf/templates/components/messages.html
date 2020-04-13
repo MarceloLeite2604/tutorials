@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Messages panel</title>
+    <meta charset="utf-8"/>
+</head>
+<body>
+<div id="messages" th:fragment="messages">
+    <div id="messages-error">
+        <span
+                th:if="${__${@thymeleafModelAttributeNamesClass.ERROR_MESSAGE}__}"
+                class="messagePanel__error"
+                th:text="${__${@thymeleafModelAttributeNamesClass.ERROR_MESSAGE}__}"></span>
+    </div>
+    <div id="messages-information">
+        <span
+                th:if="${__${@thymeleafModelAttributeNamesClass.INFORMATION_MESSAGE}__}"
+                class="messagePanel__info"
+                th:text="${__${@thymeleafModelAttributeNamesClass.INFORMATION_MESSAGE}__}"></span>
+    </div>
+    <div id="messages-detailed-error">
+        <span
+                th:if="${__${@thymeleafModelAttributeNamesClass.DETAILED_ERROR_MESSAGE}__}"
+                class="messagePanel__error"
+                th:text="${__${@thymeleafModelAttributeNamesClass.DETAILED_ERROR_MESSAGE}__.message}"></span>
+        <ul
+                th:if="${__${@thymeleafModelAttributeNamesClass.DETAILED_ERROR_MESSAGE}__}"
+                th:style="'text-align: initial'">
+            <th:block th:each="detail : ${__${@thymeleafModelAttributeNamesClass.DETAILED_ERROR_MESSAGE}__.details}">
+                <li th:text=${detail}/>
+            </th:block>
+        </ul>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title th:text="#{site.error-404.title}">Page title</title>
+    <meta charset="utf-8" />
+</head>
+<body>
+<h1 th:text="#{site.error-404.title}">page not found</h1>
+<p th:text="#{site.error-404.explanation}">Could not locate requested page.</p>
+<a th:href="@{__${@sitePathsClass.INDEX}__}" th:text="#{site.error-404.return-message}">Return to main page.</a>
+</body>
+</html>

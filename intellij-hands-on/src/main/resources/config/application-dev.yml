@@ -1,0 +1,14 @@
+spring:
+  thymeleaf:
+    prefix: file:src/main/resources/thymeleaf/templates/
+    cache: false
+  jpa:
+    show-sql: true
+application:
+  web-mvc-resource-location-prefix: file:src/main/resources/static
+  messages:
+    file-base-directory-path: file:src/main/resources/i18n/messages
+  database:
+    min-pool-size: 2
+    max-pool-size: 10
+    acquirement-increment: 2

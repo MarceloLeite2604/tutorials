@@ -1,0 +1,16 @@
+version: "3.3"
+
+services:
+  intelij-hands-on-mysql:
+    container_name: intellij-hands-on-mysql
+    image: mysql:8.0.19
+    ports:
+      - 3306:3306
+      - 33060:33060
+    environment:
+      MYSQL_ROOT_PASSWORD: greentea2077
+    volumes:
+      - ./mysql/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d:ro
+      - ./mysql/conf.d:/etc/mysql/conf.d:ro
+      - ./mysql/data:/var/lib/mysql
+      - ./mysql/log:/var/log/mysql

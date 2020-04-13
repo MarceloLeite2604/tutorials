@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html
+        xmlns:th="http://www.thymeleaf.org"
+        th:lang="${#locale}"
+        lang="en">
+<head th:replace="components/head :: head(title = #{site.index.title})">
+<body>
+<div th:insert="components/header :: header(title = #{site.index.title})"></div>
+<a th:href="@{__${@sitePathsClass.PERSON}__}" th:text="#{site.index.anchor-person.text}">Persons</a>
+<a th:href="@{__${@sitePathsClass.SKILL}__}" th:text="#{site.index.anchor-skill.text}">Skills</a>
+</body>
+</html>

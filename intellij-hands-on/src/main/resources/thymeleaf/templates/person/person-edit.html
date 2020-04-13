@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html
+        xmlns:th="http://www.thymeleaf.org"
+        th:lang="${#locale}"
+        lang="en">
+<head>
+    <title th:if="${@personBo.isNew(person)}" th:text="#{site.person-edit.title.new}">Create person</title>
+    <title th:unless="${@personBo.isNew(person)}" th:text="#{site.person-edit.title.existing(${person.name})}">Edit person</title>
+    <meta charset="utf-8"/>
+    <link
+            rel="stylesheet"
+            type="text/css"
+            media="all"
+            th:href="@{/css/style.css}"/>
+</head>
+<body>
+<h1 th:if="${@personBo.isNew(person)}" th:text="#{site.person-edit.title.new}">Create person</h1>
+<h1 th:unless="${@personBo.isNew(person)}" th:text="#{site.person-edit.title.existing(${person.name})}">Edit person</h1>
+<form
+        action="#"
+        method="post"
+        th:action="@{__${@sitePathsClass.PERSON}__}"
+        th:object="${__${@thymeleafModelAttributeNamesClass.PERSON}__}">
+    <table>
+        <tr>
+            <td>
+                <label
+                        for="name"
+                        th:text="#{site.person-edit.name.label}">
+                    Name label
+                </label>
+            </td>
+            <td>
+                <input
+                        id="name"
+                        th:field="*{name}"
+                        type="text">
+            </td>
+            <td
+                    th:if="${#fields.hasErrors('name')}"
+                    th:errors="*{name}">Name Error
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <input
+                        type="hidden"
+                        th:field="*{id}">
+                <input
+                        th:if="${@personBo.isNew(person)}"
+                        type="submit"
+                        th:value="#{site.person-edit.form.submit.label.create}">
+                <input
+                        th:unless="${@personBo.isNew(person)}"
+                        type="submit"
+                        th:value="#{site.person-edit.form.submit.label.update}">
+            </td>
+        <tr>
+    </table>
+</form>
+</body>
+</html>

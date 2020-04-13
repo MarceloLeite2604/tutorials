@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Form delete</title>
+    <meta charset="utf-8" />
+</head>
+<body>
+<th:block th:fragment="form-create(buttonLabel, createPath)" >
+    <form
+            id="form-create"
+            th:action="${createPath}">
+        <input
+                type="submit"
+                th:value="${buttonLabel}">
+        <input
+                th:if="${redirectPath}"
+                type="hidden"
+                name="redirectPath"
+                th:value="${redirectPath}">
+        <input
+                th:if="${additionalParameterName1}"
+                type="hidden"
+                th:name="${additionalParameterName1}"
+                th:value="${additionalParameterValue1}">
+        <input
+                th:if="${additionalParameterName2}"
+                type="hidden"
+                th:name="${additionalParameterName2}"
+                th:value="${additionalParameterValue2}">
+    </form>
+</th:block>
+</body>
+</html>

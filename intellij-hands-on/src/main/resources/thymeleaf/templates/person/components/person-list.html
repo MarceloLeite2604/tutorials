@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html
+        xmlns="http://www.w3.org/1999/html"
+        xmlns:th="http://www.thymeleaf.org"
+        lang="en">
+<head>
+    <title>Person list</title>
+    <meta charset="utf-8"/>
+</head>
+<body>
+<div th:id="persons-list" th:fragment="person-list(persons)">
+    <th:block th:if="${not #lists.isEmpty(persons)}">
+        <table th:id="persons-table">
+            <tr th:each="person: ${persons}" th:id="'person-' + ${person.id}">
+                <td>
+                    <a
+                            th:href="@{__${@sitePathsClass.PERSON+'/'+person.id}__}"
+                            th:text="${person.name}">
+                    </a>
+                </td>
+                <td>
+                    <a
+                            href="#"
+                            th:text="#{site.person.delete.anchor.text}"
+                            th:attr="data-id=${person.id}"
+                            th:onclick="Person.delete(this.dataset.id)">
+                    </a>
+                </td>
+            </tr>
+        </table>
+    </th:block>
+    <th:block th:unless="${not #lists.isEmpty(persons)}">
+        <p th:text="#{site.person-list.empty}"></p>
+    </th:block>
+</div>
+</body>
+</html>

@@ -1,0 +1,33 @@
+spring:
+  profiles:
+    active:
+    - "@springProfileActive@"
+  thymeleaf:
+    prefix: classpath:/thymeleaf/templates/
+    suffix: .html
+    mode: HTML
+    encoding: UTF-8
+    template-resolver-order: 0
+  jpa:
+    open-in-view: false
+application:
+  web-mvc-resource-location-prefix: classpath:thymeleaf/static
+  messages:
+    file-base-directory-path: classpath:i18n/messages
+    additional-message-file-paths:
+      - validation/validation
+  locale: en
+  encryption:
+    cry
+    cryptographic-algorithm: DESede
+    feedback-mode: CBC
+    padding-scheme: PKCS5Padding
+    key: oYa549ydm57s3I9dRdAg1c2P7wh2Qxm6
+  database:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/intellij_hands_on_db
+    username: application
+    password: C2Nd/jcDi9qdiMlxpsW3Mn61sYxFrPpo
+    min-pool-size: 5
+    max-pool-size: 25
+    acquirement-increment: 5

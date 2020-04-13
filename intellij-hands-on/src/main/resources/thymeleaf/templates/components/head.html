@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="head(title)">
+    <title th:text="${title}">Page title</title>
+    <meta charset="utf-8"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script th:src="@{/js/javascript.js}"></script>
+    <script th:src="@{/js/message.js}"></script>
+    <script th:src="@{/js/person.js}"></script>
+    <link
+            rel="stylesheet"
+            type="text/css"
+            media="all"
+            th:href="@{/css/style.css}"/>
+</head>
+</html>

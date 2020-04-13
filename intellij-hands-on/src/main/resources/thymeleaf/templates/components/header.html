@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Header</title>
+    <meta charset="utf-8" />
+</head>
+<body>
+<th:block th:fragment="header(title)">
+    <h1
+            th:if="${not #strings.isEmpty(title)}"
+            th:text="${title}"></h1>
+    <th:block th:replace="/components/messages :: messages"></th:block>
+</th:block>
+</body>
+</html>

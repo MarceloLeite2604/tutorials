@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Form delete</title>
+    <meta charset="utf-8" />
+</head>
+<body>
+<th:block th:fragment="form-delete(deletePath)" >
+    <form
+            id="form-delete"
+            th:action="@{${deletePath}}"
+            method="delete">
+        <input
+                type="hidden"
+                id="id"
+                name="id" />
+        <input
+                th:if="${redirectPath}"
+                type="hidden"
+                id="redirectPath"
+                name="redirectPath"
+                th:value="${redirectPath}" />
+    </form>
+</th:block>
+</body>
+</html>

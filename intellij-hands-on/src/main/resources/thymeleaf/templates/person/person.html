@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html
+        xmlns:th="http://www.thymeleaf.org"
+        th:lang="${#locale}"
+        lang="en">
+<head th:replace="components/head :: head(title = #{site.person.title})"></head>
+<body>
+<div th:insert="components/header :: header(#{site.person.title})"></div>
+<th:block th:replace="person/components/person-list :: person-list(${__${@thymeleafModelAttributeNamesClass.PERSONS}__})"/>
+<th:block th:replace="components/form-create :: form-create(buttonLabel=#{site.person.button.create.label}, createPath = @{${@sitePathsClass.PERSON_NEW}})" />
+<th:block th:replace="components/form-delete :: form-delete(deletePath = @{${@sitePathsClass.PERSON}})" />
+</body>
+</html>
