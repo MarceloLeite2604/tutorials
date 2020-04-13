@@ -48,3 +48,7 @@ spring/spring-hsqldb/hsqldb/*
 
 # Arquivos de credenciais do GCP.
 **/gcp/**/*.json
+
+# Arquivos de dados e logs do MySQL
+**/mysql/data/*
+**/mysql/log/*
