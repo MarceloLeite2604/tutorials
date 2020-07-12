@@ -33,3 +33,19 @@ db.alunos.findOne({
         $gt: 5
     }
 })
+
+
+/* Sort results by name ascending. */
+db.alunos.find().sort({
+    "nome": 1
+});
+
+/* Sort results by name descending. */
+db.alunos.find().sort({
+    "nome": -1
+});
+
+/* Sort results by name ascending and limit results on first three elements. */
+db.alunos.find().sort({
+    "nome": 1
+}).limit(3);
