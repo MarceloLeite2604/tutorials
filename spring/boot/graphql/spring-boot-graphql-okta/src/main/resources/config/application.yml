@@ -1,0 +1,9 @@
+graphql:
+  spqr:
+    gui:
+      enabled: true
+okta:
+  oauth2:
+    issuer: "https://dev-739483.okta.com/oauth2/default"
+    client-id: "0oadct89e48EQZFy44x6"
+    client-secret: "${OAUTH2_CLIENT_SECRET:invalid-client-secret}"
