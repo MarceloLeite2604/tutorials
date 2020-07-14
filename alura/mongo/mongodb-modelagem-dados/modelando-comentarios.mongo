@@ -1,0 +1,30 @@
+db.artigos.update(
+    {},
+    {
+        "$set" : {
+            comentarios: []
+        }
+    },
+    {
+        multi: true
+    }
+);
+
+db.artigos.aggregate([
+    {
+        "$unwind": "$comentarios"
+    },
+    {
+        "$project": {
+            "_id" : 0,
+            "id_artigo": "$_id",
+            "nome": "$comentarios.nome",
+            "email": "$comentarios.email",
+            "texto": "$comentarios.texto",
+            "data": "$comentarios.data",
+        }
+    },
+    {
+        "$out": "comentarios"
+    }
+]);

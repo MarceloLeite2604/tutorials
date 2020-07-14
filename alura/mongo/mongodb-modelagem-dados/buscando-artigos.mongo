@@ -1,0 +1,18 @@
+db.autores.find({
+    "artigos.slug": "projeto-caelum-nas-faculdades"
+});
+
+/* The second object on "find" method informs which properties should be returned as result. */
+db.autores.find({
+    "artigos.slug": "projeto-caelum-nas-faculdades"
+}, {
+    "artigos.titulo": 1,
+    "artigos.conteudo": 1
+});
+
+db.autores.find({
+    "nome": "Gabriel Ferreira"
+}, {
+    "artigos.titulo": 1,
+    "artigos.conteudo": 1
+});

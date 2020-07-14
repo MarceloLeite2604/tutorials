@@ -1,0 +1,30 @@
+/* 
+The "$unwind" operator deconstructs an array field from the input documents to output a document for each element. 
+The "$project" operator projects the content from the original document into a new format described by its content. 
+The "$out" operator will replace the content of a collection by the output of the pipeline. 
+By replacing "_id" content with 0, Mongo will automatically create a new value for it.
+*/
+db.autores.aggregate([
+    {
+        "$unwind": "$artigos"
+    },
+    {
+        "$project": {
+            "_id": 0, 
+            "autor.nome": "$nome",
+            "autor.descricao": "$descricao",
+            "autor.email": "$email",
+            "autor.senha": "$senha",
+            "slug": "$artigos.slug",
+            "titulo": "$artigos.titulo",
+            "conteudo": "$artigos.conteudo",
+            "dataCriado": "$artigos.dataCriado"
+        }
+    }, {
+        "$out" : "artigos"
+    }
+]);
+
+db.autores.drop();
+
+db.getCollectionNames();

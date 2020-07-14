@@ -1,0 +1,29 @@
+db.artigos.aggregate([
+    {
+        /* Group documents by the specified "_id" property informed */
+        "$group": {
+            _id: "$autor.email",
+            nome: {
+                "$first": "$autor.nome"
+            },
+            email: {
+                "$first": "$autor.email"
+            },
+            descricao: {
+                "$first": "$autor.descricao"
+            },
+            senha: {
+                "$first": "$autor.senha"
+            }
+        }
+    }, 
+    {
+        /* Use "$project" to remove previous "_id" informed, so Mongo will create a new id for each document. */
+        "$project" : {
+            "_id": 0
+        }
+    },
+    {
+        "$out": "infoAutores"
+    }
+]);

@@ -1,0 +1,13 @@
+db.artigos.dropIndex('slug_1');
+
+db.artigos.deleteOne({
+    slug: "projeto-caelum-nas-faculdades"
+});
+
+db.artigos.createIndex({
+    slug: 1
+}, {
+    unique: true
+});
+
+db.artigos.getIndexes();
