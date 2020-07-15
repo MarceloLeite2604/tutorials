@@ -1,0 +1,31 @@
+db.produtos.update({
+    modelo: "Moto G7"
+}, {
+    $set: {
+        quantidade: 5
+    }
+})
+
+db.produtos.update({
+    modelo: "iPhone 8"
+}, {
+    $set: {
+        quantidade: 3
+    }
+})
+
+db.produtos.update({
+    modelo: "Galaxy Note 10"
+}, {
+    $set: {
+        quantidade: 11
+    }
+})
+
+db.produtos.update({
+    modelo: "Redmi Go"
+}, {
+    $set: {
+        quantidade: 4
+    }
+})

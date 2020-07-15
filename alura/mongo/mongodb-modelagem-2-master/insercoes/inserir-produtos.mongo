@@ -1,0 +1,39 @@
+db.produtos.insertOne({
+    marca: "Motorola",
+    modelo: "Moto G7",
+    descricao: "Novo celular da Motorola lançado em 2018",
+    sistema: "Android 9.0",
+    memoria: "32GB",
+    chips: 2,
+    preco: NumberDecimal("800"),
+})
+
+db.produtos.insertOne({
+    marca: "Apple",
+    modelo: "iPhone 8",
+    descricao: "Celular da apple",
+    sistema: "iOS 13",
+    memoria: "64GB",
+    chips: 1,
+    preco: NumberDecimal("3000"),
+})
+
+db.produtos.insertOne({
+    marca: "Samsung",
+    modelo: "Galaxy Note 10",
+    descricao: "Celular grande da Samsung",
+    sistema: "Android",
+    memoria: "256GB",
+    chips: 2,
+    preco: NumberDecimal("5300"),
+})
+
+db.produtos.insertOne({
+    marca: "Xiaomi",
+    modelo: "Redmi Go",
+    descricao: "Celular de entrada da Xiaomi",
+    sistema: "Android",
+    memoria: "8GB",
+    chips: 2,
+    preco: NumberDecimal("400"),
+})

@@ -1,0 +1,21 @@
+let motog7 = db.produtos.findOne({ modelo: "Moto G7" });
+let note10 = db.produtos.findOne({ modelo: "Galaxy Note 10" });
+let redmigo = db.produtos.findOne({ modelo: "Redmi Go" });
+let iphone11 = db.produtos.findOne({ modelo: "iPhone 11" });
+let iphone8 = db.produtos.findOne({ modelo: "iPhone 8" });
+
+db.lojas.update({
+    nome: "Fast Shop",
+}, {
+    $set: {
+        produtos: [motog7._id, iphone8._id, redmigo._id]
+    }
+})
+
+db.lojas.update({
+    nome: "Magazine Luiza",
+}, {
+    $set: {
+        produtos: [motog7._id, note10._id]
+    }
+})
