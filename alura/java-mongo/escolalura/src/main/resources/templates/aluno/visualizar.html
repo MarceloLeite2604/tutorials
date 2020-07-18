@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" >
+<head>
+    <meta charset="UTF-8" />
+    <link type="text/css" rel="stylesheet"
+          href="../../materialize/css/materialize.min.css" media="screen,projection" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+          rel="stylesheet" />
+    <title>EscolAlura</title>
+    <script type="text/javascript"
+            src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+</head>
+<body class="grey lighten-3">
+<div id="formularioEdicao" class="container">
+    <h3 class="main-title center">Visualizar Aluno</h3>
+    <div class="row">
+        <div class="section">
+            <h5>Dados Básicos</h5>
+            <div class="row">
+                <div class="input-field col s12">
+                    <input id="first_name" type="text" th:field="${aluno.nome}" disabled="disabled"  />
+                    <label for="first_name">Nome</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s12">
+                    <input id="last_name" type="text" class="datepicker" th:field="${aluno.dataNascimento}" disabled="disabled"  />
+                    <label for="last_name">Dt. Nascimento</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s12">
+                    <input id="first_name" type="text" class="validate" th:field="${aluno.curso.nome}" disabled="disabled"   />
+                    <label for="first_name">Curso</label>
+                </div>
+            </div>
+        </div> <!-- Fim SECTION Dados Basicos -->
+        <div class="section">
+            <h5>Notas</h5>
+            <div class="row">
+                <div class="input-field col s12">
+                    <ul>
+                        <th:block th:object="${aluno}">
+                            <li th:each="nota : *{notas}" th:text="${'Nota: ' + nota.valor }">Item description here...</li>
+                        </th:block>
+                    </ul>
+                </div>
+            </div>
+        </div> <!-- Fim SECTION Notas -->
+        <div class="section">
+            <h5>Habilidades</h5>
+            <div class="row">
+                <div class="input-field col s12">
+                    <ul>
+                        <th:block th:object="${aluno}">
+                            <li th:each="habilidade : *{habilidades}" th:text="${'Nome: ' + habilidade.nome + ' - Nível: ' + habilidade.nivel }">Item description here...</li>
+                        </th:block>
+                    </ul>
+                </div>
+            </div>
+        </div> <!-- Fim SECTION Notas -->
+
+        <div class="row">
+            <div class="input-field col s12 center">
+                <button onclick="history.back();" class="btn waves-effect waves-light" type="submit" name="action">Voltar</button>
+            </div>
+        </div>
+    </div>
+
+</div> <!-- Fim do formulario de edicao -->
+
+<script type="text/javascript" src="../../materialize/js/materialize.min.js"></script>
+
+</body>
+</html>
