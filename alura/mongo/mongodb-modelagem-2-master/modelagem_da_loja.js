@@ -190,14 +190,29 @@ db.produtos.aggregate([
     },
     {
         "$lookup" : {
-            /* "produtos" collection */
             "from" : "lojas",
-            /* "produtos" property defined on documents inside "lojas" will be used to match content. */
             "localField" : "vendido_em",
-            /* "_id" property defined on documents inside the other collection will be checked to match. */
             "foreignField": "_id",
-            /* Name given to the property result. */
             "as": "listaLojas"
         }
     }
 ]).pretty();
+
+db.lojas.updateMany(
+    {},
+    {
+        "$unset" : {
+            "produtos" : 1
+        }
+    }
+);
+
+var appleStore = db.lojas.findOne(
+    {
+        "nome" : "Apple Store"
+    }
+);
+
+db.produtos.find({
+    "vendido_em": appleStore._id
+});
