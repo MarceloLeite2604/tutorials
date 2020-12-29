@@ -52,3 +52,9 @@ spring/spring-hsqldb/hsqldb/*
 # Arquivos de dados e logs do MySQL
 **/mysql/data/*
 **/mysql/log/*
+
+# Node JS modules directory
+**/node_modules
+
+# VS Code settings
+**/.vscode/*
