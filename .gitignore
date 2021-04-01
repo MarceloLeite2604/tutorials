@@ -58,3 +58,6 @@ spring/spring-hsqldb/hsqldb/*
 
 # VS Code settings
 **/.vscode/*
+
+# Docker postgres data files
+**/docker/postgres/data

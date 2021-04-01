@@ -1,0 +1,25 @@
+version: '3.8'
+services:
+  postgres:
+    image: postgres:13.2
+    ports:
+      - 5434:5432 # External port is different from the original to prevent conflict with other Postgres databases.
+    command: postgres -c config_file=/etc/postgresql.conf
+    environment:
+      - POSTGRES_USER=unleash
+      - POSTGRES_PASSWORD=unleash-password
+      - POSTGRES_DB=unleash
+    volumes:
+      - ./docker/postgres/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
+      - ./docker/postgres/data:/var/lib/postgresql/data
+      - ./docker/postgres/postgresql.conf:/etc/postgresql.conf
+  unleash:
+    build: ./docker/unleash/.
+    ports:
+      - 4242:4242
+    environment: 
+      - DATABASE_HOST=postgres
+      - DATABASE_PORT=5432
+      - DATABASE_URL=postgres://unleash:unleash-password@postgres:5432/unleash
+    depends_on:
+      - postgres
